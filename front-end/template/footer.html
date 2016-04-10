@@ -71,11 +71,11 @@
 						    院长书记信箱
 						    <span class="caret"></span>
 						  </button>
-						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-						    <li><a href="#">Action</a></li>
-						    <li><a href="#">Another action</a></li>
-						    <li><a href="#">Something else here</a></li>
-						    <li><a href="#">Separated link</a></li>
+						  <ul class="dropdown-menu"  id="teacher-email" aria-labelledby="dropdownMenu4">
+						    <li><a href="#" attr-email="453646474@qq.com">Action</a></li>
+						    <li><a href="#" attr-email="123@qq.com">Another action</a></li>
+						    <li><a href="#" attr-email="34324321@qq.com">Something else here</a></li>
+						    <li><a href="#" attr-email="33333@qq.com">Separated link</a></li>
 						  </ul>
 						</div>
 					</div>
@@ -88,7 +88,7 @@
 				<address>四川省成都市龙泉驿区十陵镇成都大学 邮编：610100&nbsp;&nbsp;&nbsp;电话：&nbsp;&nbsp;&nbsp;邮箱：&nbsp;&nbsp;&nbsp;</address>
 				<div class="copyright"><p>&copy;成都大学政治学院</p></div>
 			</div>
-			
+
 		</div>
 	</footer>
 </body>
@@ -103,5 +103,11 @@
 
 <!-- 轮播图所需要的js -->
 <script src="../js/slides.min.jquery.js"></script>
-
+<script type="text/javascript">
+		$('#teacher-email li').on('click', 'a', function(){
+			var email = $(this).attr('attr-email');
+			var msg = '请直接发邮件到：'+email;
+			alert(msg);
+		});
+</script>
 </html>
