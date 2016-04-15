@@ -172,8 +172,9 @@ footer{
 .footerinner{
 	padding: 0;
 }
-address,.copyright{
-	color: #555;
+address,.copyright,.copyright a{
+	color: #D7D7D7;
+	text-align: center;
 }
 .footnav{
 	padding: 20px 0;
