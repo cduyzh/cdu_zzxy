@@ -20,6 +20,19 @@ define('APP_DEBUG',True);
 // 定义应用目录
 define('APP_PATH','./Application/');
 
+// 添加模块, 绑定 Home 模块
+define('BUILD_MODEL_LIST','Home,Admin');
+
+//定义全局文件变量
+define('CSS_PATH','/Public/css');
+define('JS_PATH','/Public/js');
+define('IMG_PATH','/Public/imgs');
+define('NOT_FOUND', '/Application/Home/View/notfound');
+
+define('ADMIN_CSS_PATH','/Public/admin/css');
+define('ADMIN_JS_PATH','/Public/admin/js');
+define('ADMIN_IMG_PATH','/Public/admin/image');
+
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
 

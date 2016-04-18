@@ -1,0 +1,207 @@
+<extend name="Base/base"/>
+<block name="css_module">
+    <style>
+        .modul-list{
+            display: block;
+            float: none;
+            clear: both;
+        }
+        .modul-list li{
+            float: left;
+            padding: 10px 20px;
+            list-style: none;
+            width: 130px;
+            height: 20px;
+            display: block;
+            margin: 0 auto;
+        }
+        .modul-list div{
+            float: none;
+            clear: both;
+        }
+        .divider{
+            border-bottom: 1px solid #ccc;
+            width: 100%;
+        }
+    </style>
+</block>
+<block name="page_content">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE CONTAINER-->
+
+        <div class="container-fluid">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        这里是页面名称
+
+                    </h3>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <!-- BEGIN PAGE CONTENT-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <ul class="modul-list">
+                        <li>模块名称</li>
+                        <li>模块类型</li>
+                        <li>是否显示</li>
+                        <li>添加子模块</li>
+                        <li>模块排序</li>
+                        <li>操作</li>
+                    </ul>
+
+                    <ul class="modul-list">
+                        <li><a data-toggle="collapse" data-parent="#" href="#one">学院概况</a></li>
+                        <li>模块类型</li>
+                        <li>是/否</li>
+                        <li><a class="btn green">添加子模块</a></li>
+                        <li><input class="span5" type="text"></li>
+                        <li>
+                            <a class="btn blue">编辑</a>
+                            <a class="btn red">删除</a>
+                        </li>
+
+                        <div id="one" class="panel-collapse collapse">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>模块名称</th>
+                                    <th>模块分类</th>
+                                    <th>排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <a class="btn blue">编辑</a>
+                                        <a class="btn red">删除</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </ul>
+                    <div class="divider"></div>
+
+                    <ul class="modul-list">
+                        <li><a data-toggle="collapse" data-parent="#" href="#two">学院概况</a></li>
+                        <li>模块类型</li>
+                        <li>是/否</li>
+                        <li><a class="btn green">添加子模块</a></li>
+                        <li><input class="span5" type="text"></li>
+                        <li>
+                            <a class="btn blue">编辑</a>
+                            <a class="btn red">删除</a>
+                        </li>
+
+                        <div id="two" class="panel-collapse collapse">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>模块名称</th>
+                                    <th>模块分类</th>
+                                    <th>排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <a class="btn blue">编辑</a>
+                                        <a class="btn red">删除</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </ul>
+                    <div class="divider"></div>
+
+                    <ul class="modul-list">
+                        <li><a data-toggle="collapse" data-parent="#" href="#three">学院概况</a></li>
+                        <li>模块类型</li>
+                        <li>是/否</li>
+                        <li><a class="btn green">添加子模块</a></li>
+                        <li><input class="span5" type="text"></li>
+                        <li>
+                            <a class="btn blue">编辑</a>
+                            <a class="btn red">删除</a>
+                        </li>
+
+                        <div id="three" class="panel-collapse collapse">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>模块名称</th>
+                                    <th>模块分类</th>
+                                    <th>排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td><input type="text"></td>
+                                    <td>
+                                        <a class="btn blue">编辑</a>
+                                        <a class="btn red">删除</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </ul>
+                    <div class="divider"></div>
+
+                    <div class="form-actions">
+                        <a href="add-module.html" class="btn green pull-right">添加模块</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+</block>

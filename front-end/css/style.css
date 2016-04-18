@@ -395,3 +395,6 @@ img.teacher-object{
 .dropdown{
 	padding: 0 70px;
 }
+.big-font { font-size: 20px; }
+.mid-font { font-size: 16px; }
+.small-font { font-size: 14px; }

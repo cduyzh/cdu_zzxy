@@ -1,0 +1,100 @@
+<extend name="Base/base" />
+<block name="page_content">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE CONTAINER-->
+
+        <div class="container-fluid">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        这里是页面名称
+
+                    </h3>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <!-- BEGIN PAGE CONTENT-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <table class="table table-striped table-bordered table-hover dataTable" id="sample_2" aria-describedby="sample_2_info">
+
+                        <thead>
+
+                        <tr role="row">
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">用户名
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">管理员级别
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">上次登录时间
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">上次登录IP
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">操作
+                            </th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                        <tr class="gradeX odd">
+
+                            <td class=" ">shuxer</td>
+
+                            <td class="">8524</td>
+
+                            <td class="">120</td>
+
+                            <td class="center">123564132</td>
+
+                            <td>
+                                <a href="/admin/sysUser/modify" class="btn blue">编辑</a>
+                                <a href="" class="btn red">删除</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="form-actions">
+
+                        <a href="/admin/sysUser/modify" class="btn green pull-right">添加管理员</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+</block>

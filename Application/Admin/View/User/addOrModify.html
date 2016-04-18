@@ -1,0 +1,218 @@
+<extend name="Base/base" />
+<block name="page_content">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE CONTAINER-->
+
+        <div class="container-fluid">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        这里是页面名称
+
+                    </h3>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <!-- BEGIN PAGE CONTENT-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <form action="#" class="form-horizontal">
+
+                        <div class="control-group">
+
+                            <label class="control-label">用户名</label>
+
+                            <div class="controls">
+
+                                <input type="text" class="span6 m-wrap">
+
+                                <span class="help-inline">*用户名必须为4-19个字母或者数字或者下划线组成</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">密码</label>
+
+                            <div class="controls">
+
+                                <input type="password" class="span6 m-wrap">
+
+                                <span class="help-inline">*密码必须为6-19个字母数字和下划线组成</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group" id="manager-class">
+
+                            <label class="control-label">管理员级别</label>
+
+                            <div class="controls">
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class="checked"><input id="super-manager" type="radio" name="manager-class" checked="" value="super-manager"></span></div>
+
+                                    超级管理员
+
+                                </label>
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class=""><input id="manager" type="radio" name="manager-class" value="manager"></span></div>
+
+                                    管理员
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group manager-access hidden">
+
+                            <label class="control-label">系统基础设置</label>
+
+                            <div class="controls">
+
+                                <div class="row-fluid">
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 1
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 2
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 3
+
+                                        </label>
+
+                                    </div>
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 4
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 5
+
+                                        </label>
+
+                                    </div>
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 6
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 7
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group manager-access hidden">
+
+                            <label class="control-label">网站设置</label>
+
+                            <div class="controls">
+
+                                <div class="row-fluid">
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="website-setting"> Checkbox 1
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="website-setting"> Checkbox 2
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="website-setting"> Checkbox 3
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <button type="submit" class="btn blue">添加</button>
+
+                            <button type="button" class="btn">取消</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+</block>

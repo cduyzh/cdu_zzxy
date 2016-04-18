@@ -1,0 +1,196 @@
+<extend name="Base/base"/>
+<block name="page_content">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE CONTAINER-->
+
+        <div class="container-fluid">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        这里是页面名称
+
+                    </h3>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <!-- BEGIN PAGE CONTENT-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <form action="#" class="form-horizontal">
+
+                        <div class="control-group">
+
+                            <label class="control-label">备份文件压缩设定</label>
+
+                            <div class="controls">
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class="checked"><input type="radio" name="optionsRadios1" value="option1"></span></div>
+
+                                    不压缩
+
+                                </label>
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios1" value="option2"></span></div>
+
+                                    分卷文件分别压缩
+
+                                </label>
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios1" checked="" value="option3"></span></div>
+
+                                    压缩为一个zip文件
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">备份数据库文件兼容格式</label>
+
+                            <div class="controls">
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class="checked"><input type="radio" name="optionsRadios2" checked="" value="option1"></span></div>
+
+                                    MySQL 3.23/4.0.x
+
+                                </label>
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios2" value="option2"></span></div>
+
+                                    MySQL 4.1.x/5.x
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">备份的文件名</label>
+
+                            <div class="controls">
+
+                                <input type="text" class="span6 m-wrap">
+
+                                <span class="help-inline">*用户名必须为4-19个字母或者数字或者下划线组成</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">分卷打包大小</label>
+
+                            <div class="controls">
+
+                                <input type="text" class="span6 m-wrap">
+
+                                <span class="help-inline">kb *分卷备份 - 每个分卷文件大小限制(kb)</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <button type="submit" class="btn blue">备份</button>
+
+                            <button type="button" class="btn">取消</button>
+
+                        </div>
+
+                    </form>
+
+                    <table class="table table-striped table-bordered table-hover dataTable" id="sample_2" aria-describedby="sample_2_info">
+
+                        <thead>
+
+                        <tr role="row">
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">序号
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">备份文件名称
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">备份文件大小
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">备份时间
+                            </th>
+
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">操作
+                            </th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                        <tr class="gradeX odd">
+
+                            <td class=" ">1</td>
+
+                            <td class="">8524</td>
+
+                            <td class="">120</td>
+
+                            <td class="center">123564132</td>
+
+                            <td class=" ">
+                                <a href="" class="btn blue">编辑</a>
+                                <a href="" class="btn red">删除</a>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+</block>

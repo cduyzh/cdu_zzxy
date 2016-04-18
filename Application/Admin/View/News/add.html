@@ -1,0 +1,110 @@
+<extend name="Base/base"/>
+<block name="page_content">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE CONTAINER-->
+
+        <div class="container-fluid">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        这里是页面名称
+
+                    </h3>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <!-- BEGIN PAGE CONTENT-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <form action="#" class="form-horizontal">
+
+                        <div class="control-group">
+
+                            <label class="control-label">标题</label>
+
+                            <div class="controls">
+
+                                <input type="text" class="span6 m-wrap">
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">简要信息</label>
+
+                            <div class="controls">
+
+                                <textarea class="span6 m-wrap" rows="3"></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">详细信息</label>
+
+                            <div class="controls">
+
+                                <textarea class="span12 m-wrap" rows="6" id="editor1" name="editor" placeholder="输入您的新闻内容"></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">排序</label>
+
+                            <div class="controls">
+
+                                <input type="text" class="span1 m-wrap" value="0">
+
+                                <span class="help-inline">只能输入大于0的数字</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <button type="submit" class="btn blue">提交</button>
+
+                            <button type="button" class="btn">取消</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+</block>
