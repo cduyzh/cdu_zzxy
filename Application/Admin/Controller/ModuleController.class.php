@@ -11,7 +11,7 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class ModuleController extends Controller
+class ModuleController extends SuperController
 {
     public function index() {
         $this->display('set');

@@ -8,12 +8,13 @@
 
 namespace Admin\Controller;
 
-
-use Think\Controller;
-
-class FriendLinkController extends Controller
+class FriendLinkController extends SuperController
 {
     public function index() {
-        $this->display('set');
+        $this->display('list');
+    }
+
+    public function add() {
+        $this->display('add');
     }
 }

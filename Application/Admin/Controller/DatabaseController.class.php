@@ -9,9 +9,7 @@
 namespace Admin\Controller;
 
 
-use Think\Controller;
-
-class DatabaseController extends Controller
+class DatabaseController extends SuperController
 {
     public function index() {
         $this->display('optDatabase');

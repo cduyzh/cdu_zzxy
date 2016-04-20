@@ -16,7 +16,7 @@
 
                     <h3 class="page-title">
 
-                        这里是页面名称
+                        {$pageName}
 
                     </h3>
 
@@ -34,7 +34,7 @@
 
                 <div class="span12">
 
-                    <form action="#" class="form-horizontal">
+                    <form action="/Admin/system/update" class="form-horizontal" method="post">
 
                         <div class="control-group">
 
@@ -42,7 +42,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="sitename" id="site_name" value="{$setting[sitename]['value']}">
 
                                 <span class="help-inline">*网站名称，将显示在前台首页标题中</span>
 
@@ -56,7 +56,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="sitekeywords" id="site_keywords" value="{$setting[sitekeywords][value]}">
 
                                 <span class="help-inline">*网站关键字，能被搜索引擎找到。关键字请用英文逗号隔开，不要出现引号</span>
 
@@ -70,7 +70,7 @@
 
                             <div class="controls">
 
-                                <textarea class="span6 m-wrap" rows="5" style="resize: none;"></textarea>
+                                <textarea class="span6 m-wrap" rows="5" style="resize: none;" name="sitedescription" id="site_description">{$setting[sitedescription][value]}</textarea>
 
                                 <span class="help-inline">*网站描述信息</span>
 
@@ -84,7 +84,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="sitephone" id="site_phone" value="{$setting[sitephone][value]}">
 
                                 <span class="help-inline">*网站电话，将显示在页面首页的联系方式处</span>
 
@@ -98,7 +98,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="siteaddress" id="site_address" value="{$setting[siteaddress][value]}">
 
                                 <span class="help-inline">*网站地址，将显示在页面首页的联系</span>
 
@@ -112,7 +112,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="siteemail" id="site_email" value="{$setting[siteemail][value]}">
 
                                 <span class="help-inline">*网站邮件，将显示在页面首页的网站邮件处</span>
 
@@ -140,7 +140,13 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class="checked"><input type="radio" name="optionsRadios1" checked="" value="option1"></span></div>
+                                    <div class="radio"><span class="checked">
+                                        <input type="radio" name="sitestatus" id="open"
+                                        <if condition="($setting[sitestatus][value] eq 1)">
+                                            checked=""
+                                        </if>
+                                               value="1">
+                                    </span></div>
 
                                     开启
 
@@ -148,7 +154,13 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios1" value="option2"></span></div>
+                                    <div class="radio"><span class="">
+                                        <input type="radio" name="sitestatus" id="close"
+                                        <if condition="($setting[sitestatus][value] eq 0)">
+                                            checked=""
+                                        </if>
+                                               value="0">
+                                    </span></div>
 
                                     关闭
 
@@ -164,7 +176,7 @@
 
                             <div class="controls">
 
-                                <textarea class="span6 m-wrap" rows="5" style="resize: none;"></textarea>
+                                <textarea class="span6 m-wrap" rows="5" style="resize: none;" name="siteclosereason" id="site_close_reason">{$setting[siteclosereason][value]}</textarea>
 
                                 <span class="help-inline">*网站关闭时出现的提示信息</span>
 
@@ -178,9 +190,9 @@
 
                             <div class="controls">
 
-                                <textarea class="span6 m-wrap" rows="5" style="resize: none;"></textarea>
+                                <textarea class="span6 m-wrap" rows="5" style="resize: none;" name="siteadminip" id="site_admin_ip">{$setting[siteadminip][value]}</textarea>
 
-                                <span class="help-inline">*设置可以访问的管理员的IP，按Enter将多个管理员IP隔开</span>
+                                <span class="help-inline">*设置可以访问的管理员的IP，用英文逗号","将多个管理员IP隔开</span>
 
                             </div>
 
@@ -192,9 +204,9 @@
 
                             <div class="controls">
 
-                                <textarea class="span6 m-wrap" rows="5" style="resize: none;"></textarea>
+                                <textarea class="span6 m-wrap" rows="5" style="resize: none;" name="siteuserip" id="site_user_ip">{$setting[siteuserip][value]}</textarea>
 
-                                <span class="help-inline">*设置可以访问的用户IP，按Enter将多个用户IP隔开</span>
+                                <span class="help-inline">*设置可以访问的用户IP，用英文逗号","将多个用户IP隔开</span>
 
                             </div>
 
@@ -204,7 +216,7 @@
 
                             <button type="submit" class="btn blue">提交</button>
 
-                            <button type="button" class="btn">取消</button>
+                            <button type="button" class="btn" onclick="flush()">取消</button>
 
                         </div>
 
@@ -221,4 +233,11 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+</block>
+<block name="js_module">
+    <script>
+        function flush() {
+            location.reload(true);
+        }
+    </script>
 </block>

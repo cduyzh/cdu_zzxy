@@ -47,14 +47,15 @@ var Login = function () {
 	            },
 
 	            submitHandler: function (form) {
-	                window.location.href = "index.html";
+					form.submit();
 	            }
 	        });
 
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
-	                if ($('.login-form').validate().form()) {
-	                    alert('登录成功');
+                    var form = $('.login-form');
+	                if (form.validate().form()) {
+                        form.submit();
 	                }
 	                return false;
 	            }

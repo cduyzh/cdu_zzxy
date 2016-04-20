@@ -11,7 +11,7 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class NewsController extends Controller
+class NewsController extends SuperController
 {
     public function index() {
         $this->display('add');

@@ -95,7 +95,7 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                        <span class="username">您好：xxx</span>
+                        <span class="username">您好：{$Think.session.user.department}</span>
 
                         <i class="icon-angle-down"></i>
 
@@ -103,7 +103,7 @@
 
                     <ul class="dropdown-menu">
 
-                        <li><a href="login.html"><i class="icon-key"></i>退出</a></li>
+                        <li><a href="__MODULE__/login/logout"><i class="icon-key"></i>退出</a></li>
 
                     </ul>
 
@@ -492,6 +492,7 @@
     });
 
 </script>
+<block name="js_module"></block>
 
 <!-- END JAVASCRIPTS -->
 </body>

@@ -38,23 +38,13 @@
 
                         <div class="control-group">
 
-                            <label class="control-label">标题</label>
+                            <label class="control-label">用户名</label>
 
                             <div class="controls">
 
                                 <input type="text" class="span6 m-wrap">
 
-                            </div>
-
-                        </div>
-
-                        <div class="control-group">
-
-                            <label class="control-label">简要信息</label>
-
-                            <div class="controls">
-
-                                <textarea class="span6 m-wrap" rows="3"></textarea>
+                                <span class="help-inline">*用户名必须为4-19个字母或者数字或者下划线组成</span>
 
                             </div>
 
@@ -62,25 +52,145 @@
 
                         <div class="control-group">
 
-                            <label class="control-label">详细信息</label>
+                            <label class="control-label">密码</label>
 
                             <div class="controls">
 
-                                <textarea class="span12 m-wrap" rows="6" id="editor1" name="editor" placeholder="输入您的新闻内容"></textarea>
+                                <input type="password" class="span6 m-wrap">
+
+                                <span class="help-inline">*密码必须为6-19个字母数字和下划线组成</span>
 
                             </div>
 
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group" id="manager-class">
 
-                            <label class="control-label">排序</label>
+                            <label class="control-label">管理员级别</label>
 
                             <div class="controls">
 
-                                <input type="text" class="span1 m-wrap" value="0">
+                                <label class="radio">
 
-                                <span class="help-inline">只能输入大于0的数字</span>
+                                    <div class="radio"><span class="checked"><input id="super-manager" type="radio" name="manager-class" checked="" value="super-manager"></span></div>
+
+                                    超级管理员
+
+                                </label>
+
+                                <label class="radio">
+
+                                    <div class="radio"><span class=""><input id="manager" type="radio" name="manager-class" value="manager"></span></div>
+
+                                    管理员
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <!--<div class="control-group manager-access hidden">-->
+                        <div class="control-group manager-access">
+
+                            <label class="control-label">系统基础设置</label>
+
+                            <div class="controls">
+
+                                <div class="row-fluid">
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 1
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 2
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 3
+
+                                        </label>
+
+                                    </div>
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 4
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 5
+
+                                        </label>
+
+                                    </div>
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 6
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="system-setting"> Checkbox 7
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--<div class="control-group manager-access hidden">-->
+                        <div class="control-group manager-access">
+
+                            <label class="control-label">网站设置</label>
+
+                            <div class="controls">
+
+                                <div class="row-fluid">
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="website-setting"> Checkbox 1
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="website-setting"> Checkbox 2
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="" name="website-setting"> Checkbox 3
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -88,7 +198,7 @@
 
                         <div class="form-actions">
 
-                            <button type="submit" class="btn blue">提交</button>
+                            <button type="submit" class="btn blue">添加</button>
 
                             <button type="button" class="btn">取消</button>
 

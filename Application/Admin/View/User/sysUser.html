@@ -16,7 +16,7 @@
 
                     <h3 class="page-title">
 
-                        这里是页面名称
+                        {$pageName}
 
                     </h3>
 
@@ -59,30 +59,33 @@
                         </thead>
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all">
-
+                        <foreach name="admins" item="admin">
                         <tr class="gradeX odd">
 
-                            <td class=" ">shuxer</td>
+                            <td class="">{$admin[username]}</td>
 
-                            <td class="">8524</td>
+                            <td class="">{$admin[userlevel] == 1? '超级管理员':'管理员'}</td>
 
-                            <td class="">120</td>
+                            <td class="">{$admin[lastlogintime]|date="Y-m-d H:i",###}</td>
 
-                            <td class="center">123564132</td>
+                            <td class="center">{$admin[lastloginip]}</td>
 
                             <td>
-                                <a href="/admin/sysUser/modify" class="btn blue">编辑</a>
-                                <a href="" class="btn red">删除</a>
+                                <a href="/admin/sysUser/modify/{$admin[id]}" class="btn blue">编辑</a>
+                                <if condition="($admin[id] eq session('user')['id'])">
+                                <else/>
+                                <a href="javascript:void(0);"  onclick="deleteUser({$admin[id]}, this)" class="btn red">删除</a>
+                                </if>
                             </td>
                         </tr>
-
+                        </foreach>
                         </tbody>
 
                     </table>
 
                     <div class="form-actions">
 
-                        <a href="/admin/sysUser/modify" class="btn green pull-right">添加管理员</a>
+                        <a href="/admin/sysUser/add" class="btn green pull-right">添加管理员</a>
 
                     </div>
 
@@ -97,4 +100,23 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+</block>
+<block name="js_module">
+<script>
+    function deleteUser(id, obj) {
+        var flag = confirm('确定要删除该用户吗?');
+        if(flag) {
+            $.get('/admin/sysuser/delete/'+ id,
+            function(data) {
+                console.log(data);
+                if(data.status == 1000) {
+                    alert('用户删除成功!');
+                    $(obj).parents('tr').remove();
+                } else {
+                    alert('删除失败!');
+                }
+            },"json");
+        }
+    }
+</script>
 </block>
