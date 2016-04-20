@@ -34,7 +34,7 @@
 
                 <div class="span12">
 
-                    <form action="#" class="form-horizontal">
+                    <form action="/admin/system/homeset" method="post" class="form-horizontal">
 
                         <table class="table">
 
@@ -44,7 +44,7 @@
 
                                 <th>#</th>
 
-                                <th></th>
+                                <th>调用模块</th>
 
                                 <th>调用条数</th>
 
@@ -57,44 +57,37 @@
                             </thead>
 
                             <tbody>
-
+                            <foreach name="modules" item="module" key="k">
                             <tr>
-                                <td>模块1调用</td>
+                                <td>
+                                    模块{$k+1}调用:{$module[comment]}
+                                    <input type="hidden" name="index{$k}" value="{$module[variable]}">
+                                </td>
                                 <td>
                                     <div>
-                                        <select data-placeholder="Your Favorite Type of Bear" class="chosen-with-diselect span12" tabindex="-1" id="selCSI">
+                                        <select data-placeholder="选择模块" class="chosen-with-diselect span12" tabindex="-1" name="siteindex{$k}" id="index{$key}">
 
-                                            <option value=""></option>
-
-                                            <option>American Black Bear</option>
-
-                                            <option>Asiatic Black Bear</option>
-
-                                            <option>Brown Bear</option>
-
-                                            <option>Giant Panda</option>
-
-                                            <option>Sloth Bear</option>
-
-                                            <option>Sun Bear</option>
-
-                                            <option>Polar Bear</option>
-
-                                            <option>Spectacled Bear</option>
-
+                                            <option value="0">选择模块</option>
+                                            <foreach name="options" item="option">
+                                                <if condition="($option[id] eq $module[value][0])">
+                                            <option value="{$option[id]}" selected>{$option[modulename]}</option>
+                                                    <else/>
+                                            <option value="{$option[id]}">{$option[modulename]}</option>
+                                                </if>
+                                            </foreach>
                                         </select>
                                     </div>
 
                                 </td>
 
-                                <td><input type="text" class="span12 m-wrap"></td>
+                                <td><input type="text" class="span12 m-wrap" name="num{$k}" value="{$module[value][1]}"></td>
 
-                                <td><input type="text" class="span12 m-wrap"></td>
+                                <td><input type="text" class="span12 m-wrap" name="words{$k}" value="{$module[value][2]}"></td>
 
-                                <td><input type="text" class="span12 m-wrap"/></td>
+                                <td><input type="text" class="span12 m-wrap" name="date{$k}" value="{$module[value][3]}"/></td>
 
                             </tr>
-
+                            </foreach>
                             </tbody>
 
                         </table>
@@ -103,7 +96,7 @@
 
                             <button type="submit" class="btn blue">提交</button>
 
-                            <button type="button" class="btn">取消</button>
+                            <button type="button" class="btn" onclick="flush()">取消</button>
 
                         </div>
 

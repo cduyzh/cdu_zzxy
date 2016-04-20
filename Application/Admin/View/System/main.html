@@ -112,7 +112,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap" name="siteemail" id="site_email" value="{$setting[siteemail][value]}">
+                                <input type="email" class="span6 m-wrap" name="siteemail" id="site_email" value="{$setting[siteemail][value]}">
 
                                 <span class="help-inline">*网站邮件，将显示在页面首页的网站邮件处</span>
 
@@ -233,11 +233,4 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
-</block>
-<block name="js_module">
-    <script>
-        function flush() {
-            location.reload(true);
-        }
-    </script>
 </block>
