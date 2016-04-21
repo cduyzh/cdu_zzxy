@@ -16,7 +16,7 @@
 
                     <h3 class="page-title">
 
-                        这里是页面名称
+                        {$pageName}
 
                     </h3>
 
@@ -34,7 +34,7 @@
 
                 <div class="span12">
 
-                    <form action="#" class="form-horizontal">
+                    <form action="/admin/database/backup" class="form-horizontal" method="post">
 
                         <div class="control-group">
 
@@ -44,7 +44,8 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class="checked"><input type="radio" name="optionsRadios1" value="option1"></span></div>
+                                    <div class="radio"><span class="checked">
+                                        <input type="radio" name="zip" value="0"></span></div>
 
                                     不压缩
 
@@ -52,7 +53,7 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios1" value="option2"></span></div>
+                                    <div class="radio"><span class=""><input type="radio" name="zip" value="1"></span></div>
 
                                     分卷文件分别压缩
 
@@ -60,7 +61,7 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios1" checked="" value="option3"></span></div>
+                                    <div class="radio"><span class=""><input type="radio" name="zip" checked="" value="2"></span></div>
 
                                     压缩为一个zip文件
 
@@ -78,7 +79,7 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class="checked"><input type="radio" name="optionsRadios2" checked="" value="option1"></span></div>
+                                    <div class="radio"><span class="checked"><input type="radio" name="type" value="0"></span></div>
 
                                     MySQL 3.23/4.0.x
 
@@ -86,7 +87,7 @@
 
                                 <label class="radio">
 
-                                    <div class="radio"><span class=""><input type="radio" name="optionsRadios2" value="option2"></span></div>
+                                    <div class="radio"><span class=""><input type="radio" checked="" name="type" value="1"></span></div>
 
                                     MySQL 4.1.x/5.x
 
@@ -102,7 +103,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="file" value="{$file}">
 
                                 <span class="help-inline">*用户名必须为4-19个字母或者数字或者下划线组成</span>
 
@@ -116,7 +117,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="size" value="2048">
 
                                 <span class="help-inline">kb *分卷备份 - 每个分卷文件大小限制(kb)</span>
 
@@ -137,7 +138,6 @@
                     <table class="table table-striped table-bordered table-hover dataTable" id="sample_2" aria-describedby="sample_2_info">
 
                         <thead>
-
                         <tr role="row">
 
                             <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 166px;">序号
@@ -156,28 +156,27 @@
                             </th>
 
                         </tr>
-
                         </thead>
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all">
-
+                        <foreach name="files" item="f" key="k">
                         <tr class="gradeX odd">
 
-                            <td class=" ">1</td>
+                            <td class=" ">{$k+1}</td>
 
-                            <td class="">8524</td>
+                            <td class="">{$f}</td>
 
-                            <td class="">120</td>
+                            <td class="">{:filesize($_SERVER['DOCUMENT_ROOT'] . '/Public/backup/'.$f)}</td>
 
-                            <td class="center">123564132</td>
+                            <td class="center">{:date('Y-m-d i:s',filemtime($_SERVER['DOCUMENT_ROOT'] . '/Public/backup/'.$f))}</td>
 
                             <td class=" ">
-                                <a href="" class="btn blue">下载</a>
-                                <a href="" class="btn red">删除</a>
+                                <a href="/admin/database/download?file={$f}" class="btn blue">下载</a>
+                                <a href="javascript:void(0);" onclick="del_file('{$f}', this)" class="btn red">删除</a>
                             </td>
 
                         </tr>
-
+                        </foreach>
                         </tbody>
 
                     </table>
@@ -193,4 +192,21 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+</block>
+<block name="js_module">
+    <script>
+        function del_file(file, obj) {
+            $.get('/admin/database/delete',
+                    {file:file},
+                    function(data) {
+                        if(data.status == 1000) {
+                            alert(file+' 备份文件已删除!!');
+                            $(obj).parents('tr').remove();
+                        } else {
+                            alert('服务器错误!请重新试试!');
+                        }
+                    },"json"
+            );
+        }
+    </script>
 </block>

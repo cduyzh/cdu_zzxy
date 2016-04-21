@@ -40,10 +40,53 @@ class DatabaseController extends SuperController
     }
 
     public function backup() {
+        $pageName = "备份数据库";
+        $dbname = 'zzxy_';
+        $file = $dbname . date("YmdHis");
+        if($_POST != null) {
+            $size = I('size') > 0? I('size'):null;
+            $zip = I('zip');
+            $dbhost = 'localhost';
+            $dbuser = 'root';
+            $dbpass = '@986078867';
+
+//            $type = ' --compatible=mysql40';
+
+            $backup_file = $_SERVER['DOCUMENT_ROOT'] . '/Public/backup/' . $file . '.sql.zip';
+            $command = "mysqldump -h$dbhost -u$dbuser -p$dbpass $dbname -c --default_character-set=utf8 | gzip > $backup_file";
+            system($command);
+//            if($zip == 1 && $size != null) {
+//                system("split -b $size"."k $backup_file " . $backup_file .".");
+//            }
+        }
+
+        //获取某目录下所有文件、目录名（不包括子目录下文件、目录名）
+        $handler = opendir($_SERVER['DOCUMENT_ROOT'] . '/Public/backup/');
+        while (($filename = readdir($handler)) !== false) {//务必使用!==，防止目录下出现类似文件名“0”等情况
+            if ($filename != "." && $filename != "..") {
+                $files[] = $filename ;
+            }
+        }
+        closedir($handler);
+
+        $this->assign(compact(['pageName', 'file', 'files']));
         $this->display('backup');
     }
 
     public function run() {
         $this->display('run');
+    }
+
+    public function delete() {
+        $file = I('file');
+        $json['data'] = $file;
+        $file = $_SERVER['DOCUMENT_ROOT'] . '/Public/backup/' . $file;
+        if (file_exists($file)) {
+            unlink($file);
+            $json['status'] = 1000;
+        } else {
+            $json['status'] = 1001;
+        }
+        echo json_encode($json);
     }
 }
