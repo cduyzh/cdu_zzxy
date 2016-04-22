@@ -102,7 +102,7 @@ class SystemController  extends SuperController
         foreach($datas as $data) {
             try {
                 M('settings')->where('variable=\''.$data['variable'].'\'')->data($data)->save();
-            } catch(\PDOException $e) {
+            } catch(\Exception $e) {
                 $this->error("服务器错误!请刷新重试!");
             }
         }
