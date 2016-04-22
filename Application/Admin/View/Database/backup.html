@@ -171,7 +171,7 @@
                             <td class="center">{:date('Y-m-d i:s',filemtime($_SERVER['DOCUMENT_ROOT'] . '/Public/backup/'.$f))}</td>
 
                             <td class=" ">
-                                <a href="/admin/database/download?file={$f}" class="btn blue">下载</a>
+                                <a href="javascript:void(0);" _href="/Public/backup/{$f}" onclick="down_file(this)" class="btn blue">下载</a>
                                 <a href="javascript:void(0);" onclick="del_file('{$f}', this)" class="btn red">删除</a>
                             </td>
 
@@ -207,6 +207,11 @@
                         }
                     },"json"
             );
+        }
+
+        function down_file(obj) {
+            var url = $(obj).attr('_href');
+            window.open(url);
         }
     </script>
 </block>
