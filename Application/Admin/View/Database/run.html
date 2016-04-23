@@ -16,7 +16,7 @@
 
                     <h3 class="page-title">
 
-                        这里是页面名称
+                        {$pageName}
 
                     </h3>
 
@@ -34,17 +34,19 @@
 
                 <div class="span12">
 
-                    <form action="#" class="form-horizontal">
+                    <form action="/admin/database/run" method="post" class="form-horizontal">
 
                         <div class="control-group">
 
-                            <label class="control-label">请在这里输入要运行的SQL语句</label>
+                            <label class="control-label">输入运行的SQL语句</label>
 
                             <div class="controls">
 
-                                <textarea class="span6 m-wrap" rows="5" style="resize: none;"></textarea>
+                                <textarea class="span6 m-wrap" rows="5" name="sql" style="resize: none;"></textarea>
 
-                                <span class="help-inline">*输入要执行的SQL语句，看能否执行正确　　</span>
+                                <span class="help-inline">*输入要执行的SQL语句，看能否执行正确<br>
+                                    <p class="text text-danger">(请谨慎操作!数据无价!)</p>
+                                </span>
 
                             </div>
 
@@ -54,14 +56,19 @@
 
                             <button type="submit" class="btn blue">运行</button>
 
-                            <button type="button" class="btn">取消</button>
+                            <button type="reset" class="btn">取消</button>
 
                         </div>
 
                     </form>
 
                 </div>
-
+                <if condition="($error neq null) or ($aim neq null)">
+                <div class="span11 blue-stripe">
+                    <label>执行结果:</label>
+                    <pre>{$error}{:dump($aim)}</pre>
+                </div>
+                </if>
             </div>
 
             <!-- END PAGE CONTENT-->

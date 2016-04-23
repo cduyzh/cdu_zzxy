@@ -19,5 +19,5 @@ return array(
 //    'MULTI_MODULE'  => false,               //隐藏模块显示
     'DEFAULT_MODULE'    => 'Home',          //默认模块
     'URL_PARAMS_BIND_TYPE'  =>  1, // 设置参数绑定按照变量顺序绑定
-//    'TMPL_EXCEPTION_FILE' => './Application/Home/View/notfound/404.html',           // 所有错误都跳转404.html
+//    'TMPL_EXCEPTION_FILE' => './Application/Home/View/Errors/404.html',           // 所有错误都跳转404.html
 );

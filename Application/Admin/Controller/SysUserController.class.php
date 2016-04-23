@@ -13,6 +13,14 @@ use Think\Controller;
 
 class SysUserController extends SuperController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $module = 'system';
+        $this->assign(compact(['module']));
+    }
+
     public function index() {
         $pageName = '管理员列表';
         $admins = M('systemuser')->select();

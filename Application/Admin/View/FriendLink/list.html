@@ -16,7 +16,7 @@
 
                     <h3 class="page-title">
 
-                        这里是页面名称
+                        {$pageName}
 
                     </h3>
 
@@ -33,182 +33,222 @@
             <div class="row-fluid">
 
                 <div class="span12">
-                    <h4>校内院系链接模块友情链接</h4>
                     <table class="table table-striped table-bordered table-hover dataTable">
 
                         <thead>
 
+                        <tr class="">
+
+                            <th colspan="5">
+
+                            <h4>校内院系链接模块友情链接</h4>
+
+                            </th>
+
+                        </tr>
+
                         <tr role="row">
 
-                            <th>友情链接名字</th>
+                            <th width="35%">友情链接名字</th>
 
-                            <th>链接类型</th>
+                            <th width="15%">链接类型</th>
 
-                            <th>链接地址</th>
+                            <th width="20%">链接地址</th>
 
-                            <th>排序</th>
+                            <th width="10%">排序</th>
 
-                            <th>操作</th>
+                            <th width="20%">操作</th>
 
                         </tr>
 
                         </thead>
 
                         <tbody>
-
+                        <foreach name="links[0]" item="link">
                         <tr>
 
-                            <td class="">shuxer</td>
+                            <td class="">{$link[title]}</td>
 
-                            <td class="">8524</td>
+                            <td class=""> {:$link[type]==0? '文本链接' : '邮箱'} </td>
 
-                            <td class=""><a href="">点击查看</a></td>
+                            <td class=""><a href="{$link[url]}" target="_blank">点击查看</a></td>
 
-                            <td class=""><input type="text" class="span6 m-warp"></td>
+                            <td class="">{$link[listnum]}</td>
 
                             <td>
-                                <a href="/admin/friendlink/add" class="btn blue">编辑</a>
-                                <a href="" class="btn red">删除</a>
+                                <a href="/admin/friendlink/edit?id={$link[id]}" class="btn blue">编辑</a>
+                                <a href="javascript:void(0);" onclick="del_link('{$link[id]}', '{$link[title]}', this)" class="btn red">删除</a>
                             </td>
 
                         </tr>
-
+                        </foreach>
                         </tbody>
 
                     </table>
 
-                    <h4>管理机构链接模块友情链接</h4>
                     <table class="table table-striped table-bordered table-hover dataTable">
 
                         <thead>
 
+                        <tr class="">
+
+                            <th colspan="5">
+
+                                <h4>管理机构链接模块友情链接</h4>
+
+                            </th>
+
+                        </tr>
+
                         <tr role="row">
 
-                            <th>友情链接名字</th>
+                            <th width="35%">友情链接名字</th>
 
-                            <th>链接类型</th>
+                            <th width="15%">链接类型</th>
 
-                            <th>链接地址</th>
+                            <th width="20%">链接地址</th>
 
-                            <th>排序</th>
+                            <th width="10%">排序</th>
 
-                            <th>操作</th>
+                            <th width="20%">操作</th>
 
                         </tr>
 
                         </thead>
 
                         <tbody>
+                        <foreach name="links[1]" item="link">
+                            <tr>
 
-                        <tr>
+                                <td class="">{$link[title]}</td>
 
-                            <td class="">shuxer</td>
+                                <td class=""> {:$link[type]==0? '文本链接' : '邮箱'} </td>
 
-                            <td class="">8524</td>
+                                <td class=""><a href="{$link[url]}" target="_blank">点击查看</a></td>
 
-                            <td class=""><a href="">点击查看</a></td>
+                                <td class="">{$link[listnum]}</td>
 
-                            <td class=""><input type="text" class="span6 m-warp"></td>
+                                <td>
+                                    <a href="/admin/friendlink/edit?id={$link[id]}" class="btn blue">编辑</a>
+                                    <a href="javascript:void(0);" onclick="del_link('{$link[id]}', '{$link[title]}', this)" class="btn red">删除</a>
+                                </td>
 
-                            <td>
-                                <a href="" class="btn blue">编辑</a>
-                                <a href="" class="btn red">删除</a>
-                            </td>
-
-                        </tr>
-
+                            </tr>
+                        </foreach>
                         </tbody>
 
                     </table>
 
-                    <h4>校外相关链接模块友情链接</h4>
                     <table class="table table-striped table-bordered table-hover dataTable">
 
                         <thead>
 
+                        <tr class="">
+
+                            <th colspan="5">
+
+                                <h4>校外相关链接模块友情链接</h4>
+
+                            </th>
+
+                        </tr>
+
                         <tr role="row">
 
-                            <th>友情链接名字</th>
+                            <th width="35%">友情链接名字</th>
 
-                            <th>链接类型</th>
+                            <th width="15%">链接类型</th>
 
-                            <th>链接地址</th>
+                            <th width="20%">链接地址</th>
 
-                            <th>排序</th>
+                            <th width="10%">排序</th>
 
-                            <th>操作</th>
+                            <th width="20%">操作</th>
 
                         </tr>
 
                         </thead>
 
                         <tbody>
+                        <foreach name="links[2]" item="link">
+                            <tr>
 
-                        <tr>
+                                <td class="">{$link[title]}</td>
 
-                            <td class="">shuxer</td>
+                                <td class=""> {:$link[type]==0? '文本链接' : '邮箱'} </td>
 
-                            <td class="">8524</td>
+                                <td class=""><a href="{$link[url]}">点击查看</a></td>
 
-                            <td class=""><a href="">点击查看</a></td>
+                                <td class="">{$link[listnum]}</td>
 
-                            <td class=""><input type="text" class="span6 m-warp"></td>
+                                <td>
+                                    <a href="/admin/friendlink/edit?id={$link[id]}" class="btn blue">编辑</a>
+                                    <a href="javascript:void(0);" onclick="del_link('{$link[id]}', '{$link[title]}', this)" class="btn red">删除</a>
+                                </td>
 
-                            <td>
-                                <a href="" class="btn blue">编辑</a>
-                                <a href="" class="btn red">删除</a>
-                            </td>
-
-                        </tr>
-
+                            </tr>
+                        </foreach>
                         </tbody>
 
                     </table>
 
-                    <h4>院长书记信箱模块友情链接</h4>
                     <table class="table table-striped table-bordered table-hover dataTable">
 
                         <thead>
 
+                        <tr class="">
+
+                            <th colspan="5">
+
+                                <h4>院长书记信箱模块友情链接</h4>
+
+                            </th>
+
+                        </tr>
+
                         <tr role="row">
 
-                            <th>友情链接名字</th>
+                            <th width="35%">友情链接名字</th>
 
-                            <th>链接类型</th>
+                            <th width="15%">链接类型</th>
 
-                            <th>链接地址</th>
+                            <th width="20%">链接地址</th>
 
-                            <th>排序</th>
+                            <th width="10%">排序</th>
 
-                            <th>操作</th>
+                            <th width="20%">操作</th>
 
                         </tr>
 
                         </thead>
 
                         <tbody>
+                        <foreach name="links[3]" item="link">
+                            <tr>
 
-                        <tr>
+                                <td class="">{$link[title]}</td>
 
-                            <td class="">shuxer</td>
+                                <td class=""> {:$link[type]==0? '文本链接' : '邮箱'} </td>
 
-                            <td class="">8524</td>
+                                <td class=""> {$link[url]} </td>
 
-                            <td class=""><a href="">点击查看</a></td>
+                                <td class="">{$link[listnum]}</td>
 
-                            <td class=""><input type="text" class="span6 m-warp"></td>
+                                <td>
+                                    <a href="/admin/friendlink/edit?id={$link[id]}" class="btn blue">编辑</a>
+                                    <a href="javascript:void(0);" onclick="del_link('{$link[id]}', '{$link[title]}', this)" class="btn red">删除</a>
+                                </td>
 
-                            <td>
-                                <a href="" class="btn blue">编辑</a>
-                                <a href="" class="btn red">删除</a>
-                            </td>
-
-                        </tr>
-
+                            </tr>
+                        </foreach>
                         </tbody>
 
                     </table>
 
+                </div>
+
+                <div class="form-actions">
+                    <a href="/admin/friendlink/add" class="btn green pull-right">添加链接</a>
                 </div>
 
             </div>
@@ -220,4 +260,25 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+</block>
+<block name="js_module">
+    <script>
+        function del_link(id, name, obj) {
+            var _flag = confirm("确定要删除: \""+ name + "\"链接吗?");
+            if(!_flag) {
+                return false;
+            }
+            $.get('/admin/friendlink/delete',
+                    {id:id},
+                    function (data) {
+                        if(data.status == 1000) {
+                            alert("删除链接成功!");
+                            $(obj).parents('tr').remove();
+                        } else {
+                            alert("服务器错误!请刷新重试!");
+                        }
+                    }, "json"
+            )
+        }
+    </script>
 </block>

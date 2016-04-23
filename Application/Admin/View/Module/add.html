@@ -1,0 +1,210 @@
+<extend name="Base/base"/>
+<block name="page_content">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE CONTAINER-->
+
+        <div class="container-fluid">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        {$pageName}
+
+                    </h3>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <!-- BEGIN PAGE CONTENT-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <form action="/admin/module/create" method="post" class="form-horizontal">
+
+                        <div class="control-group">
+
+                            <label class="control-label">模块名称</label>
+
+                            <div class="controls">
+
+                                <input type="text" class="span6 m-wrap" name="module-name">
+
+                                <span class="help-inline">*请填写模块名称</span>
+
+                            </div>
+
+                        </div>
+                        <div class="control-group">
+
+                            <label class="control-label">所属栏目</label>
+
+                            <div class="controls">
+                                <if condition="($type eq null)">
+                                <span class="help-inline">{$fmodule[modulename]}</span>
+                                    <input type="hidden" name="fid" value="{$fmodule[id]}">
+                                    <else/>
+                                <span class="help-inline"> 一级栏目没有所属栏目 </span>
+                                    <input type="hidden" name="fid" value="0">
+                                </if>
+                            </div>
+
+                        </div>
+                        <div class="control-group">
+
+                            <label class="control-label">请选择类型</label>
+
+                            <div class="controls">
+
+                                <select class="span6 m-wrap" tabindex="1" name="module-type">
+
+                                    <option value="">请选择类型</option>
+
+                                    <option value="Sub">模块分类</option>
+
+                                    <option value="Simple">独立页面</option>
+
+                                    <option value="News">多信息列表</option>
+
+                                    <option value="DownLoad">多信息下载</option>
+
+                                    <option value="Video">多信息视频</option>
+
+                                    <option value="Url">外部链接</option>
+
+                                    <option value="Message">留言板</option>
+
+                                </select>
+
+                                <span class="help-inline">*请选择模板类型</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">模块排序</label>
+
+                            <div class="controls">
+
+                                <select class="span6 m-wrap" tabindex="1" name="list-num">
+                                    <option value="0">请选择, 数字大的优先显示</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+
+                                <span class="help-inline">默认为零</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">附加功能</label>
+
+                            <div class="controls">
+
+                                <select class="span6 m-wrap" tabindex="1" name="moption">
+
+                                    <option value="none">无</option>
+
+                                    <option value="Sort">简短信息</option>
+
+                                    <option value="Img">标题图片</option>
+
+                                    <option value="Both">简短信息+标题图片</option>
+
+                                </select>
+
+                                <span class="help-inline">*请选择附加功能，默认为无</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">外部链接</label>
+
+                            <div class="controls">
+
+                                <input type="url" class="span6 m-wrap" name="url">
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">是否前台显示</label>
+
+                            <div class="controls">
+
+                                <label class="radio">
+                                    <div class="radio">
+                                        <span>
+                                            <input type="radio" name="m-display" value="0">
+                                        </span>
+                                    </div>
+                                    是
+                                </label>
+
+                                <label class="radio">
+                                    <div class="radio">
+													<span class="checked">
+														<input type="radio" name="m-display" value="1" checked="">
+													</span>
+                                    </div>
+                                    否
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <button type="submit" class="btn blue">提交</button>
+
+                            <button type="reset" class="btn">取消</button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE CONTENT-->
+
+        </div>
+
+        <!-- END PAGE CONTAINER-->
+
+    </div>
+</block>

@@ -13,21 +13,29 @@ use Think\Controller;
 
 class SystemController  extends SuperController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $module = 'system';
+        $this->assign(compact(['module']));
+    }
+    
     /**
      * show
      */
     public function index() {
         $pageName = '系统参数设置';
-        $setting['sitename'] = M('settings')->where('variable = \'sitename\'')->select()[0];
-        $setting['sitephone'] = M('settings')->where('variable = \'sitephone\'')->select()[0];
-        $setting['siteaddress'] = M('settings')->where('variable = \'siteaddress\'')->select()[0];
-        $setting['siteemail'] = M('settings')->where('variable = \'siteemail\'')->select()[0];
-        $setting['sitestatus'] = M('settings')->where('variable = \'sitestatus\'')->select()[0];
-        $setting['siteclosereason'] = M('settings')->where('variable = \'siteclosereason\'')->select()[0];
-        $setting['siteuserip'] = M('settings')->where('variable = \'siteuserip\'')->select()[0];
-        $setting['siteadminip'] = M('settings')->where('variable = \'siteadminip\'')->select()[0];
-        $setting['sitekeywords'] = M('settings')->where('variable = \'sitekeywords\'')->select()[0];
-        $setting['sitedescription'] = M('settings')->where('variable = \'sitedescription\'')->select()[0];
+        $setting['sitename'] = M('settings')->where('variable = \'sitename\'')->find();
+        $setting['sitephone'] = M('settings')->where('variable = \'sitephone\'')->find();
+        $setting['siteaddress'] = M('settings')->where('variable = \'siteaddress\'')->find();
+        $setting['siteemail'] = M('settings')->where('variable = \'siteemail\'')->find();
+        $setting['sitestatus'] = M('settings')->where('variable = \'sitestatus\'')->find();
+        $setting['siteclosereason'] = M('settings')->where('variable = \'siteclosereason\'')->find();
+        $setting['siteuserip'] = M('settings')->where('variable = \'siteuserip\'')->find();
+        $setting['siteadminip'] = M('settings')->where('variable = \'siteadminip\'')->find();
+        $setting['sitekeywords'] = M('settings')->where('variable = \'sitekeywords\'')->find();
+        $setting['sitedescription'] = M('settings')->where('variable = \'sitedescription\'')->find();
         $this->assign(compact(['pageName', 'setting']));
         $this->display('System/main');
     }

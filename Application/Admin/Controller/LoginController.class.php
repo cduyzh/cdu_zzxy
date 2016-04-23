@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if($_POST != null) {
             $user = M('systemuser')->where(['username'=>$name, 'password'=>md5($password)])
-                ->select()[0];
+                ->find();
             if(!$user) {
                 $this->error('账号密码错误!请检查!');
             } else {

@@ -1,12 +1,12 @@
 <extend name="Base/base"/>
 <block name="css_module">
     <style>
-        .modul-list{
+        .module-list{
             display: block;
             float: none;
             clear: both;
         }
-        .modul-list li{
+        .module-list li{
             float: left;
             padding: 10px 20px;
             list-style: none;
@@ -15,7 +15,7 @@
             display: block;
             margin: 0 auto;
         }
-        .modul-list div{
+        .module-list div{
             float: none;
             clear: both;
         }
@@ -60,7 +60,7 @@
 
                 <div class="span12">
 
-                    <ul class="modul-list">
+                    <ul class="module-list">
                         <li>模块名称</li>
                         <li>模块类型</li>
                         <li>是否显示</li>
@@ -68,19 +68,40 @@
                         <li>模块排序</li>
                         <li>操作</li>
                     </ul>
-
-                    <ul class="modul-list">
-                        <li><a data-toggle="collapse" data-parent="#" href="#one">学院概况</a></li>
-                        <li>模块类型</li>
-                        <li>是/否</li>
-                        <li><a class="btn green">添加子模块</a></li>
+                    <volist name="modules" id="module" key="key">
+                    <ul class="module-list">
+                        <li><a data-toggle="collapse" data-parent="#" href="#{$key}"> + {$module[modulename]}</a></li>
+                        <li  data-toggle="collapse" data-parent="#" href="#{$key}">
+                            <if condition="($module[moduletype] eq 'Sub')">
+                                模块分类
+                                <elseif condition="($module[moduletype] eq 'Simple')"/>
+                                独立页面
+                                <elseif condition="($module[moduletype] eq 'News')"/>
+                                多信息列表
+                                <elseif condition="($module[moduletype] eq 'DownLoad')"/>
+                                多信息下载
+                                <elseif condition="($module[moduletype] eq 'Video')"/>
+                                多信息视频
+                                <elseif condition="($module[moduletype] eq 'Url')"/>
+                                外部链接
+                            </if>
+                        </li>
+                        <li  data-toggle="collapse" data-parent="#" href="#{$key}">
+                            <if condition="($module[m_display] eq 0)">是<else/>否</if>
+                        </li>
+                        <li>
+                            <if condition="($module[moduletype] eq 'Sub')">
+                            <a href="/admin/module/add?type=child&pid={$module[id]}" class="btn green">添加子模块</a>
+                            </if>
+                        </li>
                         <li><input class="span5" type="text"></li>
                         <li>
-                            <a class="btn blue">编辑</a>
-                            <a class="btn red">删除</a>
+                            <a href="/admin/module/edit?type=parent&id={$module[id]}" class="btn blue">编辑</a>
+                            <a href="/admin/module/delete?type=parent&id={$module[id]}" class="btn red">删除</a>
                         </li>
 
-                        <div id="one" class="panel-collapse collapse">
+                        <!-- id 是必须的 -->
+                        <div id="{$key}" class="panel-collapse collapse">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
@@ -92,105 +113,42 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <volist name="module['cmodule']" id="i" key="ck">
                                 <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td><input type="text"></td>
+                                    <td>{$ck}</td>
+                                    <td>{$i[modulename]}</td>
                                     <td>
-                                        <a class="btn blue">编辑</a>
-                                        <a class="btn red">删除</a>
+                                        <if condition="($i[moduletype] eq 'Sub')">
+                                                模块分类
+                                            <elseif condition="($i[moduletype] eq 'Simple')"/>
+                                                独立页面
+                                            <elseif condition="($i[moduletype] eq 'News')"/>
+                                                多信息列表
+                                            <elseif condition="($i[moduletype] eq 'DownLoad')"/>
+                                                多信息下载
+                                            <elseif condition="($i[moduletype] eq 'Video')"/>
+                                                多信息视频
+                                            <elseif condition="($i[moduletype] eq 'Url')"/>
+                                                外部链接
+                                        </if>
+                                    </td>
+                                    <td> {$i[listnum]} </td>
+                                    <td>
+                                        <a href="/admin/module/edit?type=child&id={$i[id]}" class="btn blue">编辑</a>
+                                        <a href="/admin/module/delete?type=child&id={$i[id]}" class="btn red">删除</a>
                                     </td>
                                 </tr>
+                                </volist>
                                 </tbody>
                             </table>
                         </div>
 
                     </ul>
-                    <div class="divider"></div>
-
-                    <ul class="modul-list">
-                        <li><a data-toggle="collapse" data-parent="#" href="#two">学院概况</a></li>
-                        <li>模块类型</li>
-                        <li>是/否</li>
-                        <li><a class="btn green">添加子模块</a></li>
-                        <li><input class="span5" type="text"></li>
-                        <li>
-                            <a class="btn blue">编辑</a>
-                            <a class="btn red">删除</a>
-                        </li>
-
-                        <div id="two" class="panel-collapse collapse">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>模块名称</th>
-                                    <th>模块分类</th>
-                                    <th>排序</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <a class="btn blue">编辑</a>
-                                        <a class="btn red">删除</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </ul>
-                    <div class="divider"></div>
-
-                    <ul class="modul-list">
-                        <li><a data-toggle="collapse" data-parent="#" href="#three">学院概况</a></li>
-                        <li>模块类型</li>
-                        <li>是/否</li>
-                        <li><a class="btn green">添加子模块</a></li>
-                        <li><input class="span5" type="text"></li>
-                        <li>
-                            <a class="btn blue">编辑</a>
-                            <a class="btn red">删除</a>
-                        </li>
-
-                        <div id="three" class="panel-collapse collapse">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>模块名称</th>
-                                    <th>模块分类</th>
-                                    <th>排序</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td><input type="text"></td>
-                                    <td>
-                                        <a class="btn blue">编辑</a>
-                                        <a class="btn red">删除</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </ul>
-                    <div class="divider"></div>
+                    <!--<div class="divider"></div>-->
+                    </volist>
 
                     <div class="form-actions">
-                        <a href="add-module.html" class="btn green pull-right">添加模块</a>
+                        <a href="/admin/module/add?type=parent" class="btn green pull-right">添加分类模块</a>
                     </div>
 
                 </div>

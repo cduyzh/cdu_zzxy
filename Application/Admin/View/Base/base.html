@@ -53,7 +53,7 @@
 
 <!-- BEGIN BODY -->
 
-<body class="page-header-fixed">
+<body class="page-header-fixed page-sidebar-fixed page-footer-fixed">
 
 <!-- BEGIN HEADER -->
 
@@ -142,8 +142,11 @@
 
             </li>
 
+            <if condition="($module eq 'system')">
             <li class="active">
-            <!--<li class="">-->
+                <else/>
+            <li class="">
+            </if>
 
                 <a href="javascript:;">
 
@@ -177,9 +180,11 @@
 
             </li>
 
-            <!--<li class="active ">-->
-            <li class="">
-
+            <if condition="($module eq 'module')">
+                <li class="active">
+                    <else/>
+                <li class="">
+            </if>
                 <a href="javascript:;">
 
                     <i class="icon-cogs"></i>
@@ -194,7 +199,7 @@
 
                 <ul class="sub-menu">
 
-                    <li ><a href="/admin/module/set">网站栏目管理</a></li>
+                    <li ><a href="/admin/module">网站栏目管理</a></li>
 
                     <li ><a href="">网站留言管理</a></li>
 
@@ -415,7 +420,7 @@
 
     <div class="footer-inner">
 
-        2013 &copy; Metronic by keenthemes.
+        2015 &copy; 成都大学|政治学院后台系统 by Mitol、
 
     </div>
 

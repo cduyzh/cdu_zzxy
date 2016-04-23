@@ -11,11 +11,18 @@ namespace Admin\Controller;
 
 class DatabaseController extends SuperController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $module = 'system';
+        $this->assign(compact(['module']));
+    }
+
     public function index() {
         $pageName = '数据库优化';
         $sql = "select TABLE_NAME, TABLE_ROWS, DATA_LENGTH, INDEX_LENGTH, DATA_FREE FROM information_schema.TABLES where TABLE_SCHEMA = 'zzxy'";
         $tables = M()->query($sql);
-//        dump($tables);
         $this->assign(compact(['tables', 'pageName']));
         $this->display('optDatabase');
     }
@@ -41,6 +48,7 @@ class DatabaseController extends SuperController
 
     public function backup() {
         $pageName = "备份数据库";
+        $path = '/Public/backup/';
         $dbname = 'zzxy_';
         $file = $dbname . date("YmdHis");
         if($_POST != null) {
@@ -50,11 +58,15 @@ class DatabaseController extends SuperController
             $dbuser = 'root';
             $dbpass = '@986078867';
 
+//            todo 兼容版本
+//            $type = ' --compatible=mysql323';
 //            $type = ' --compatible=mysql40';
 
             $backup_file = $_SERVER['DOCUMENT_ROOT'] . '/Public/backup/' . $file . '.sql.zip';
             $command = "mysqldump -h$dbhost -u$dbuser -p$dbpass $dbname -c --default_character-set=utf8 | gzip > $backup_file";
             system($command);
+
+//            TODO 压缩大小
 //            if($zip == 1 && $size != null) {
 //                system("split -b $size"."k $backup_file " . $backup_file .".");
 //            }
@@ -69,12 +81,8 @@ class DatabaseController extends SuperController
         }
         closedir($handler);
 
-        $this->assign(compact(['pageName', 'file', 'files']));
+        $this->assign(compact(['pageName', 'file', 'files', 'path']));
         $this->display('backup');
-    }
-
-    public function run() {
-        $this->display('run');
     }
 
     public function delete() {
@@ -88,5 +96,21 @@ class DatabaseController extends SuperController
             $json['status'] = 1001;
         }
         echo json_encode($json);
+    }
+
+    public function run() {
+        $pageName = '运行sql语句';
+        $error = null;
+        $aim = null;
+
+        if($_POST != null && I('sql')) {
+            try {
+                $aim = M()->query(I('sql'));
+            } catch(\Exception $e) {
+                $error = $e->getMessage();
+            }
+        }
+        $this->assign(compact(['pageName', 'aim', 'error']));
+        $this->display('run');
     }
 }

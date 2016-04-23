@@ -16,7 +16,7 @@
 
                     <h3 class="page-title">
 
-                        这里是页面名称
+                        {$pageName}
 
                     </h3>
 
@@ -34,7 +34,7 @@
 
                 <div class="span12">
 
-                    <form action="#" class="form-horizontal">
+                    <form action="/admin/friendlink/{$type}" method="post" class="form-horizontal">
 
                         <div class="control-group">
 
@@ -42,7 +42,9 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="hidden" name="aim" value="{$link[id]}">
+
+                                <input type="text" class="span6 m-wrap" name="title" value="{$link[title]}">
 
                             </div>
 
@@ -54,7 +56,7 @@
 
                             <div class="controls">
 
-                                <input type="text" class="span6 m-wrap">
+                                <input type="text" class="span6 m-wrap" name="url" value="{$link[url]}">
 
                             </div>
 
@@ -66,16 +68,16 @@
 
                             <div class="controls">
 
-                                <select data-placeholder="Your Favorite Type of Bear" class="chosen-with-diselect span3" tabindex="-1" id="sel1">
-
-                                    <option>校内院系链接模块友情链接</option>
-
-                                    <option>管理机构链接模块友情链接</option>
-
-                                    <option>校外相关链接模块友情链接</option>
-
-                                    <option>院长书记信箱模块友情链接</option>
-
+                                <select data-placeholder="选择链接模块"
+                                        class="chosen-with-diselect span3" tabindex="-1"
+                                        id="sel1" name="link-type">
+                                    <foreach name="linkModule" item="i" key="key">
+                                        <if condition="($link[linktype] eq $key)">
+                                            <option value="{$key}" selected>{$i}</option>
+                                            <else/>
+                                            <option value="{$key}">{$i}</option>
+                                        </if>
+                                    </foreach>
                                 </select>
 
                             </div>
@@ -88,11 +90,18 @@
 
                             <div class="controls">
 
-                                <select data-placeholder="Your Favorite Type of Bear" class="chosen-with-diselect span3" tabindex="-1" id="sel2">
+                                <select data-placeholder="选择链接类型"
+                                        class="chosen-with-diselect span3" tabindex="-1"
+                                        id="sel2" name="type">
+                                    <if condition="($link[type] eq 0)">
+                                        <option value="0" selected>文本链接</option>
 
-                                    <option>文本链接</option>
+                                        <option value="1">邮箱</option>
+                                        <else/>
+                                        <option value="0">文本链接</option>
 
-                                    <option>邮箱</option>
+                                        <option value="1" selected>邮箱</option>
+                                    </if>
 
                                 </select>
 
@@ -104,7 +113,7 @@
 
                             <button type="submit" class="btn blue">提交</button>
 
-                            <button type="button" class="btn">取消</button>
+                            <button type="reset" class="btn">取消</button>
 
                         </div>
 
