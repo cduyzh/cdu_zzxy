@@ -34,7 +34,7 @@
 
                 <div class="span12">
 
-                    <form action="" method="post" class="form-horizontal">
+                    <form action="/admin/sysUser/{$url}" method="post" class="form-horizontal">
 
                         <div class="control-group">
 
@@ -48,7 +48,7 @@
 
                                 <input type="text" id="name" name="name" class="span6 m-wrap" value="{$admin[username]}">
 
-                                <span class="help-inline">*用户名必须为4-19个字母或者数字或者下划线组成</span>
+                                <span class="help-inline">*用户名建议为4-19个字母或者数字或者下划线组成</span>
 
                             </div>
 
@@ -62,7 +62,7 @@
 
                                 <input type="password" name="password" id="password" class="span6 m-wrap">
 
-                                <span class="help-inline">*密码必须为6-19个字母数字和下划线组成</span>
+                                <span class="help-inline">*密码建议为6-19个字母数字和下划线组成</span>
 
                             </div>
 
@@ -79,7 +79,7 @@
                                     <div class="radio"><span class="checked">
                                         <input id="super-manager" type="radio"
                                                name="manager-class"
-                                               <if condition="($admin['userlevel'] eq 1) or $admin eq null">
+                                               <if condition="(($admin['userlevel'] eq 1) or ($admin['userlevel'] eq 0)) or $admin eq null">
                                                checked=""
                                                    <else/>
                                                </if>
@@ -123,7 +123,7 @@
 
                                             <input type="checkbox" value="system_set"
                                                    name="system-setting[]"
-                                            <?php if(strpos('system_set', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/system_set/', $auth))"> checked="" </if>
                                             > 系统参数设置
 
                                         </label>
@@ -132,7 +132,7 @@
 
                                             <input type="checkbox" value="system_skin"
                                                    name="system-setting[]"
-                                            <?php if(strpos('system_skin', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/system_skin/', $auth))"> checked="" </if>
                                             > 首页调用设置
 
                                         </label>
@@ -141,7 +141,7 @@
 
                                             <input type="checkbox" value="system_user"
                                                    name="system-setting[]"
-                                            <?php if(strpos('system_user', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/system_user/', $auth))"> checked="" </if>
                                             > 管理员账号管理
 
                                         </label>
@@ -154,7 +154,7 @@
 
                                             <input type="checkbox" value="database"
                                                    name="system-setting[]"
-                                            <?php if(strpos('database', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/database/', $auth))"> checked="" </if>
                                             > 数据库优化
 
                                         </label>
@@ -163,7 +163,7 @@
 
                                             <input type="checkbox" value="database_backup"
                                                    name="system-setting[]"
-                                            <?php if(strpos('database_backup', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/database_backup/', $auth))"> checked="" </if>
                                             > 数据库备份
 
                                         </label>
@@ -176,7 +176,7 @@
 
                                             <input type="checkbox" value="database_query"
                                                    name="system-setting[]"
-                                            <?php if(strpos('database_query', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/database_query/', $auth))"> checked="" </if>
                                             > 运行 SQL 语句
 
                                         </label>
@@ -185,7 +185,7 @@
 
                                             <input type="checkbox" value="database_replace"
                                                    name="system-setting[]"
-                                            <?php if(strpos('database_replace', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/database_replace/', $auth))"> checked="" </if>
                                             > 数据库批处理
 
                                         </label>
@@ -212,7 +212,7 @@
 
                                             <input type="checkbox" value="module"
                                                    name="website-setting[]"
-                                            <?php if(strpos('module', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/module/', $auth))"> checked="" </if>
                                             > 网站栏目管理
 
                                         </label>
@@ -223,7 +223,7 @@
 
                                             <input type="checkbox" value="sitebook"
                                                    name="website-setting[]"
-                                            <?php if(strpos('sitebook', $auth) >= 0) echo 'checked';?>
+                                                   <if condition="(preg_match('/sitebook/', $auth))"> checked="" </if>
                                             > 网站留言管理
 
                                         </label>
@@ -233,7 +233,7 @@
                                         <label class="checkbox line">
                                             <input type="checkbox" value="friendlink"
                                                    name="website-setting[]"
-                                            <?php if(strpos('friendlink', $auth) >= 0) echo 'checked';?>
+                                            <if condition="(preg_match('/friendlink/', $auth))"> checked="" </if>
                                             > 友情链接管理
                                         </label>
                                     </div>

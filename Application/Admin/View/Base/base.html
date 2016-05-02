@@ -218,7 +218,7 @@
                     <volist name="sitemodules" id="module">
                         <li>
                             <if condition="($module[moduletype] neq 'Sub')">
-                                <a href=""> {$module[modulename]} </a>
+                                <a href="/admin/news?id={$module[id]}"> {$module[modulename]} </a>
                                 <else/>
                                 <a href="javascript:;">{$module[modulename]}<span class="arrow"></span></a>
                                 <ul class="sub-menu">
