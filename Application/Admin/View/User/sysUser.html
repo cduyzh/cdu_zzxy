@@ -64,17 +64,17 @@
 
                             <td class="">{$admin[username]}</td>
 
-                            <td class="">{$admin[userlevel] == 1? '超级管理员':'管理员'}</td>
+                            <td class="">{$admin[userlevel] == 2? '管理员':'超级管理员'}</td>
 
                             <td class="">{$admin[lastlogintime]|date="Y-m-d H:i",###}</td>
 
                             <td class="center">{$admin[lastloginip]}</td>
 
                             <td>
-                                <a href="/admin/sysUser/modify/{$admin[id]}" class="btn blue">编辑</a>
+                                <a href="/admin/sysUser/modify?id={$admin[id]}" class="btn blue">编辑</a>
                                 <if condition="($admin[id] eq session('user')['id'])">
-                                <else/>
-                                <a href="javascript:void(0);"  onclick="deleteUser({$admin[id]}, this)" class="btn red">删除</a>
+                                    <else/>
+                                    <a href="javascript:void(0);"  onclick="deleteUser({$admin[id]}, this)" class="btn red">删除</a>
                                 </if>
                             </td>
                         </tr>
@@ -113,7 +113,7 @@
                     alert('用户删除成功!');
                     $(obj).parents('tr').remove();
                 } else {
-                    alert('删除失败!');
+                    alert(data.data);
                 }
             },"json");
         }

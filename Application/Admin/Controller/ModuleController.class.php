@@ -31,9 +31,9 @@ class ModuleController extends SuperController
      */
     public function index() {
         $pageName = '网站栏目管理';
-        $modules = M('sitemodule')->where('fid = 0')->getField('id, modulename, moduletype, listnum, m_display');
+        $modules = M('sitemodule')->where('fid = 0')->order('m_display asc, listnum desc')->getField('id, modulename, moduletype, listnum, m_display');
         foreach ($modules as $key=>$module) {
-            $modules[$key]['cmodule'] = M('sitemodule')->where("fid = $module[id]")->getField('id, fid, moduletype, modulename, listnum');
+            $modules[$key]['cmodule'] = M('sitemodule')->where("fid = $module[id]")->order('m_display asc, listnum desc')->getField('id, fid, moduletype, modulename, listnum');
         }
         $this->assign(compact(['pageName', 'modules']));
         $this->display('set');
@@ -123,7 +123,6 @@ class ModuleController extends SuperController
         $data['moption'] = I('moption');
         $data['url'] = I('url');
         $data['m_display'] = I('m-display');
-        dump($data);
         try {
             M('sitemodule')->where("id = $data[id]")->save($data);
         } catch (Exception $e) {
@@ -132,7 +131,7 @@ class ModuleController extends SuperController
         }
 //        $message = "<script>alert('模块已修改!');location.href(".$_SERVER['HTTP_REFERER'].");</script>";
 //        exit($message);
-        $this->success('成功创建模块!');
+        $this->success('已修改模块!', '/admin/module');
     }
 
     /**
