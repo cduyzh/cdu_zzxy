@@ -20,6 +20,10 @@ class FriendLinkController extends SuperController
     public function __construct()
     {
         parent::__construct();
+        if (!$this->isAllow('friendlink')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $moduleActive = 'module';
         $this->assign(compact(['moduleActive']));
     }

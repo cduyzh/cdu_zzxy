@@ -20,6 +20,10 @@ class DatabaseController extends SuperController
     }
 
     public function index() {
+        if (!$this->isAllow('database')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $pageName = '数据库优化';
         $sql = "select TABLE_NAME, TABLE_ROWS, DATA_LENGTH, INDEX_LENGTH, DATA_FREE FROM information_schema.TABLES where TABLE_SCHEMA = 'zzxy'";
         $tables = M()->query($sql);
@@ -28,6 +32,10 @@ class DatabaseController extends SuperController
     }
 
     public function optimize() {
+        if (!$this->isAllow('database')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $tables = I('table');
         $tables = implode(', ', $tables);
         $sql = "OPTIMIZE TABLE $tables";
@@ -47,6 +55,10 @@ class DatabaseController extends SuperController
     }
 
     public function backup() {
+        if (!$this->isAllow('database_backup')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $pageName = "备份数据库";
         $path = '/Public/backup/';
         $dbname = 'zzxy_';
@@ -86,6 +98,10 @@ class DatabaseController extends SuperController
     }
 
     public function delete() {
+        if (!$this->isAllow('database_backup')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $file = I('file');
         $json['data'] = $file;
         $file = $_SERVER['DOCUMENT_ROOT'] . '/Public/backup/' . $file;
@@ -99,6 +115,10 @@ class DatabaseController extends SuperController
     }
 
     public function run() {
+        if (!$this->isAllow('database_query')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $pageName = '运行sql语句';
         $error = null;
         $aim = null;

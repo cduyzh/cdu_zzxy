@@ -25,6 +25,9 @@ class SystemController  extends SuperController
      * show
      */
     public function index() {
+        if (!$this->isAllow('system_set')) {
+            $this->hrefBack('你没有该权限!');
+        }
         $pageName = '系统参数设置';
         $setting['sitename'] = M('settings')->where('variable = \'sitename\'')->find();
         $setting['sitephone'] = M('settings')->where('variable = \'sitephone\'')->find();
@@ -44,6 +47,10 @@ class SystemController  extends SuperController
      * update
      */
     public function update() {
+        if (!$this->isAllow('system_set')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $num = 0;
         foreach(I() as $key=>$item) {
             $datas[$num]['variable'] = $key;
@@ -65,6 +72,10 @@ class SystemController  extends SuperController
      * show
      */
     public function home() {
+        if (!$this->isAllow('system_skin')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $pageName = '首页调用设置';
         $modules = M('settings')->where('variable like \'siteindex%\'')
             ->order('variable asc')->select();
@@ -80,6 +91,10 @@ class SystemController  extends SuperController
      * set home module show
      */
     public function homeSet() {
+        if (!$this->isAllow('system_skin')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         if($_POST != null) {
             for($i=0; $i<7; $i++) {
                 $flag = 0;

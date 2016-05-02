@@ -17,6 +17,11 @@ class SysUserController extends SuperController
     public function __construct()
     {
         parent::__construct();
+        
+        if (!$this->isAllow('system_user,')) {
+            $this->hrefBack('你没有该权限!');
+        }
+
         $moduleActive = 'system';
         $this->assign(compact(['moduleActive']));
     }
@@ -33,14 +38,16 @@ class SysUserController extends SuperController
      */
     public function modify() {
         $pageName = '修改管理员';
-        $id = I()[0];
+        $id = I('id');
 
         if($_POST!=null) {
             $input['id'] = I('before');
-            if ($id != $_SESSION['user']['id']) {
+            if ($input['id'] != $_SESSION['user']['id'] &&
+                $_SESSION['user']['userlevel'] == 2) {
                 $system_setting = implode(',', I("system-setting"));
                 $website_setting = implode(',' ,I('website-setting'));
                 $input['actions'] = $system_setting. ',' . $website_setting;
+                $input['userlevel'] = I('manager-class');
             }
             $input['username'] = I('name');
             if (I('password') != null) {
@@ -48,27 +55,36 @@ class SysUserController extends SuperController
             }
 //            todo 需要更多的人员
             $input['department'] = I('manager-class')==0? '超级管理员': '管理员';
-            $input['userlevel'] = I('manager-class');
             $flag = M('systemuser')->where("id = $input[id]")->data($input)->save();
             if($flag) $this->success('修改成功!', '/admin/sysUser/modify/'.$input['id']);
         } else{
             $admin = M('systemuser')->find($id);
-            $auth = $_SESSION['user']['actions'];
+            $auth = $admin['actions'];
+            if ($admin == null) {
+                $this->error('没有查找到该管理员!');
+            }
             $this->assign(compact(['pageName', 'admin', 'auth']));
             $this->display('User/addOrModify');
         }
     }
 
+    /**
+     * new a user
+     */
     public function add() {
         $flag = I('crsf');
         if($flag == md5(1)) { //1是新增
-            $system_setting = implode(',', I("system-setting"));
-            $website_setting = implode(',' ,I('website-setting'));
-            $input['actions'] = $system_setting. ',' . $website_setting;
+            $input['userlevel'] = I('manager-class');
+            if($input['userlevel'] == 1) {
+                $input['actions'] = M('systemuser')->where('userlevel = 0')->limit(1)->select()[0]['actions'];
+            } else {
+                $system_setting = implode(',', I("system-setting"));
+                $website_setting = implode(',' ,I('website-setting'));
+                $input['actions'] = $system_setting. ',' . $website_setting;
+            }
             $input['username'] = I('name');
             $input['password'] = md5(I('password'));
             $input['department'] = I('manager-class')==0? '超级管理员': '管理员';
-            $input['userlevel'] = I('manager-class');
 
             if(!trim($input['username'])) {
                 $this->hrefBack('请输入用户名!');
@@ -87,10 +103,11 @@ class SysUserController extends SuperController
                 $this->hrefBack();
             }
             $this->success("添加管理账号成功!", '/admin/sysUser');
-        } else {
+        } else {    //显示页面
             $pageName = '添加管理员';
             $flag = md5(1);
-            $this->assign(compact(['pageName', 'flag']));
+            $url = 'add';
+            $this->assign(compact(['pageName', 'flag', 'url']));
             $this->display('User/addOrModify');
         }
     }
@@ -98,7 +115,24 @@ class SysUserController extends SuperController
     public function delete() {
         $id = I()[0];
 //        todo 判断权限
-        $_flag = M('systemuser')->delete($id);
+
+        $MUser = M('systemuser');
+        $user = $MUser->find($id);
+        if ($user['userlevel'] < 2 && $_SESSION['user']['userlevel'] !=0) {
+            $json['status'] = 1002;
+            $json['data'] = '超级管理员不可以删除!';
+            echo json_encode($json);
+            exit(-1);
+        }
+
+        if ($user['id'] == $_SESSION['user']['id']) {
+            $json['status'] = 1002;
+            $json['data'] = '不可以删除自己的账号!';
+            echo json_encode($json);
+            exit(-1);
+        }
+
+        $_flag = $MUser->delete($id);
         if($_flag) {
             $json['status'] = 1000;
             $json['data'] = '删除成功!';

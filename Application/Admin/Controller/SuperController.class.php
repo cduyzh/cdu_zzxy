@@ -82,4 +82,14 @@ class SuperController extends Controller
         $script = "<script>window.history.back();alert('$message');</script>";
         exit($script);
     }
+
+    /**
+     * @param null $string:  the permission should be check
+     * @return bool
+     */
+    public function isAllow($string = null) {
+        if ($string == null) return false;
+        $action = M('systemuser')->find($_SESSION['user']['id'])['actions'];
+        return preg_match("/$string/", $action);
+    }
 }
