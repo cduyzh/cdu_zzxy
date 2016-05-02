@@ -82,12 +82,12 @@ class NewsController extends SuperController
             $data['url'] = '/Public/news/'.date('YmdHis').'/';     //访问文件地址;
             $data['content'] = $this->saveImage(I('content'), $data['url']);
             try {
-                $article->where("id = $data[id]")->data($data)->save();
+                $article->where("id = $data[id]")->data($data)->add();
             } catch (\Exception $e) {
                 $this->error("数据存储失败!请重新保存!");
                 exit(-1);
             }
-            $this->success("新闻修改成功!");
+            $this->success("成功添加新闻!", 'admin/news?id=' . $data['moduleid']);
         }
     }
 
@@ -113,7 +113,9 @@ class NewsController extends SuperController
             }
             closedir($handler);
             foreach ($delFile as $file) {
-                unlink($_SERVER['DOCUMENT_ROOT'] . $fileBase . $file);
+                if (!preg_match("/$file/", $content)) {  //不存在的图片才会删除
+                    unlink($_SERVER['DOCUMENT_ROOT'] . $fileBase . $file);
+                }
             }
         }
 

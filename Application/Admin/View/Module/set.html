@@ -94,7 +94,7 @@
                             <a href="/admin/module/add?type=child&pid={$module[id]}" class="btn green">添加子模块</a>
                             </if>
                         </li>
-                        <li><input class="span5" type="text"></li>
+                        <li> {$module[listnum]} </li>
                         <li>
                             <a href="/admin/module/edit?type=parent&id={$module[id]}" class="btn blue">编辑</a>
                             <a href="javascript:void(0);" onclick="del_module('parent', {$module[id]}, '{$module[modulename]}', this)" class="btn red">删除</a>
