@@ -28,6 +28,8 @@ class LoginController extends Controller
             if(!$user) {
                 $this->error('账号密码错误!请检查!');
             } else {
+                $user['actions'] = str_replace('m', '', $user['actions']);
+                $user['actions'] = explode(',' , $user['actions'].'');
                 session('user', $user);
                 $data['id'] = $user['id'];
                 $data['lastloginip'] = get_client_ip();

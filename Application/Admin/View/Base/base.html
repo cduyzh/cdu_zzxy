@@ -142,7 +142,7 @@
 
             </li>
 
-            <if condition="($module eq 'system')">
+            <if condition="($moduleActive eq 'system')">
             <li class="active">
                 <else/>
             <li class="">
@@ -161,26 +161,16 @@
                 </a>
 
                 <ul class="sub-menu">
-
-                    <li ><a href="/Admin/system">系统参数设置</a></li>
-
-                    <li ><a href="/admin/system/home">首页调用设置</a></li>
-
-                    <li ><a href="/admin/sysuser">管理员账号管理</a></li>
-
-                    <li ><a href="/admin/database">数据库优化</a></li>
-
-                    <li ><a href="/admin/database/backup">数据库备份</a></li>
-
-                    <li ><a href="/admin/database/run">运行SQL语句</a></li>
-
-                    <li ><a href="/admin/database/run">数据库批处理</a></li>
-
+                    <foreach name="actions" item="item">
+                        <if condition="($sysAuth[$item] neq null)">
+                            <li ><a href="{$sysAuth[$item][url]}">{$sysAuth[$item][name]}</a></li>
+                        </if>
+                    </foreach>
                 </ul>
 
             </li>
 
-            <if condition="($module eq 'module')">
+            <if condition="($moduleActive eq 'module')">
                 <li class="active">
                     <else/>
                 <li class="">
@@ -198,19 +188,20 @@
                 </a>
 
                 <ul class="sub-menu">
-
-                    <li ><a href="/admin/module">网站栏目管理</a></li>
-
-                    <li ><a href="">网站留言管理</a></li>
-
-                    <li ><a href="/admin/friendLink">友情链接管理</a></li>
-
+                    <foreach name="actions" item="item">
+                        <if condition="($siteSet[$item] neq null)">
+                            <li ><a href="{$siteSet[$item][url]}">{$siteSet[$item][name]}</a></li>
+                        </if>
+                    </foreach>
                 </ul>
 
             </li>
 
-            <!-- todo 需要后台读取 -->
-            <li>
+            <if condition="($moduleActive eq 'news')">
+                <li class="active">
+                    <else/>
+                <li class="">
+            </if>
 
                 <a class="active" href="javascript:;">
 
@@ -224,74 +215,20 @@
 
                 <ul class="sub-menu">
 
-                    <li>
-                        <a href="javascript:;">学院概况<span class="arrow"></span></a>
-                        <ul class="sub-menu">
-                            <li><a href="/admin/news/add">学院简介</a></li>
-
-                            <li><a href="/admin/news/all">学院领导</a></li>
-
-                            <li><a href="#">机构设置</a></li>
-
-                            <li><a href="#">教研室简介</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:;">师资队伍<span class="arrow"></span></a>
-                        <ul class="sub-menu">
-                            <li><a href="#">师资概况</a></li>
-
-                            <li><a href="#">教师风采</a></li>
-
-                            <li><a href="#">师德师风</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:;">教学工作<span class="arrow"></span></a>
-                        <ul class="sub-menu">
-                            <li><a href="#">教务信息</a></li>
-
-                            <li><a href="#">教学动态</a></li>
-
-                            <li><a href="#">质量工程</a></li>
-
-                            <li><a href="#">管理制度</a></li>
-
-                            <li><a href="#">资料下载</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:;">学科建设<span class="arrow"></span></a>
-                        <ul class="sub-menu">
-                            <li><a href="#">马克思主义硕士点</a></li>
-
-                            <li><a href="#">重点学科</a></li>
-
-                            <li><a href="#">工作动态</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:;">学术研究<span class="arrow"></span></a>
-                        <ul class="sub-menu">
-                            <li><a href="#">科研团队</a></li>
-
-                            <li><a href="#">学术讲座</a></li>
-
-                            <li><a href="#">科研动态</a></li>
-
-                            <li><a href="#">研究平台</a></li>
-
-                            <li><a href="#">学术观点</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="">合作交流（我只做了一些demo的样子）</a>
-                    </li>
+                    <volist name="sitemodules" id="module">
+                        <li>
+                            <if condition="($module[moduletype] neq 'Sub')">
+                                <a href=""> {$module[modulename]} </a>
+                                <else/>
+                                <a href="javascript:;">{$module[modulename]}<span class="arrow"></span></a>
+                                <ul class="sub-menu">
+                                    <volist name="module[cmodule]" id="child">
+                                    <li><a href="/admin/news?id={$child[id]}">{$child[modulename]}</a></li>
+                                    </volist>
+                                </ul>
+                            </if>
+                        </li>
+                    </volist>
                 </ul>
 
             </li>
@@ -356,14 +293,16 @@
                                 <tr>
 
                                     <td>版权所有</td>
-                                    <td>***</td>
+                                    <td> 成都大学|政治学院版权所有 </td>
 
                                 </tr>
 
                                 <tr>
 
-                                    <td>公司网站</td>
-                                    <td>***</td>
+                                    <td>项目开发人员：</td>
+                                    <td>前台开发：张泽玮 （成都大学  信息科学与工程学院  2013级软件工程二班学生）<br>
+                                        后台开发：黄金宏 （成都大学  信息科学与工程学院  2013级软件工程四班学生）<br>
+                                        界面布局与设计：卢俊华（成都大学  政治学院教师）</td>
 
                                 </tr>
 
@@ -371,19 +310,9 @@
 
                                     <td>联系方式</td>
                                     <td>
-                                        电话:027-87517020 87517312 <br>
-                                        邮箱:mitol.huang@gmail.com  <br>
-                                        Q Q:986078867(黄金宏),453646474(张泽伟)
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>二次开发</td>
-                                    <td>
-                                        界面设计：张泽玮 （成都大学&nbsp;&nbsp;信息科学与工程学院&nbsp;&nbsp;2013级软件工程二班学生）<br>
-                                        后台开发：黄金宏 （成都大学&nbsp;&nbsp;信息科学与工程学院&nbsp;&nbsp;2013级软件工程四班学生）
+                                        张泽玮（电话：13320721196 , QQ：453646474）<br>
+                                        黄金宏（电话：18584058227 , QQ：986078867）<br>
+                                        卢俊华（电话：15228806098 , QQ：624969088）
                                     </td>
 
                                 </tr>
@@ -420,7 +349,7 @@
 
     <div class="footer-inner">
 
-        2015 &copy; 成都大学|政治学院后台系统 by Mitol、
+        2015 &copy; 成都大学|政治学院版权所有
 
     </div>
 
@@ -486,6 +415,7 @@
 
 <script src="{$Think.const.ADMIN_JS_PATH}/table-managed.js"></script>
 
+<block name="js_module"></block>
 <script>
 
     function flush() {
@@ -501,7 +431,6 @@
     });
 
 </script>
-<block name="js_module"></block>
 
 <!-- END JAVASCRIPTS -->
 </body>

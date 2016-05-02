@@ -18,8 +18,8 @@ class ModuleController extends SuperController
     public function __construct()
     {
         parent::__construct();
-        $module = 'module';
-        $this->assign(compact(['module']));
+        $moduleActive = 'module';
+        $this->assign(compact(['moduleActive']));
     }
 
     /**
@@ -40,24 +40,51 @@ class ModuleController extends SuperController
      */
     public function add() {
         $type = I('type');
-        if($type === 'child') {
-            $pageName = '添加子模块';
-            $pid = I('pid');
-            $fmodule = M('sitemodule')->where("id = $pid and fid = 0")->getField('0, id, modulename', 1)[0];
-            if($fmodule == null) {
-                $this->error('数据错误!请回到栏目页面重新操作!');
-                exit(-1);
-            }
-            $this->assign(compact(['pageName', 'fmodule']));
-            $this->display('add');
-            return;
-        } elseif ($type === 'parent') {
-            $pageName = '添加模块';
-            $this->assign(compact(['pageName', 'type']));
-            $this->display('add');
-            return;
-        } else {
-            $this->display('Errors/500');
+        $this->assign('url', 'create');
+        switch ($type) {
+            case 'child':
+                $pageName = '添加子模块';
+                $pid = I('pid');
+                $fmodule = M('sitemodule')->where("id = $pid and fid = 0")->getField('0, id, modulename', 1)[0];
+                if($fmodule == null) {
+                    $this->error('数据错误!请回到栏目页面重新操作!');
+                    exit(-1);
+                }
+                $this->assign(compact(['pageName', 'fmodule']));
+                $this->display('add');
+                break;
+            case 'parent':
+                $pageName = '添加模块';
+                $this->assign(compact(['pageName', 'type']));
+                $this->display('add');
+                break;
+            default:
+                $this->display('Errors/500');
+                break;
+        }
+    }
+
+    public function edit() {
+        $type = I('type');
+        $Mod = M('sitemodule');
+        $this->assign('url', 'modify');
+
+        switch ($type) {
+            case 'child':
+                $pageName = '修改子模块';
+                $id = I('id');
+                $thisModule = $Mod->find($id);
+                $fmodule = $Mod->find($thisModule['fid']);
+                $this->assign(compact('pageName', 'thisModule', 'fmodule'));
+                $this->display('add');
+                break;
+            case 'parent':
+                $pageName = '修改模块';
+                $id = I('id');
+                $thisModule = $Mod->find($id);
+                $this->assign(compact('pageName', 'thisModule', 'type'));
+                $this->display('add');
+                break;
         }
     }
 
@@ -82,18 +109,51 @@ class ModuleController extends SuperController
     }
 
     /**
-     *
+     * modify a module
+     */
+    public function modify() {
+        $data['id'] = I('id');
+        $data['modulename'] = I('module-name');
+        $data['moduletype'] = I('module-type');
+        $data['listnum'] = I('list-num');
+        $data['moption'] = I('moption');
+        $data['url'] = I('url');
+        $data['m_display'] = I('m-display');
+        dump($data);
+        try {
+            M('sitemodule')->where("id = $data[id]")->save($data);
+        } catch (Exception $e) {
+            $e->getMessage();
+            exit(-1);
+        }
+//        todo 需要检验是否修改成功!
+//        $message = "<script>alert('模块已修改!');location.href(".$_SERVER['HTTP_REFERER'].");</script>";
+//        exit($message);
+//        $this->success('成功创建模块!');
+    }
+
+    /**
+     * 删除模块
      */
     public function delete() {
         $type = I('type');
         $id = I('id');
         if($type === 'child') {
             M('sitemodule')->where("id = $id and fid != 0")->delete();
+            M('sitearticle')->where("moduleid = $id")->delete();
         } elseif ($type === 'parent') {
+            $sql = "DELETE FROM `hj_sitearticle` where moduleid in (
+	                  SELECT id FROM `hj_sitemodule` where `fid`= $id or `id`= $id)";
             M('sitemodule')->where("id = $id or fid = $id")->delete();
+            M()->execute($sql);
         } else {
-            $this->error('服务器错误!请刷新重试!');
+            $json['status'] = 1003;
+            $json['info'] = '服务器错误!请刷新重试!';
+            echo json_encode($json);
+            exit(-1);
         }
-        $this->success('成功删除模块!', '/admin/module');
+        $json['status'] = 1000;
+        $json['info'] = '模块已删除!';
+        echo json_encode($json);
     }
 }

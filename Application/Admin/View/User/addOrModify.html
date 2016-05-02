@@ -79,7 +79,7 @@
                                     <div class="radio"><span class="checked">
                                         <input id="super-manager" type="radio"
                                                name="manager-class"
-                                               <if condition="($admin['userlevel'] == 1)">
+                                               <if condition="($admin['userlevel'] eq 1) or $admin eq null">
                                                checked=""
                                                    <else/>
                                                </if>
@@ -91,7 +91,15 @@
 
                                 <label class="radio" for="manager">
 
-                                    <div class="radio"><span class=""><input id="manager" type="radio" name="manager-class" value="2"></span></div>
+                                    <div class="radio"><span class="">
+                                        <input id="manager" type="radio"
+                                               name="manager-class"
+                                               <if condition="($admin['userlevel'] eq 2)">
+                                                   checked=""
+                                                   <else/>
+                                               </if>
+                                               value="2">
+                                    </span></div>
 
                                     管理员
 
@@ -113,35 +121,28 @@
 
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="system-setting"> 系统参数设置
+                                            <input type="checkbox" value="system_set"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('system_set', $auth) >= 0) echo 'checked';?>
+                                            > 系统参数设置
 
                                         </label>
 
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="system-setting"> 首页调用设置
+                                            <input type="checkbox" value="system_skin"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('system_skin', $auth) >= 0) echo 'checked';?>
+                                            > 首页调用设置
 
                                         </label>
 
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="system-setting"> 管理员账号管理
-
-                                        </label>
-
-                                    </div>
-
-                                    <div class="span3">
-
-                                        <label class="checkbox line">
-
-                                            <input type="checkbox" value="" name="system-setting"> 数据库优化
-
-                                        </label>
-
-                                        <label class="checkbox line">
-
-                                            <input type="checkbox" value="" name="system-setting"> 数据库备份
+                                            <input type="checkbox" value="system_user"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('system_user', $auth) >= 0) echo 'checked';?>
+                                            > 管理员账号管理
 
                                         </label>
 
@@ -151,13 +152,41 @@
 
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="system-setting"> 运行 SQL 语句
+                                            <input type="checkbox" value="database"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('database', $auth) >= 0) echo 'checked';?>
+                                            > 数据库优化
 
                                         </label>
 
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="system-setting"> 数据库批处理
+                                            <input type="checkbox" value="database_backup"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('database_backup', $auth) >= 0) echo 'checked';?>
+                                            > 数据库备份
+
+                                        </label>
+
+                                    </div>
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="database_query"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('database_query', $auth) >= 0) echo 'checked';?>
+                                            > 运行 SQL 语句
+
+                                        </label>
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="database_replace"
+                                                   name="system-setting[]"
+                                            <?php if(strpos('database_replace', $auth) >= 0) echo 'checked';?>
+                                            > 数据库批处理
 
                                         </label>
 
@@ -181,7 +210,10 @@
 
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="website-setting"> 网站栏目管理
+                                            <input type="checkbox" value="module"
+                                                   name="website-setting[]"
+                                            <?php if(strpos('module', $auth) >= 0) echo 'checked';?>
+                                            > 网站栏目管理
 
                                         </label>
                                     </div>
@@ -189,14 +221,57 @@
                                     <div class="span3">
                                         <label class="checkbox line">
 
-                                            <input type="checkbox" value="" name="website-setting"> 网站留言管理
+                                            <input type="checkbox" value="sitebook"
+                                                   name="website-setting[]"
+                                            <?php if(strpos('sitebook', $auth) >= 0) echo 'checked';?>
+                                            > 网站留言管理
 
                                         </label>
                                     </div>
 
                                     <div class="span3">
                                         <label class="checkbox line">
-                                            <input type="checkbox" value="" name="website-setting"> 友情链接管理
+                                            <input type="checkbox" value="friendlink"
+                                                   name="website-setting[]"
+                                            <?php if(strpos('friendlink', $auth) >= 0) echo 'checked';?>
+                                            > 友情链接管理
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group manager-access">
+
+                            <label class="control-label">网站栏目</label>
+
+                            <div class="controls">
+
+                                <div class="row-fluid">
+
+                                    <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="module" name="website-setting[]"> 网站栏目管理
+
+                                        </label>
+                                    </div>
+
+                                    <div class="span3">
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="sitebook" name="website-setting[]"> 网站留言管理
+
+                                        </label>
+                                    </div>
+
+                                    <div class="span3">
+                                        <label class="checkbox line">
+                                            <input type="checkbox" value="friendlink" name="website-setting[]"> 友情链接管理
                                         </label>
                                     </div>
 
@@ -231,18 +306,13 @@
 <block name="js_module">
     <script>
         jQuery(document).ready(function() {
-            <if condition="($admin['userlevel'] == 1)">
-                $('.manager-access').hide();
-                <else/>
-            </if>
+            var isChecked = $('#manager').attr('checked');
+            console.log(isChecked);
+            if(isChecked != 'checked') $('.manager-access').hide(300);
             $('[name="manager-class"]').click(function() {
                 if($(this).attr('id') == 'manager') {
-                    console.log('manager');
-//                    $('.manager-access').removeClass('hidden');
                     $('.manager-access').show(300);
                 } else {
-                    console.log(this);
-//                    $('.manager-access').addClass('hidden');
                     $('.manager-access').hide(300);
                 }
             });

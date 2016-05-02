@@ -33,16 +33,16 @@
             <div class="row-fluid">
 
                 <div class="span12">
-
-                    <form action="/admin/module/create" method="post" class="form-horizontal">
+                    <!-- todo 需要修改链接 -->
+                    <form action="/admin/module/{$url}" method="post" class="form-horizontal">
 
                         <div class="control-group">
 
                             <label class="control-label">模块名称</label>
 
                             <div class="controls">
-
-                                <input type="text" class="span6 m-wrap" name="module-name">
+                                <input type="hidden" name="id" value="{$thisModule[id]}" />
+                                <input type="text" class="span6 m-wrap" name="module-name" value="{$thisModule[modulename]}">
 
                                 <span class="help-inline">*请填写模块名称</span>
 
@@ -71,23 +71,136 @@
                             <div class="controls">
 
                                 <select class="span6 m-wrap" tabindex="1" name="module-type">
+                                    <if condition="($thisModule[moduletype] eq 'Sub')">
+                                        <option value="">请选择类型</option>
 
-                                    <option value="">请选择类型</option>
+                                        <option value="Sub" selected>模块分类</option>
 
-                                    <option value="Sub">模块分类</option>
+                                        <option value="Simple">独立页面</option>
 
-                                    <option value="Simple">独立页面</option>
+                                        <option value="News">多信息列表</option>
 
-                                    <option value="News">多信息列表</option>
+                                        <option value="DownLoad">多信息下载</option>
 
-                                    <option value="DownLoad">多信息下载</option>
+                                        <option value="Video">多信息视频</option>
 
-                                    <option value="Video">多信息视频</option>
+                                        <option value="Url">外部链接</option>
 
-                                    <option value="Url">外部链接</option>
+                                        <option value="Message">留言板</option>
+                                        <elseif condition="($thisModule[moduletype] eq 'News')"/>
+                                        <option value="">请选择类型</option>
 
-                                    <option value="Message">留言板</option>
+                                        <option value="Sub">模块分类</option>
 
+                                        <option value="Simple">独立页面</option>
+
+                                        <option value="News" selected>多信息列表</option>
+
+                                        <option value="DownLoad">多信息下载</option>
+
+                                        <option value="Video">多信息视频</option>
+
+                                        <option value="Url">外部链接</option>
+
+                                        <option value="Message">留言板</option>
+                                        <elseif condition="($thisModule[moduletype] eq 'Simple')"/>
+                                        <option value="">请选择类型</option>
+
+                                        <option value="Sub">模块分类</option>
+
+                                        <option value="Simple" selected>独立页面</option>
+
+                                        <option value="News">多信息列表</option>
+
+                                        <option value="DownLoad">多信息下载</option>
+
+                                        <option value="Video">多信息视频</option>
+
+                                        <option value="Url">外部链接</option>
+
+                                        <option value="Message">留言板</option>
+                                        <elseif condition="($thisModule[moduletype] eq 'DownLoad')"/>
+                                        <option value="">请选择类型</option>
+
+                                        <option value="Sub">模块分类</option>
+
+                                        <option value="Simple">独立页面</option>
+
+                                        <option value="News">多信息列表</option>
+
+                                        <option value="DownLoad" selected>多信息下载</option>
+
+                                        <option value="Video">多信息视频</option>
+
+                                        <option value="Url">外部链接</option>
+
+                                        <option value="Message">留言板</option>
+                                        <elseif condition="($thisModule[moduletype] eq 'Video')"/>
+                                        <option value="">请选择类型</option>
+
+                                        <option value="Sub">模块分类</option>
+
+                                        <option value="Simple">独立页面</option>
+
+                                        <option value="News">多信息列表</option>
+
+                                        <option value="DownLoad">多信息下载</option>
+
+                                        <option value="Video" selected>多信息视频</option>
+
+                                        <option value="Url">外部链接</option>
+
+                                        <option value="Message">留言板</option>
+                                        <elseif condition="($thisModule[moduletype] eq 'Url')"/>
+                                        <option value="">请选择类型</option>
+
+                                        <option value="Sub">模块分类</option>
+
+                                        <option value="Simple">独立页面</option>
+
+                                        <option value="News">多信息列表</option>
+
+                                        <option value="DownLoad">多信息下载</option>
+
+                                        <option value="Video">多信息视频</option>
+
+                                        <option value="Url" selected>外部链接</option>
+
+                                        <option value="Message">留言板</option>
+                                        <elseif condition="($thisModule[moduletype] eq 'Message')"/>
+                                        <option value="">请选择类型</option>
+
+                                        <option value="Sub">模块分类</option>
+
+                                        <option value="Simple">独立页面</option>
+
+                                        <option value="News">多信息列表</option>
+
+                                        <option value="DownLoad">多信息下载</option>
+
+                                        <option value="Video">多信息视频</option>
+
+                                        <option value="Url">外部链接</option>
+
+                                        <option value="Message" selected>留言板</option>
+                                        <else/>
+
+                                        <option value="">请选择类型</option>
+
+                                        <option value="Sub">模块分类</option>
+
+                                        <option value="Simple">独立页面</option>
+
+                                        <option value="News">多信息列表</option>
+
+                                        <option value="DownLoad">多信息下载</option>
+
+                                        <option value="Video">多信息视频</option>
+
+                                        <option value="Url">外部链接</option>
+
+                                        <option value="Message">留言板</option>
+                                    </if>
                                 </select>
 
                                 <span class="help-inline">*请选择模板类型</span>
@@ -103,7 +216,11 @@
                             <div class="controls">
 
                                 <select class="span6 m-wrap" tabindex="1" name="list-num">
-                                    <option value="0">请选择, 数字大的优先显示</option>
+                                    <if condition="($thisModule[listnum] gt 0)">
+                                        <option value="{$thisModule[listnum]}">{$thisModule[listnum]}</option>
+                                        <else/>
+                                        <option value="0">请选择, 数字大的优先显示</option>
+                                    </if>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -129,14 +246,47 @@
                             <div class="controls">
 
                                 <select class="span6 m-wrap" tabindex="1" name="moption">
+                                    <if condition="($thisModule[moption] eq 'Node')">
+                                        <option value="None" selected>无</option>
 
-                                    <option value="none">无</option>
+                                        <option value="Sort">简短信息</option>
 
-                                    <option value="Sort">简短信息</option>
+                                        <option value="Img">标题图片</option>
 
-                                    <option value="Img">标题图片</option>
+                                        <option value="Both">简短信息+标题图片</option>
+                                        <elseif condition="($thisModule[moption] eq 'Sort')"/>
+                                        <option value="None">无</option>
 
-                                    <option value="Both">简短信息+标题图片</option>
+                                        <option value="Sort" selected>简短信息</option>
+
+                                        <option value="Img">标题图片</option>
+
+                                        <option value="Both">简短信息+标题图片</option>
+                                        <elseif condition="($thisModule[moption] eq 'Img')"/>
+                                        <option value="None">无</option>
+
+                                        <option value="Sort">简短信息</option>
+
+                                        <option value="Img" selected>标题图片</option>
+
+                                        <option value="Both">简短信息+标题图片</option>
+                                        <elseif condition="($thisModule[moption] eq 'Both')"/>
+                                        <option value="None">无</option>
+
+                                        <option value="Sort">简短信息</option>
+
+                                        <option value="Img">标题图片</option>
+
+                                        <option value="Both" selected>简短信息+标题图片</option>
+                                        <else/>
+                                        <option value="None">无</option>
+
+                                        <option value="Sort">简短信息</option>
+
+                                        <option value="Img">标题图片</option>
+
+                                        <option value="Both">简短信息+标题图片</option>
+                                    </if>
 
                                 </select>
 
@@ -152,7 +302,7 @@
 
                             <div class="controls">
 
-                                <input type="url" class="span6 m-wrap" name="url">
+                                <input type="url" class="span6 m-wrap" name="url" value="{$thisModule[url]}">
 
                             </div>
 
@@ -167,16 +317,19 @@
                                 <label class="radio">
                                     <div class="radio">
                                         <span>
-                                            <input type="radio" name="m-display" value="0">
+                                            <input type="radio" name="m-display"
+                                                   <if condition="($thisModule[m_display] eq 0)"> checked="" </if>
+                                                   value="0">
                                         </span>
                                     </div>
                                     是
                                 </label>
-
                                 <label class="radio">
                                     <div class="radio">
 													<span class="checked">
-														<input type="radio" name="m-display" value="1" checked="">
+														<input type="radio" name="m-display" value="1"
+                                                   <if condition="($thisModule[m_display] eq 1)"> checked=""
+                                                   <elseif condition="($thisModule[m_display] eq null)"/>checked=""</if>>
 													</span>
                                     </div>
                                     否

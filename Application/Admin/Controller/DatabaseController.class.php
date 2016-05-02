@@ -15,8 +15,8 @@ class DatabaseController extends SuperController
     public function __construct()
     {
         parent::__construct();
-        $module = 'system';
-        $this->assign(compact(['module']));
+        $moduleActive = 'system';
+        $this->assign(compact(['moduleActive']));
     }
 
     public function index() {

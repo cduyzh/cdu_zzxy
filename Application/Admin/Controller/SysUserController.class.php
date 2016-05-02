@@ -17,8 +17,8 @@ class SysUserController extends SuperController
     public function __construct()
     {
         parent::__construct();
-        $module = 'system';
-        $this->assign(compact(['module']));
+        $moduleActive = 'system';
+        $this->assign(compact(['moduleActive']));
     }
 
     public function index() {
@@ -28,50 +28,65 @@ class SysUserController extends SuperController
         $this->display('User/sysUser');
     }
 
+    /**
+     * modify a system manager
+     */
     public function modify() {
         $pageName = '修改管理员';
         $id = I()[0];
 
         if($_POST!=null) {
-//            dump($_POST);
             $input['id'] = I('before');
+            if ($id != $_SESSION['user']['id']) {
+                $system_setting = implode(',', I("system-setting"));
+                $website_setting = implode(',' ,I('website-setting'));
+                $input['actions'] = $system_setting. ',' . $website_setting;
+            }
             $input['username'] = I('name');
-            $input['password'] =  I('password') == null ? null: md5(I('password'));
+            if (I('password') != null) {
+                $input['password'] =  md5(I('password'));
+            }
 //            todo 需要更多的人员
             $input['department'] = I('manager-class')==0? '超级管理员': '管理员';
             $input['userlevel'] = I('manager-class');
-            $flag = M('systemuser')->data($input)->save();
+            $flag = M('systemuser')->where("id = $input[id]")->data($input)->save();
             if($flag) $this->success('修改成功!', '/admin/sysUser/modify/'.$input['id']);
         } else{
-            $admin = M('systemuser')->select($id)[0];
-            $this->assign(compact(['pageName', 'admin']));
+            $admin = M('systemuser')->find($id);
+            $auth = $_SESSION['user']['actions'];
+            $this->assign(compact(['pageName', 'admin', 'auth']));
             $this->display('User/addOrModify');
         }
     }
 
     public function add() {
         $flag = I('crsf');
-
         if($flag == md5(1)) { //1是新增
+            $system_setting = implode(',', I("system-setting"));
+            $website_setting = implode(',' ,I('website-setting'));
+            $input['actions'] = $system_setting. ',' . $website_setting;
             $input['username'] = I('name');
             $input['password'] = md5(I('password'));
             $input['department'] = I('manager-class')==0? '超级管理员': '管理员';
             $input['userlevel'] = I('manager-class');
 
             if(!trim($input['username'])) {
-                exit('<script>alert("请输入用户名!")</script>');
+                $this->hrefBack('请输入用户名!');
             }
 
             if(!trim($input['password'])) {
-                exit('<script>alert("请输入密码!")</script>');
+                $this->hrefBack('请输入密码!');
             }
 
-            if(!trim($input['username'])) {
-
+            if(M('systemuser')->where("username = '$input[username]'")->select() != null) {
+                $this->hrefBack('账号已存在!');
             }
-
-            M('systemuser')->add($input);
-            dump($input);
+            try {
+                M('systemuser')->add($input);
+            } catch (\Exception $e) {
+                $this->hrefBack();
+            }
+            $this->success("添加管理账号成功!", '/admin/sysUser');
         } else {
             $pageName = '添加管理员';
             $flag = md5(1);

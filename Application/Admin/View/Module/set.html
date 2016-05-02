@@ -97,7 +97,7 @@
                         <li><input class="span5" type="text"></li>
                         <li>
                             <a href="/admin/module/edit?type=parent&id={$module[id]}" class="btn blue">编辑</a>
-                            <a href="/admin/module/delete?type=parent&id={$module[id]}" class="btn red">删除</a>
+                            <a href="javascript:void(0);" onclick="del_module('parent', {$module[id]}, '{$module[modulename]}', this)" class="btn red">删除</a>
                         </li>
 
                         <!-- id 是必须的 -->
@@ -135,7 +135,7 @@
                                     <td> {$i[listnum]} </td>
                                     <td>
                                         <a href="/admin/module/edit?type=child&id={$i[id]}" class="btn blue">编辑</a>
-                                        <a href="/admin/module/delete?type=child&id={$i[id]}" class="btn red">删除</a>
+                                        <a href="javascript:void(0);" onclick="del_module('child',{$i[id]}, '{$i[modulename]}', this)" class="btn red">删除</a>
                                     </td>
                                 </tr>
                                 </volist>
@@ -162,4 +162,24 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+</block>
+<block name="js_module">
+    <script>
+        function del_module(type, id, name, obj) {
+            var _flag = confirm("确认要删除" + name + '模块吗?');
+            if (_flag) {
+                $.get('/admin/module/delete',
+                        {type:type, id:id},
+                function (data) {
+                    if(data.status == 1000) {
+                        alert(name + "模块已删除!");
+                        $(obj).parents('tr').remove();
+                    } else {
+                        alert(data.info);
+                        location.reload(true);
+                    }
+                }, "json")
+            }
+        }
+    </script>
 </block>

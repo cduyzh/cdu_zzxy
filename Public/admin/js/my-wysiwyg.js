@@ -1,10 +1,9 @@
 $(document).ready(function(){
     // Full featured editor
-    $('#editor1,#editor2,#editor3').each( function(index, element)
+    $('#editor1').each( function(index, element)
     {
         $(element).wysiwyg({
             classes: 'some-more-classes',
-            // 'selection'|'top'|'top-selection'|'bottom'|'bottom-selection'
             toolbar: index == 0 ? 'top-selection' : (index == 1 ? 'bottom' : 'selection'),
             buttons: {
                 // Dummy-HTML-Plugin
@@ -16,7 +15,6 @@ $(document).ready(function(){
                                 else
                                     alert( 'Please selection some text' );
                             }),
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 // Dummy-Button-Plugin
@@ -26,139 +24,8 @@ $(document).ready(function(){
                     click: function( $button ) {
                             alert('Do something');
                            },
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
-                // // Smiley plugin
-                // smilies: {
-                //     title: 'Smilies',
-                //     image: '\uf118', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                //     popup: function( $popup, $button ) {
-                //             var list_smilies = [
-                //                     '<img src="media/smiley/afraid.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/amorous.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/angel.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/angry.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/bored.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/cold.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/confused.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/cross.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/crying.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/devil.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/disappointed.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/dont-know.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/drool.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/embarrassed.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/excited.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/excruciating.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/eyeroll.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/happy.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/hot.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/hug-left.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/hug-right.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/hungry.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/invincible.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/kiss.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/lying.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/meeting.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/nerdy.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/neutral.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/party.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/pirate.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/pissed-off.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/question.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/sad.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/shame.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/shocked.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/shut-mouth.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/sick.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/silent.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/sleeping.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/sleepy.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/stressed.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/thinking.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/tongue.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/uhm-yeah.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/wink.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/working.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/bathing.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/beer.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/boy.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/camera.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/chilli.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/cigarette.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/cinema.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/coffee.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/girl.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/console.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/grumpy.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/in_love.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/internet.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/lamp.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/mobile.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/mrgreen.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/musical-note.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/music.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/phone.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/plate.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/restroom.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/rose.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/search.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/shopping.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/star.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/studying.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/suit.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/surfing.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/thunder.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/tv.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/typing.png" width="16" height="16" alt="" />',
-                //                     '<img src="media/smiley/writing.png" width="16" height="16" alt="" />'
-                //             ];
-                //             var $smilies = $('<div/>').addClass('wysiwyg-toolbar-smilies')
-                //                                       .attr('unselectable','on');
-                //             $.each( list_smilies, function(index,smiley){
-                //                 if( index != 0 )
-                //                     $smilies.append(' ');
-                //                 var $image = $(smiley).attr('unselectable','on');
-                //                 // Append smiley
-                //                 var imagehtml = ' '+$('<div/>').append($image.clone()).html()+' ';
-                //                 $image
-                //                     .css({ cursor: 'pointer' })
-                //                     .click(function(event){
-                //                         $(element).wysiwyg('shell').insertHTML(imagehtml); // .closePopup(); - do not close the popup
-                //                     })
-                //                     .appendTo( $smilies );
-                //             });
-                //             var $container = $(element).wysiwyg('container');
-                //             $smilies.css({ maxWidth: parseInt($container.width()*0.95)+'px' });
-                //             $popup.append( $smilies );
-                //             // Smilies do not close on click, so force the popup-position to cover the toolbar
-                //             var $toolbar = $button.parents( '.wysiwyg-toolbar' );
-                //             if( ! $toolbar.length ) // selection toolbar?
-                //                 return ;
-                //             var left = 0,
-                //                 top = 0,
-                //                 node = $toolbar.get(0);
-                //             while( node )
-                //             {
-                //                 left += node.offsetLeft;
-                //                 top += node.offsetTop;
-                //                 node = node.offsetParent;
-                //             }
-                //             left += parseInt( ($toolbar.outerWidth() - $popup.outerWidth()) / 2 );
-                //             if( $toolbar.hasClass('wysiwyg-toolbar-top') )
-                //                 top -= $popup.height() - parseInt($button.outerHeight() * 1/4);
-                //             else
-                //                 top += parseInt($button.outerHeight() * 3/4);
-                //             $popup.css({ left: left + 'px',
-                //                          top: top + 'px'
-                //                        });
-                //             // prevent applying position
-                //             return false;
-                //            },
-                //     //showstatic: true,    // wanted on the toolbar
-                //     showselection: index == 2 ? true : false    // wanted on selection
-                // },
                 insertimage: {
                     title: 'Insert image',
                     image: '\uf030', // <img src="path/to/image.png" width="16" height="16" alt="" />
@@ -199,7 +66,6 @@ $(document).ready(function(){
                             });
                             $popup.append( $list );
                            },
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: index == 0 ? true : false    // wanted on selection
                 },
                 // Fontsize plugin
@@ -234,8 +100,6 @@ $(document).ready(function(){
                             });
                             $popup.append( $list );
                            }
-                    //showstatic: true,    // wanted on the toolbar
-                    //showselection: true    // wanted on selection
                 },
                 // Header plugin
                 header: index != 1 ? false : {
@@ -309,7 +173,6 @@ $(document).ready(function(){
                 aligncenter: index != 0 ? false : {
                     title: 'Center',
                     image: '\uf037', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 alignright: index != 0 ? false : {
@@ -321,43 +184,36 @@ $(document).ready(function(){
                 alignjustify: index != 0 ? false : {
                     title: 'Justify',
                     image: '\uf039', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 subscript: index == 1 ? false : {
                     title: 'Subscript',
                     image: '\uf12c', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: true    // wanted on selection
                 },
                 superscript: index == 1 ? false : {
                     title: 'Superscript',
                     image: '\uf12b', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: true    // wanted on selection
                 },
                 indent: index != 0 ? false : {
                     title: 'Indent',
                     image: '\uf03c', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 outdent: index != 0 ? false : {
                     title: 'Outdent',
                     image: '\uf03b', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 orderedList: index != 0 ? false : {
                     title: 'Ordered list',
                     image: '\uf0cb', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 unorderedList: index != 0 ? false : {
                     title: 'Unordered list',
                     image: '\uf0ca', // <img src="path/to/image.png" width="16" height="16" alt="" />
-                    //showstatic: true,    // wanted on the toolbar
                     showselection: false    // wanted on selection
                 },
                 removeformat: {
@@ -374,32 +230,6 @@ $(document).ready(function(){
             dropfileclick: 'Drop image or click',
             placeholderUrl: 'www.example.com',
             maxImageSize: [600,200]
-            /*
-            onImageUpload: function( insert_image ) {
-                            // Used to insert an image without XMLHttpRequest 2
-                            // A bit tricky, because we can't easily upload a file
-                            // via '$.ajax()' on a legacy browser.
-                            // You have to submit the form into to a '<iframe/>' element.
-                            // Call 'insert_image(url)' as soon as the file is online
-                            // and the URL is available.
-                            // Best way to do: http://malsup.com/jquery/form/
-                            // For example:
-                            //$(this).parents('form')
-                            //       .attr('action','/path/to/file')
-                            //       .attr('method','POST')
-                            //       .attr('enctype','multipart/form-data')
-                            //       .ajaxSubmit({
-                            //          success: function(xhrdata,textStatus,jqXHR){
-                            //            var image_url = xhrdata;
-                            //            console.log( 'URL: ' + image_url );
-                            //            insert_image( image_url );
-                            //          }
-                            //        });
-                        },
-            onKeyEnter: function() {
-                            return false; // swallow enter
-                        }
-            */
         })
         .change(function(){
             if( typeof console != 'undefined' )
@@ -415,40 +245,24 @@ $(document).ready(function(){
         });
     });
 
-    // Demo-Buttons
-    $('#editor3-bold').click(function(){
-        $('#editor3').wysiwyg('shell').bold();
-        return false;
-    });
-    $('#editor3-red').click(function(){
-        $('#editor3').wysiwyg('shell').highlight('#ff0000');
-        return false;
-    });
-    $('#editor3-sethtml').click(function(){
-        $('#editor3').wysiwyg('shell').setHTML('This is the new text.');
-        return false;
-    });
-    $('#editor3-inserthtml').click(function(){
-        $('#editor3').wysiwyg('shell').insertHTML('Insert some text.');
-        return false;
-    });
+
 
     // Raw editor
-    var option = {
-        element: $('#editor0').get(0),
-        onkeypress: function( code, character, shiftKey, altKey, ctrlKey, metaKey ) {
-                        if( typeof console != 'undefined' )
-                            console.log( 'RAW: '+character+' key pressed' );
-                    },
-        onselection: function( collapsed, rect, nodes, rightclick ) {
-                        if( typeof console != 'undefined' && rect )
-                            console.log( 'RAW: selection rect('+rect.left+','+rect.top+','+rect.width+','+rect.height+'), '+nodes.length+' nodes' );
-                    },
-        onplaceholder: function( visible ) {
-                        if( typeof console != 'undefined' )
-                            console.log( 'RAW: placeholder ' + (visible ? 'visible' : 'hidden') );
-                    }
-    };
-    var wysiwygeditor = wysiwyg( option );
+    // var option = {
+    //     element: $('#editor1').get(0),
+    //     onkeypress: function( code, character, shiftKey, altKey, ctrlKey, metaKey ) {
+    //                     if( typeof console != 'undefined' )
+    //                         console.log( 'RAW: '+character+' key pressed' );
+    //                 },
+    //     onselection: function( collapsed, rect, nodes, rightclick ) {
+    //                     if( typeof console != 'undefined' && rect )
+    //                         console.log( 'RAW: selection rect('+rect.left+','+rect.top+','+rect.width+','+rect.height+'), '+nodes.length+' nodes' );
+    //                 },
+    //     onplaceholder: function( visible ) {
+    //                     if( typeof console != 'undefined' )
+    //                         console.log( 'RAW: placeholder ' + (visible ? 'visible' : 'hidden') );
+    //                 }
+    // };
+    // var wysiwygeditor = wysiwyg( option );
     //wysiwygeditor.setHTML( '<html>' );
 });

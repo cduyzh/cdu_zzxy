@@ -20,8 +20,8 @@ class FriendLinkController extends SuperController
     public function __construct()
     {
         parent::__construct();
-        $module = 'module';
-        $this->assign(compact(['module']));
+        $moduleActive = 'module';
+        $this->assign(compact(['moduleActive']));
     }
 
     /**
