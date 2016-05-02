@@ -71,7 +71,7 @@ class SystemController  extends SuperController
         foreach($modules as $key=>$module) {
             $modules[$key]['value'] = explode(',', $module['value']);
         }
-        $options = M('sitemodule')->where('fid != 0')->select();
+        $options = M('sitemodule')->where('fid = 0')->select();
         $this->assign(compact(['pageName', 'modules', 'options']));
         $this->display('System/home');
     }

@@ -54,7 +54,7 @@ class ModuleController extends SuperController
                 $this->display('add');
                 break;
             case 'parent':
-                $pageName = '添加模块';
+                $pageName = '添加主模块';
                 $this->assign(compact(['pageName', 'type']));
                 $this->display('add');
                 break;
@@ -98,11 +98,11 @@ class ModuleController extends SuperController
         $data['listnum'] = I('list-num');
         $data['moption'] = I('moption');
         $data['url'] = I('url');
-        $data['m_display'] = I('m-display');
+        $data['m_display'] = I('m-display') == 0? false : true;
         try {
             M('sitemodule')->data($data)->add();
         } catch (Exception $e) {
-            $e->getMessage();
+            $this->error('创建失败!'.$e->getMessage());
             exit(-1);
         }
         $this->success('成功创建模块!', '/admin/module');
@@ -126,10 +126,9 @@ class ModuleController extends SuperController
             $e->getMessage();
             exit(-1);
         }
-//        todo 需要检验是否修改成功!
 //        $message = "<script>alert('模块已修改!');location.href(".$_SERVER['HTTP_REFERER'].");</script>";
 //        exit($message);
-//        $this->success('成功创建模块!');
+        $this->success('成功创建模块!');
     }
 
     /**
