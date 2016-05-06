@@ -1,7 +1,27 @@
 <extend name="Base/base"/>
 <block name="css_module">
-    <link rel="stylesheet" type="text/css" href="{$Think.const.ADMIN_CSS_PATH}/wysiwyg-editor.css" />
-    <link href="{$Think.const.ADMIN_CSS_PATH}/demo-wysiwyg.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/font-awesome.min.css">
+
+    <!-- Include Editor style. -->
+    <link href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
+    <link href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Include Code Mirror style -->
+    <<!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css"> -->
+
+    <!-- Include Editor Plugins style. -->
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/char_counter.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/code_view.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/colors.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/emoticons.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/file.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/fullscreen.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/image.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/image_manager.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/line_breaker.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/quick_insert.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/table.css">
+    <link rel="stylesheet" href="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/css/plugins/video.css">
 </block>
 <block name="page_content">
     <div class="page-content">
@@ -64,14 +84,15 @@
 
                         </div>
 
+
+
                         <div class="control-group">
 
                             <label class="control-label">详细信息</label>
 
                             <div class="controls">
 
-                                <textarea class="span12 m-wrap" rows="6" id="editor1"
-                                          name="content" placeholder="输入您的新闻内容">{$article[content]}</textarea>
+                                <textarea class="span12 m-wrap" rows="6" id="editor" name="content" placeholder="输入您的新闻内容">{$article[content]}</textarea>
 
                             </div>
 
@@ -79,13 +100,21 @@
 
                         <div class="control-group">
 
-                            <label class="control-label">排序</label>
+                            <label class="control-label">首页轮播显示</label>
 
                             <div class="controls">
 
-                                <input type="text" class="span1 m-wrap" value="{$article[listnum]}" name="list-num">
+                                <select class="span6 m-wrap" tabindex="1" name="slider">
+                                    <if condition="($article[slider] eq 0)">
+                                        <option value="0" selected> 否 </option>
+                                        <option value="1"> 是 </option>
+                                        <else/>
+                                        <option value="0"> 否 </option>
+                                        <option value="1" selected> 是 </option>
+                                    </if>
+                                </select>
 
-                                <span class="help-inline">只能输入大于0的数字</span>
+                                <span class="help-inline">默认为不在首页轮播</span>
 
                             </div>
 
@@ -95,7 +124,7 @@
 
                             <button type="submit" class="btn blue">提交</button>
 
-                            <button type="button" class="btn">取消</button>
+                            <button type="button" class="btn" onclick="back()">取消</button>
 
                         </div>
 
@@ -113,8 +142,68 @@
 
     </div>
 </block>
-<block name="js_module">
-    <script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/wysiwyg.js"></script>
-    <script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/wysiwyg-editor.js"></script>
-    <script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/my-wysiwyg.js"></script>
+<block name="js_module">		<!-- Include JS files. -->
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/froala_editor.min.js"></script>
+
+    <!-- Include Code Mirror. -->
+
+
+    <!-- Include Plugins. -->
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/align.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/char_counter.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/code_beautifier.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/code_view.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/colors.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/emoticons.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/entities.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/file.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/font_family.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/font_size.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/fullscreen.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/image.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/image_manager.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/inline_style.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/line_breaker.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/link.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/lists.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/paragraph_format.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/paragraph_style.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/quick_insert.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/quote.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/table.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/save.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/url.min.js"></script>
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/plugins/video.min.js"></script>
+
+    <!-- Include Language file if we want to use it. -->
+    <script type="text/javascript" src="{$Think.const.ADMIN_PLUGINS_PATH}/froalaEditor/js/languages/zh_cn.js"></script>
+
+    <script>
+        var toolBarButtons = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'color', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'insertHR', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html'];
+        $(function() {
+            $('#editor').froalaEditor({
+                language: 'zh_cn',
+                toolbarButtons: toolBarButtons
+            });
+//            $('#editor').on('froalaEditor.image.removed', function (e, editor, $img) {
+//                // Do something here.
+//                var imgHttpSrc = $img.context.src;
+//                $.get('/admin/file/delete',
+//                        {file:imgHttpSrc},
+//                        function (data) {
+//                            console.log(imgSrc);
+//                        }, "json");
+//            });
+//            $('#editor').on('froalaEditor.file.unlink', function (e, editor, link) {
+//                // Do something here.
+//                var href = link.href;
+//                var imgHttpSrc = $img.context.src;
+//                $.get('/admin/file/delete',
+//                        {file:href},
+//                        function (data) {
+//                            console.log(imgSrc);
+//                        }, "json");
+//            });
+        });
+    </script>
 </block>

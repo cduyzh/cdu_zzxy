@@ -34,7 +34,7 @@
 
                 <div class="span12">
 
-                    <form action="/admin/sysUser/{$url}" method="post" class="form-horizontal">
+                    <form action="/admin/sysuser/{$url}" method="post" class="form-horizontal">
 
                         <div class="control-group">
 
@@ -63,6 +63,30 @@
                                 <input type="password" name="password" id="password" class="span6 m-wrap">
 
                                 <span class="help-inline">*密码建议为6-19个字母数字和下划线组成</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="control-group">
+
+                            <label class="control-label">所属部门</label>
+
+                            <div class="controls">
+
+                                <select class="span6 m-wrap" tabindex="1" name="department">
+                                    <foreach name="userType" item="i" key="key">
+                                        <if condition="($admin[department] eq null) and $key eq 0">
+                                            <option value="{$i}" selected> {$i} </option>
+                                            <elseif condition="$admin[department] eq $i"/>
+                                            <option value="{$i}" selected> {$i} </option>
+                                            <else/>
+                                            <option value="{$i}"> {$i} </option>
+                                        </if>
+                                    </foreach>
+                                </select>
+
+                                <span class="help-inline">*默认为管理员</span>
 
                             </div>
 
@@ -253,26 +277,20 @@
                                 <div class="row-fluid">
 
                                     <div class="span3">
+                                    <foreach name="mainmodule" item="module" key="key">
+                                            <label class="checkbox line">
 
-                                        <label class="checkbox line">
+                                                <input type="checkbox" value="m{$module[id]}m"
+                                                <if condition="(preg_match('/m'. $module[id] .'m/', $auth))"> checked="" </if>
+                                                       name="module-setting[]"> {$module[modulename]}
 
-                                            <input type="checkbox" value="module" name="website-setting[]"> 网站栏目管理
+                                            </label>
+                                        <if condition="(($key + 1) % 3) eq 0">
+                                        </div>
 
-                                        </label>
-                                    </div>
-
-                                    <div class="span3">
-                                        <label class="checkbox line">
-
-                                            <input type="checkbox" value="sitebook" name="website-setting[]"> 网站留言管理
-
-                                        </label>
-                                    </div>
-
-                                    <div class="span3">
-                                        <label class="checkbox line">
-                                            <input type="checkbox" value="friendlink" name="website-setting[]"> 友情链接管理
-                                        </label>
+                                        <div class="span3">
+                                        </if>
+                                    </foreach>
                                     </div>
 
                                 </div>
@@ -282,10 +300,13 @@
                         </div>
 
                         <div class="form-actions">
-
+                        <if condition="$auth eq null">
                             <button type="submit" class="btn blue">添加</button>
+                            <else/>
+                            <button type="submit" class="btn blue">修改</button>
+                        </if>
 
-                            <button type="button" class="btn">取消</button>
+                            <button type="button" class="btn" onclick="back()">取消</button>
 
                         </div>
 

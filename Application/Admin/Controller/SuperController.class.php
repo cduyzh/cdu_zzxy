@@ -59,8 +59,6 @@ class SuperController extends Controller
         ],
     ];
 
-//    protected  $stes = 'm1m,m5m,m9m,m15m,m18m,m23m,m28m,m32m,m33m,m43m,m35m,m61m';
-
     public function __construct()
     {
         parent::__construct();
@@ -70,11 +68,42 @@ class SuperController extends Controller
         }
         $sysAuth = $this->sysAuth;
         $siteSet = $this->siteSet;
+        $Mod = M('sitemodule');
         $actions = $_SESSION['user']['actions'];
-        $sitemodules = M('sitemodule')->where('fid = 0')->getField('id, modulename, moduletype, listnum, m_display');
-        foreach ($sitemodules as $key=>$module) {
-            $sitemodules[$key]['cmodule'] = M('sitemodule')->where("fid = $module[id]")->getField('id, fid, moduletype, modulename, listnum');
+
+        foreach ($actions as $action) {
+            if (is_numeric($action)) {
+                $userModule[] = $action;
+            }
         }
+        $userModule = '(' . implode(',', $userModule) . ')';
+
+
+        if ($_SESSION['user']['userlevel'] < 2) { //        超级管理员可以查看所有模块
+            $where = 'fid = 0';
+        } else {
+            $where = "m_display = 0 and id in $userModule";
+        }
+
+//        获取可以查看的主模块
+        try {
+            $sitemodules = $Mod->where($where)->order('m_display asc ,listnum desc')
+                ->getField('id, modulename, moduletype, listnum, m_display');
+        } catch (\Exception $e) {
+            $sitemodules = null;
+        }
+
+        if ($_SESSION['user']['userlevel'] < 2) { //        超级管理员可以查看所有模块
+            $where = '';
+        } else {                                  //        普通管理员只可以查看显示的模块
+            $where = " and m_display = 0";
+        }
+
+        foreach ($sitemodules as $key=>$module) {
+            $sitemodules[$key]['cmodule'] = $Mod->where("fid = $module[id]" . $where)
+                ->getField('id, fid, moduletype, modulename, listnum');
+        }
+//        exit();
         $this->assign(compact(['sitemodules', 'sysAuth', 'siteSet', 'actions']));
     }
 
@@ -88,8 +117,10 @@ class SuperController extends Controller
      * @return bool
      */
     public function isAllow($string = null) {
+        $user = M('systemuser')->find($_SESSION['user']['id'])['actions'];
+        if ($user['userlevel'] < 2) return true;
         if ($string == null) return false;
-        $action = M('systemuser')->find($_SESSION['user']['id'])['actions'];
-        return preg_match("/$string/", $action);
+        if (is_numeric($string)) $string = 'm'.$string.'m';
+        return preg_match("/$string/", $user['actions']);
     }
 }

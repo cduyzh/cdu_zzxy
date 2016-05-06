@@ -76,7 +76,7 @@
 				else {
 					trigger.addEventListener( 'click', function( ev ) {
 						if( this.parentNode.querySelector( 'ul.cbp-tm-submenu' ) ) {
-							ev.preventDefault();
+							//就是这个取消了超链接事件默认事件ev.preventDefault();
 						}
 					} );
 					el.addEventListener( 'mouseover', function(ev) { if( isMouseLeaveOrEnter( ev, this ) ) self._openMenu( this ); } );

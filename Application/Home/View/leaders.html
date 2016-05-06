@@ -1,0 +1,76 @@
+<extend name="Base/base"/>
+<block name="body">
+    <section class="section4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 subpage">
+                    <ul class="list-group">
+                    <foreach name="results" item="result" key="$key">
+                        <li class="list-group-item">
+                            <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
+                        </li>
+                    </foreach>
+                    </ul>
+                </div>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"> {$thisMod[modulename]} </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>职务</td>
+                                    <td>姓名</td>
+                                    <td>办公地点</td>
+                                    <td>办公电话</td>
+                                    <td>工作分工</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="3">行政</td>
+                                    <td> {$modArticle[0][1]} </td>
+                                    <td><a href="/home/show?id={$modArticle[0][6]}"> {$modArticle[0][0]} </a></td>
+                                    <td> {$modArticle[0][3]} </td>
+                                    <td> {$modArticle[0][4]} </td>
+                                    <td> {$modArticle[0][5]} </td>
+                                </tr>
+                                <tr>
+                                    <td> {$modArticle[1][1]} </td>
+                                    <td><a href="/home/show?id={$modArticle[1][6]}"> {$modArticle[1][0]} </a></td>
+                                    <td> {$modArticle[1][3]} </td>
+                                    <td> {$modArticle[1][4]} </td>
+                                    <td> {$modArticle[1][5]} </td>
+                                </tr>
+                                <tr>
+                                    <td> {$modArticle[2][1]} </td>
+                                    <td><a href="/home/show?id={$modArticle[2][6]}"> {$modArticle[2][0]} </a></td>
+                                    <td> {$modArticle[2][3]} </td>
+                                    <td> {$modArticle[2][4]} </td>
+                                    <td> {$modArticle[2][5]} </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">党务</td>
+                                    <td> {$modArticle[3][1]} </td>
+                                    <td><a href="/home/show?id={$modArticle[3][6]}"> {$modArticle[3][0]} </a></td>
+                                    <td> {$modArticle[3][3]} </td>
+                                    <td> {$modArticle[3][4]} </td>
+                                    <td> {$modArticle[3][5]} </td>
+                                </tr>
+                                <tr>
+                                    <td> {$modArticle[4][1]} </td>
+                                    <td><a href="/home/show?id={$modArticle[4][6]}"> {$modArticle[4][0]} </a></td>
+                                    <td> {$modArticle[4][3]} </td>
+                                    <td> {$modArticle[4][4]} </td>
+                                    <td> {$modArticle[4][5]} </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

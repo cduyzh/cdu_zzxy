@@ -95,7 +95,7 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                        <span class="username">您好：{$Think.session.user.department}</span>
+                        <span class="username"> {$Think.session.user.department} : {$Think.session.user.username}</span>
 
                         <i class="icon-angle-down"></i>
 
@@ -420,6 +420,10 @@
 
     function flush() {
         location.reload(true);
+    }
+
+    function back() {
+        window.history.back();
     }
 
     jQuery(document).ready(function() {

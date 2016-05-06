@@ -12,14 +12,18 @@
             <div class="example-slide clearfix">
                 <div id="slides" class="slidest">
                     <div class="slides_container">
-
+                    <foreach name="articles[0]" item="article">
                         <div class="slide">
                             <div class="slide-left">
-                                <a href="#" title="图片信息2" ><img src="{$Think.const.IMG_PATH}/slide-2.jpg" alt="Slide 2"></a>
+                                <a href="/home/show?id={$article[id]}" title="{$article[title]}" ><img src="{$article[url]}" alt="{$article[title]}" width="" height=""></a>
                             </div>
+                            <!--public/imgs/slide.jpg-->
                             <div class="slide-right">
-                                <div class="hotinfo-tit">图片信息2</div>
-                                <div class="hotinfo-desc">jQuery是免费、开源的，使用MIT许可协议。jQuery的语法设计可以使开发更加便捷，例如操作文档对象、选择DOM元素、制作动画效果、事件处理、使用Ajax以及其他功能。除此以外，jQuery提供API让开发者编写插件...
+                                <div class="hotinfo-tit">
+                                    <nobr> {$article[title]} </nobr>
+                                </div>
+                                <div class="hotinfo-desc">
+                                    {$article[content]}
                                 </div>
                                 <div class="hotinfo-item clearfix">
                                     <div class="hotinfo-link">
@@ -28,23 +32,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="slide">
-                            <div class="slide-left">
-                                <a href="#" title="图片信息2" ><img src="{$Think.const.IMG_PATH}/slide-3.jpg" alt="Slide 2"></a>
-                            </div>
-                            <div class="slide-right">
-                                <div class="hotinfo-tit">图片信息2</div>
-                                <div class="hotinfo-desc">jQuery是免费、开源的，使用MIT许可协议。jQuery的语法设计可以使开发更加便捷，例如操作文档对象、选择DOM元素、制作动画效果、事件处理、使用Ajax以及其他功能。除此以外，jQuery提供API让开发者编写插件...
-                                </div>
-                                <div class="hotinfo-item clearfix">
-                                    <div class="hotinfo-link">
-                                        <a class="button small">阅读详情</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                    </foreach>
                     </div>
                     <a href="#" class="prev"></a>
                     <a href="#" class="next"></a>
@@ -60,197 +48,83 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="col-links-wrapper">
-                        <h2><span>学院新闻</span><small><a href="">更多</a></small></h2>
+                        <h2><span>学院新闻</span><small><a href="/home/list?id={:explode(',' ,$settings[siteindex1])[0]}">更多</a></small></h2>
                         <ul>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University<span class="set-new"></span></a>
-
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University<span class="set-ding"></span></a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
+                            <foreach name="articles[1]" item="article">
+                                <li>
+                                    <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                    <span class="pull-right"> {:date($article[$siteIndex[1]], $article[addtime])} </span>
+                                </li>
+                            </foreach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-links-wrapper">
-                        <h2><span>通知公告</span><small><a href="">更多</a></small></h2>
+                        <h2><span>通知公告</span><small><a href="/home/list?id={:explode(',' ,$settings[siteindex2])[0]}">更多</a></small></h2>
                         <ul>
+                        <foreach name="articles[2]" item="article">
                             <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
+                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <span class="pull-right"> {:date($siteIndex[2], $article[addtime])} </span>
                             </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-links-wrapper">
 
-                        <h2><span>教学工作</span><small><a href="">更多</a></small></h2>
+                        <h2><span>教学工作</span><small><a href="/home/list?id={:explode(',' ,$settings[siteindex3])[0]}">更多</a></small></h2>
                         <ul>
+                        <foreach name="articles[3]" item="article">
                             <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
+                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <span class="pull-right"> {:date($siteIndex[3], $article[addtime])} </span>
                             </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-links-wrapper">
 
-                        <h2><span>科研工作</span><small><a href="">更多</a></small></h2>
+                        <h2><span>科研工作</span><small><a href="/home/list?id={:explode(',' ,$settings[siteindex4])[0]}">更多</a></small></h2>
                         <ul>
+                        <foreach name="articles[4]" item="article">
                             <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
+                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <span class="pull-right"> {:date($siteIndex[4], $article[addtime])} </span>
                             </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-links-wrapper">
 
-                        <h2><span>学生工作</span><small><a href="">更多</a></small></h2>
+                        <h2><span>学生工作</span><small><a href="/home/list?id={:explode(',' ,$settings[siteindex5])[0]}">更多</a></small></h2>
                         <ul>
+                        <foreach name="articles[5]" item="article">
                             <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
+                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <span class="pull-right"> {:date($siteIndex[5], $article[addtime])} </span>
                             </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-links-wrapper">
 
-                        <h2><span>党群工作</span><small><a href="">更多</a></small></h2>
+                        <h2><span>党群工作</span><small><a href="/home/list?id={:explode(',' ,$settings[siteindex6])[0]}">更多</a></small></h2>
                         <ul>
+                        <foreach name="articles[6]" item="article">
                             <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
+                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <span class="pull-right"> {:date($siteIndex[6], $article[addtime])} </span>
                             </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
-                            <li>
-                                <a href="" target="_blank">Anderson Collection at Stanford University</a>
-                                <span class="pull-right">2016-4-6</span>
-                            </li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>

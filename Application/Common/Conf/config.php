@@ -14,8 +14,9 @@ return array(
     'DB_FIELDS_CACHE'       =>  true,        // 启用字段缓存
     'DB_CHARSET'            =>  'utf8',      // 数据库编码默认采用utf8
 
-    'URL_MODEL' => '2',         // URL为REWRITE模式
-    'URL_HTML_SUFFIX'	=> '.html',        // 伪静态
+    'URL_CASE_INSENSITIVE'  =>  true,  //大小写不敏感
+    'URL_MODEL'             =>  '2',         // URL为REWRITE模式
+    'URL_HTML_SUFFIX'       =>  '.html',        // 伪静态
 //    'MULTI_MODULE'  => false,               //隐藏模块显示
     'DEFAULT_MODULE'    => 'Home',          //默认模块
     'URL_PARAMS_BIND_TYPE'  =>  1, // 设置参数绑定按照变量顺序绑定

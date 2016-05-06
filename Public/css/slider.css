@@ -161,6 +161,10 @@ img {
 	line-height:25px;
 	text-align: justify;
 	margin-top:10px;
+	width: 360px;
+	height: 125px;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 }
 .slide-right .hotinfo-item {
 	font-size:12px;

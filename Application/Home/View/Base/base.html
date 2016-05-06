@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>成都大学 政治学院</title>
+    <title> {$settings[sitename]} </title>
     <link rel="stylesheet" type="text/css" href="{$Think.const.CSS_PATH}/normalize.css">
     <link rel="stylesheet" type="text/css" href="{$Think.const.CSS_PATH}/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="{$Think.const.CSS_PATH}/component.css" />
@@ -38,91 +38,83 @@
                 <a href="/">&nbsp;&nbsp;首&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;</a>
             </li>
             <li>
-                <a href="/index/show">学院概况</a>
+                <a href="/home/list?id={$fmodules[0][id]}">{$fmodules[0][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="/index/show" >学院简介</a></li>
-                    <li><a href="" >学院领导</a></li>
-                    <li><a href="" >服务机构</a></li>
-                    <li><a href="" >教研室简介</a></li>
-                    <li><a href="" >法学系简介</a></li>
-                    <li><a href="" >实验室简介</a></li>
-                    <li><a href="" >资料室简介</a></li>
+                    <foreach name="fmodules[0][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="">师资队伍</a>
+                <a href="/home/list?id={$fmodules[1][id]}">{$fmodules[1][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="" >师资概况</a></li>
-                    <li><a href="" >教授团队</a></li>
-                    <li><a href="" >博士团队</a></li>
-                    <li><a href="" >特聘专家</a></li>
+                    <foreach name="fmodules[1][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="">教学工作</a>
+                <a href="/home/list?id={$fmodules[2][id]}">{$fmodules[2][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="" >教学动态</a></li>
-                    <li><a href="" >实践教学</a></li>
-                    <li><a href="" >管理制度</a></li>
-                    <li><a href="" >质量工程</a></li>
+                    <foreach name="fmodules[2][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">人才培养</a>
+                <a href="/home/list?id={$fmodules[3][id]}">{$fmodules[3][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >本科生培养</a></li>
-                    <li><a href="#" >研究生培养</a></li>
+                    <foreach name="fmodules[3][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">学术研究</a>
+                <a href="/home/list?id={$fmodules[4][id]}">{$fmodules[4][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >研究动态</a></li>
-                    <li><a href="#" >学术交流</a></li>
-                    <li><a href="#" >科研平台</a></li>
-                    <li><a href="#" >研究成果</a></li>
-                    <li><a href="#" >科研规章</a></li>
+                    <foreach name="fmodules[4][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">学生工作</a>
+                <a href="/home/list?id={$fmodules[5][id]}">{$fmodules[5][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >学生活动</a></li>
-                    <li><a href="#" >思政教育</a></li>
-                    <li><a href="#" >学子风采</a></li>
-                    <li><a href="#" >奖勤助贷</a></li>
-                    <li><a href="#" >管理文件</a></li>
+                    <foreach name="fmodules[5][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">党建工作</a>
+                <a href="/home/list?id={$fmodules[6][id]}">{$fmodules[6][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >组织机构</a></li>
-                    <li><a href="#" >分党校</a></li>
-                    <li><a href="#" >党建信息</a></li>
-                    <li><a href="#" >教工风采</a></li>
+                    <foreach name="fmodules[6][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">招生就业</a>
+                <a href="/home/list?id={$fmodules[7][id]}">{$fmodules[7][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >招生信息</a></li>
-                    <li><a href="#" >就业工作</a></li>
-                    <li><a href="#" >创新创业</a></li>
+                    <foreach name="fmodules[7][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">院友之家</a>
+                <a href="/home/list?id={$fmodules[8][id]}">{$fmodules[8][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >院友风采</a></li>
-                    <li><a href="#" >历届合影</a></li>
+                    <foreach name="fmodules[8][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
             <li>
-                <a href="#">资料下载</a>
+                <a href="/home/list?id={$fmodules[9][id]}">{$fmodules[9][modulename]}</a>
                 <ul class="cbp-tm-submenu">
-                    <li><a href="#" >教师下载</a></li>
-                    <li><a href="#" >学生下载</a></li>
+                    <foreach name="fmodules[9][cmodule]" item="module">
+                        <li><a href="/home/list?id={$module[id]}" >{$module[modulename]}</a></li>
+                    </foreach>
                 </ul>
             </li>
         </ul>
@@ -137,61 +129,57 @@
 
             <nav class="footnav">
                 <div class="col-lg-3">
-                    <div class="dropdown">
+                    <div class="dropup">
                         <button class="btn mybtn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             校内院系链接
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
+                        <foreach name="link[0]" item="item">
+                            <li><a href="{$item[url]}" target="_blank">{$item[title]}</a></li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-3">
-                    <div class="dropdown">
+                    <div class="dropup">
                         <button class="btn mybtn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             管理机构链接
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
+                        <foreach name="link[1]" item="item">
+                            <li><a href="{$item[url]}" target="_blank">{$item[title]}</a></li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-3">
-                    <div class="dropdown">
+                    <div class="dropup">
                         <button class="btn mybtn dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             校外相关链接
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
+                        <foreach name="link[2]" item="item">
+                            <li><a href="{$item[url]}" target="_blank">{$item[title]}</a></li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-3">
-                    <div class="dropdown">
+                    <div class="dropup">
                         <button class="btn mybtn dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             院长书记信箱
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu"  id="teacher-email" aria-labelledby="dropdownMenu4">
-                            <li><a href="#" attr-email="453646474@qq.com">Action</a></li>
-                            <li><a href="#" attr-email="123@qq.com">Another action</a></li>
-                            <li><a href="#" attr-email="34324321@qq.com">Something else here</a></li>
-                            <li><a href="#" attr-email="33333@qq.com">Separated link</a></li>
+                        <foreach name="link[3]" item="item">
+                            <li><a href="javascript:void(0);" attr-email="{$item[url]}">{$item[title]}</a></li>
+                        </foreach>
                         </ul>
                     </div>
                 </div>
@@ -200,8 +188,8 @@
         </div>
 
         <div class="col-lg-12">
-            <br><br><br><br>
-            <address>地址: <成都市外东十></成都市外东十>陵镇成都大学第六教学楼 邮编：610106&nbsp;&nbsp;&nbsp;电话：028-84616147&nbsp;&nbsp;&nbsp;邮箱：&nbsp;&nbsp;&nbsp;</address>
+            <br>
+            <address>地址: {$settings[siteaddress]} 邮编：{$settings[sitezip]}&nbsp;&nbsp;&nbsp;电话：{$settings[sitephone]}&nbsp;&nbsp;&nbsp;邮箱：{$settings[siteemail]}&nbsp;&nbsp;&nbsp;</address>
             <div class="copyright"><p>版权所有&copy;成都大学政治学院&nbsp;&nbsp;&nbsp;<a href="/admin">后台管理</a></p></div>
         </div>
 

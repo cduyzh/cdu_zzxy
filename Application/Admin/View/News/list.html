@@ -83,7 +83,7 @@
                                     <a href="/admin/news/edit?id={$article[id]}" class="btn blue">编辑</a>
                                     <a href="/admin/news/top?id={$article[id]}" class="btn green">置顶</a>
                                     <a href="/admin/news/down?id={$article[id]}" class="btn yellow">取消置顶</a>
-                                    <a href="/admin/news/delete?id={$article[id]}" class="btn red">删除</a>
+                                    <a href="javascript:void(0);" onclick="del_new({$article[id]}, '{$article[title]}', this)" class="btn red">删除</a>
                                 </td>
 
                             </tr>
@@ -109,4 +109,23 @@
         <!-- END PAGE CONTAINER-->
 
     </div>
+</block>
+<block name="js_module">
+    <script>
+        function del_new(id, title, obj) {
+            var _flag = confirm("确认要删除新闻\'" + title + "\"?");
+            if (_flag) {
+                $.get("/admin/news/delete",
+                        {id:id},
+                function (data) {
+                    if (data.status == 1000) {
+                        alert("新闻已删除!");
+                        $(obj).parents('tr').remove();
+                    } else {
+                        alert(data.data);
+                    }
+                }, "json")
+            }
+        }
+    </script>
 </block>

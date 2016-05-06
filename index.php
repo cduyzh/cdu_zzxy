@@ -32,6 +32,7 @@ define('NOT_FOUND', '/Application/Home/View/notfound');
 define('ADMIN_CSS_PATH','/Public/admin/css');
 define('ADMIN_JS_PATH','/Public/admin/js');
 define('ADMIN_IMG_PATH','/Public/admin/image');
+define('ADMIN_PLUGINS_PATH','/Public/admin/plugins');
 
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';

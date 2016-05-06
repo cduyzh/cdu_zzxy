@@ -8,7 +8,7 @@
 
 namespace Admin\Controller;
 
-class FriendLinkController extends SuperController
+class FriendlinkController extends SuperController
 {
     private $linkTypes = [
         1 => '校内院系链接模块友情链接',

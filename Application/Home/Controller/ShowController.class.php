@@ -9,9 +9,52 @@
 namespace Home\Controller;
 
 
-class showController
+class showController extends BaseController
 {
     public function index() {
-        return $this->display('/single');
+        $id = I('id');
+        $Mod = M('sitemodule');
+        $Art = M('sitearticle');
+
+        if($id == null) {
+            $mid = I('mid');
+
+            $module = $Mod->find($id);
+
+            if ($module == null) {
+                $this->hrefBack('数据错误!请刷新重试!');
+            }
+            $module['cmodule'] = $Mod->where("fid = $module[id] and m_display = 0")->order('listnum desc')->select();
+            $this->assign(compact(['module']));
+            $this->display('/second');
+        } else {
+            $modArticle = $Art->find($id);
+            if ($modArticle == null) {
+                $this->hrefBack('没有查找到数据!请刷新重试!');
+            }
+
+            $thisMod = $Mod->find($modArticle['moduleid']);
+            if($thisMod != null) {
+                try {
+                    $results = $Mod->where("fid = $thisMod[fid] and m_display = 0")->order("listnum desc")->getField("id, id, modulename");
+                } catch (\Exception $e) {
+                    $this->hrefBack($e->getMessage());
+                }
+            } else {
+                $this->hrefBack('没有找到该模块内容!');
+            }
+            $pre = $Art->where("(moduleid = $modArticle[moduleid]) and (id > $modArticle[id]) and (listnum > 0)")
+                ->order("id desc")->limit(1)->getField('id, id, title');
+            $next = $Art->where("(moduleid = $modArticle[moduleid]) and (id < $modArticle[id]) and (listnum > 0)")
+                ->order("id desc")->limit(1)->getField('id, id, title');
+//            dump($pre);
+//            dump($modArticle);
+//            dump($next);
+//            dump($results);
+            $pre = reset($pre);
+            $next = reset($next);
+            $this->assign(compact(['modArticle', 'pre', 'next', 'results', 'thisMod']));
+            $this->display('/single');
+        }
     }
 }

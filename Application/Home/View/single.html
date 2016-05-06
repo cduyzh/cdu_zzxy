@@ -4,34 +4,51 @@
     <section class="section4">
         <div class="container">
             <div class="row">
-                <ol class="breadcrumb">当前位置：
-                    <li><a href="#">一级目录（例：首页）</a></li>
-                    <li><a href="#">二级目录（新闻）</a></li>
-                    <li>三级目录（新闻详情）</li>
-                </ol>
-                <div class="page-header">
-                    <h1>大标题 <small>来源:&nbsp;时间:&nbsp;浏览次数:&nbsp;字体:
-						<span class="set-font-size">[
-					  	<a class="big-font">大</a>
-					  	<a class="mid-font">中</a>
-					  	<a class="small-font">小</a>
-							]
-					  </span>
-                    </small></h1>
+                <div class="col-lg-2 subpage">
+                    <ul class="list-group">
+                    <foreach name="results" item="result" key="$key">
+                        <li class="list-group-item">
+                            <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
+                        </li>
+                    </foreach>
+                    </ul>
                 </div>
-                <div class="hr"><span class="col-lg-9"></span></div>
-                <div class="container">
-                    <article class="col-lg-12">
-                        <img class="newsImg col-lg-12" src="{$Think.const.IMG_PATH}/slide-1.jpg" alt="...">
-                        10月29日下午，计算机学院学生党支部在第十教学楼召开了举行了主题为“点滴心愿，汇成暖河”的爱心募捐活动。党支部负责老师方林红、各支部组织委员、宣传委员及部分入党积极分子参加了此次活动，活动由方老师主持。
-                        各位党员同志和积极分子纷纷表示小爱心力量虽小但依旧重要，大家踊跃捐款，纷纷献出爱心，一张张纸币传递出了一份份温暖的爱，一枚枚硬币碰撞出心中的热，每一份微小的行动都彰显着感动和鼓舞，金额虽不多，但展现出尤为动人的画面。
-                    </article>
-                    <nav>
-                        <ul class="pager">
-                            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>上一篇：名字</a></li>
-                            <li class="next"><a href="#">名字：下一篇<span aria-hidden="true">&rarr;</span></a></li>
-                        </ul>
-                    </nav>
+                <div class="col-lg-10">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"> {$thisMod[modulename]} </div>
+                        <div class="panel-body">
+                            <div class="page-header">
+                                <h1>{$modArticle[title]}<br>
+                                    <small>来源: {$modArticle[department]}&nbsp;&nbsp;时间: {:date('Y-m-d H:i:s',$modArticle[addtime])}&nbsp;浏览次数: {$modArticle[hit]}&nbsp;
+                                        字体:
+					       		<span class="set-font-size">[
+					       	  	<a class="big-font">大</a>
+					       	  	<a class="mid-font">中</a>
+					       	  	<a class="small-font">小</a>
+					       			]
+					       	  </span>
+                                </small></h1>
+                            </div>
+                            <div class="hr"><span class="col-lg-9"></span></div>
+                            <article class="col-lg-12">
+                                {$modArticle[content]}
+                            </article>
+                            <nav>
+                                <ul class="pager">
+                                    <if condition="($pre neq null)">
+                                    <li class="previous"><a href="/home/show?id={$pre[id]}"><span aria-hidden="true">&larr;</span>上一篇：{$pre[title]}</a></li>
+                                        <else/>
+                                    <li class="previous"><a>没有上一篇!</a></li>
+                                    </if>
+                                    <if condition="($next neq null)">
+                                    <li class="next"><a href="/home/show?id={$next[id]}">{$next[title]}：下一篇<span aria-hidden="true">&rarr;</span></a></li>
+                                        <else/>
+                                    <li class="previous"><a>没有下一篇!</a></li>
+                                    </if>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,13 +61,13 @@
             var fontSize = $(this).attr('class');
             switch (fontSize) {
                 case 'big-font':
-                    $('article').css({'font-size':'20px'});
+                    $('article').removeClass('mid-font small-font').addClass('big-font');
                     break;
                 case 'mid-font':
-                    $('article').css({'font-size':'16px'});
+                    $('article').removeClass('small-font big-font').addClass('mid-font');
                     break;
                 case 'small-font':
-                    $('article').css({'font-size':'14px'});
+                    $('article').removeClass('big-font mid-font').addClass('small-font');
                     break;
             }
         });

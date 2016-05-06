@@ -11,7 +11,7 @@ namespace Admin\Controller;
 
 use Think\Controller;
 
-class SysUserController extends SuperController
+class SysuserController extends SuperController
 {
 
     public function __construct()
@@ -21,9 +21,11 @@ class SysUserController extends SuperController
         if (!$this->isAllow('system_user,')) {
             $this->hrefBack('你没有该权限!');
         }
-
+        $userType = C('userType');
         $moduleActive = 'system';
-        $this->assign(compact(['moduleActive']));
+        $mainmodule = M('sitemodule')->where('fid =0 and m_display = 0 and listnum > 0')
+            ->order('listnum desc')->select();
+        $this->assign(compact(['moduleActive' , 'userType' , 'mainmodule']));
     }
 
     public function index() {
@@ -38,15 +40,25 @@ class SysUserController extends SuperController
      */
     public function modify() {
         $pageName = '修改管理员';
+        $User = M('systemuser');
         $id = I('id');
+        $input['id'] = I('before');
 
-        if($_POST!=null) {
-            $input['id'] = I('before');
+        $admin = $User->find($id);
+        if ($admin == null) {
+            $admin = $User->find($input['id']);
+            if ($admin == null) {
+                $this->error('没有查找到该管理员!');
+            }
+        }
+
+        if($_POST!=null) {  // modify
             if ($input['id'] != $_SESSION['user']['id'] &&
-                $_SESSION['user']['userlevel'] == 2) {
+                ($admin['userlevel'] == 2 || 0 == $_SESSION['user']['userlevel'])) {
                 $system_setting = implode(',', I("system-setting"));
                 $website_setting = implode(',' ,I('website-setting'));
-                $input['actions'] = $system_setting. ',' . $website_setting;
+                $module_setting = implode(',' ,I('module-setting'));
+                $input['actions'] = $system_setting. ',' . $website_setting . ',' . $module_setting;
                 $input['userlevel'] = I('manager-class');
             }
             $input['username'] = I('name');
@@ -54,16 +66,14 @@ class SysUserController extends SuperController
                 $input['password'] =  md5(I('password'));
             }
 //            todo 需要更多的人员
-            $input['department'] = I('manager-class')==0? '超级管理员': '管理员';
-            $flag = M('systemuser')->where("id = $input[id]")->data($input)->save();
-            if($flag) $this->success('修改成功!', '/admin/sysUser/modify/'.$input['id']);
-        } else{
-            $admin = M('systemuser')->find($id);
+            $input['department'] = I('department');
+            $flag = $User->where("id = $input[id]")->data($input)->save();
+            if($flag != false) $this->success('修改成功!', '/admin/sysuser/modify?id='.$input['id']);
+            else $this->error("修改失败!");
+        } else{  // get info
+            $url = 'modify';
             $auth = $admin['actions'];
-            if ($admin == null) {
-                $this->error('没有查找到该管理员!');
-            }
-            $this->assign(compact(['pageName', 'admin', 'auth']));
+            $this->assign(compact(['pageName', 'admin', 'url', 'auth']));
             $this->display('User/addOrModify');
         }
     }
@@ -80,11 +90,12 @@ class SysUserController extends SuperController
             } else {
                 $system_setting = implode(',', I("system-setting"));
                 $website_setting = implode(',' ,I('website-setting'));
-                $input['actions'] = $system_setting. ',' . $website_setting;
+                $module_setting = implode(',' ,I('module-setting'));
+                $input['actions'] = $system_setting. ',' . $website_setting . ',' . $module_setting;
             }
             $input['username'] = I('name');
             $input['password'] = md5(I('password'));
-            $input['department'] = I('manager-class')==0? '超级管理员': '管理员';
+            $input['department'] = I('department');
 
             if(!trim($input['username'])) {
                 $this->hrefBack('请输入用户名!');
@@ -102,7 +113,7 @@ class SysUserController extends SuperController
             } catch (\Exception $e) {
                 $this->hrefBack();
             }
-            $this->success("添加管理账号成功!", '/admin/sysUser');
+            $this->success("添加管理账号成功!", '/admin/sysuser');
         } else {    //显示页面
             $pageName = '添加管理员';
             $flag = md5(1);

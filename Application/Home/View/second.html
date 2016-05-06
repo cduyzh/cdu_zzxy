@@ -7,121 +7,69 @@
                 <!-- 二级页面的左边导航栏 -->
                 <div class="col-lg-2 subpage">
                     <ul class="list-group">
+                    <foreach name="results" item="result" key="$key">
                         <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
+                            <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li><li class="list-group-item">
-                        <a href="#">Cras justo odio</a>
-                    </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li><li class="list-group-item">
-                        <a href="#">Cras justo odio</a>
-                    </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li><li class="list-group-item">
-                        <a href="#">Cras justo odio</a>
-                    </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li><li class="list-group-item">
-                        <a href="#">Cras justo odio</a>
-                    </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#">Cras justo odio</a>
-                        </li>
+                    </foreach>
                     </ul>
                 </div>
 
                 <!-- right_content start -->
                 <div class="col-lg-10">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">这里是二级页面的名称 例如：教师介绍</div>
+                        <div class="panel-heading"> {$thisMod[modulename]} </div>
                         <div class="panel-body">
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <a href="/index/single">Cras justo odio<span class="set-new"></span></a>
-                                    <span class="pull-right">日期</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio<span class="set-new"></span><span class="set-ding"></span></a>
-                                    <span class="pull-right">日期</span>
-                                </li><li class="list-group-item">
-                                <a href="#">Cras justo odio<span class="set-new"></span></a>
-                                <span class="pull-right">日期</span>
-                            </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio<span class="set-new"></span></a>
-                                    <span class="pull-right">日期</span>
-                                </li><li class="list-group-item">
-                                <a href="#">Cras justo odio<span class="set-new"></span></a>
-                                <span class="pull-right">日期</span>
-                            </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio</a>
-                                    <span class="pull-right">日期</span>
-                                </li><li class="list-group-item">
-                                <a href="#">Cras justo odio</a>
-                                <span class="pull-right">日期</span>
-                            </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio</a>
-                                    <span class="pull-right">日期</span>
-                                </li><li class="list-group-item">
-                                <a href="#">Cras justo odio</a>
-                                <span class="pull-right">日期</span>
-                            </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio</a>
-                                    <span class="pull-right">日期</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio</a>
-                                    <span class="pull-right">日期</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <a href="#">Cras justo odio</a>
-                                    <span class="pull-right">日期</span>
-                                </li>
+                                <foreach name="modArticles" item="article">
+                                    <li class="list-group-item">
+                                        <a href="/home/show?id={$article[id]}"> {$article[title]}
+                                            <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                            <span class="set-new"></span>
+                                            </if>
+                                            <!-- todo isstickies how to set? -->
+                                            <if condition="($article[isstickies] eq 0)">
+                                            <span class="set-ding"></span>
+                                            </if>
+                                        </a>
+                                        <span class="pull-right">{:date('Y-m-d H:i:s', $article[addtime])}</span>
+                                    </li>
+                                </foreach>
                             </ul>
                         </div>
                     </div>
 
                     <!-- 二级页面分页 -->
+                    <if condition="($pageNum gt 1)">
                     <nav>
                         <ul class="pagination">
-                            <li class="disabled">
-                                <span aria-hidden="true">&laquo;</span>
-                            </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
                             <li>
-                                <a href="#" aria-label="Next">
+                                <a href="/home/list?id={$thisMod[id]}&page=0" aria-label="top">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <?php
+                                $start = ($page - 2) < 0 ? 0 : ($page - 2);
+                                $end = ($page + 2) > ($pageNum -1) ? ($pageNum -1) : ($page + 2);
+
+                                for($i = $start; $i <= $end; ++$i) {
+                                    if($i == $page) {
+                            ?>
+                                <li class="active"><a href="/home/list?id=<?php echo ($thisMod[id]); ?>&page=<?php echo ($i); ?>">{$i+1}</a></li>
+                            <?php } else {?>
+                                <li><a href="/home/list?id=<?php echo ($thisMod[id]); ?>&page=<?php echo ($i); ?>"><?php echo ($i+1); ?></a></li>
+                            <?php }
+                            }?>
+                            <li>
+                                <a href="/home/list?id={$thisMod[id]}&page={$pageNum-1}" aria-label="bottom">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                         </ul>
                     </nav>
-
+                    </if>
                 </div>
                 <!-- right_content end -->
-
-                <!-- 二级页面的左边导航栏 在这下面加上内容页-->
-
-                <!-- 二级页面的左边导航栏 在这下面加上内容页-->
-
             </div>
         </div>
     </section>
