@@ -53,7 +53,15 @@
                         <ul>
                             <foreach name="articles[1]" item="article">
                                 <li>
-                                    <a href="/home/show?id={$article[id]}">{$article[title]}</a>
+                                    <a href="/home/show?id={$article[id]}">
+                                        <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                            <span class="set-new"></span>
+                                        </if>
+                                        <if condition="($article[isstickies] lt 10)">
+                                            <span class="set-ding"></span>
+                                        </if>
+                                        {$article[title]}
+                                    </a>
                                     <span class="pull-right"> {:date($article[$siteIndex[1]], $article[addtime])} </span>
                                 </li>
                             </foreach>
@@ -66,7 +74,15 @@
                         <ul>
                         <foreach name="articles[2]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">
+                                    <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                        <span class="set-new"></span>
+                                    </if>
+                                    <if condition="($article[isstickies] lt 10)">
+                                        <span class="set-ding"></span>
+                                    </if>
+                                    {$article[title]}
+                                </a>
                                 <span class="pull-right"> {:date($siteIndex[2], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -80,7 +96,15 @@
                         <ul>
                         <foreach name="articles[3]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">
+                                    <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                        <span class="set-new"></span>
+                                    </if>
+                                    <if condition="($article[isstickies] lt 10)">
+                                        <span class="set-ding"></span>
+                                    </if>
+                                    {$article[title]}
+                                </a>
                                 <span class="pull-right"> {:date($siteIndex[3], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -94,7 +118,15 @@
                         <ul>
                         <foreach name="articles[4]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">
+                                    <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                        <span class="set-new"></span>
+                                    </if>
+                                    <if condition="($article[isstickies] lt 10)">
+                                        <span class="set-ding"></span>
+                                    </if>
+                                    {$article[title]}
+                                </a>
                                 <span class="pull-right"> {:date($siteIndex[4], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -108,7 +140,15 @@
                         <ul>
                         <foreach name="articles[5]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">
+                                    <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                        <span class="set-new"></span>
+                                    </if>
+                                    <if condition="($article[isstickies] lt 10)">
+                                        <span class="set-ding"></span>
+                                    </if>
+                                    {$article[title]}
+                                </a>
                                 <span class="pull-right"> {:date($siteIndex[5], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -122,7 +162,15 @@
                         <ul>
                         <foreach name="articles[6]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">
+                                    <if condition="($article[addtime] gt strtotime('yesterday'))">
+                                        <span class="set-new"></span>
+                                    </if>
+                                    <if condition="($article[isstickies] lt 10)">
+                                        <span class="set-ding"></span>
+                                    </if>
+                                    {$article[title]}
+                                </a>
                                 <span class="pull-right"> {:date($siteIndex[6], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -137,4 +185,29 @@
 
 <block name="js_model">
     <script src="{$Think.const.JS_PATH}/slides.min.jquery.js"></script>
+    <script type="text/javascript" charset="UTF-8">
+        $(function(){
+            $('#slides').slides({
+                preload: true,
+                preloadImage: 'imgs/loading.gif',
+                play: 5000,
+                pause: 2500,
+                hoverPause: true,
+                animationStart: function(current){
+                    if (window.console && console.log) {
+                        // example return of current slide number
+                        //console.log('animationStart on slide: ', current);
+                    };
+                },
+                animationComplete: function(current){
+                    if (window.console && console.log) {
+                        // example return of current slide number
+                        //console.log('animationComplete on slide: ', current);
+                    };
+                },
+                slidesLoaded: function() {
+                }
+            });
+        });
+    </script>
 </block>

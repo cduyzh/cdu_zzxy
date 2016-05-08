@@ -155,12 +155,13 @@ img {
 	line-height:30px;
 	font-family:微软雅黑;
 	font-style:normal;
+	width: 360px;
+	height: 80px;
 }
 .slide-right .hotinfo-desc {
 	font-size:16px;
 	line-height:25px;
 	text-align: justify;
-	margin-top:10px;
 	width: 360px;
 	height: 125px;
   	overflow: hidden;

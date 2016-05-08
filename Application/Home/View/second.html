@@ -7,8 +7,15 @@
                 <!-- 二级页面的左边导航栏 -->
                 <div class="col-lg-2 subpage">
                     <ul class="list-group">
+
+                        <li class="list-group-item active">
+                            <a href="/home/list?id={$parentMod[id]}">
+                                {$parentMod[modulename]}
+                            </a>
+                        </li>
                     <foreach name="results" item="result" key="$key">
                         <li class="list-group-item">
+                            <span class="glyphicon glyphicon glyphicon-record" aria-hidden="true"></span>
                             <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
                         </li>
                     </foreach>
@@ -17,6 +24,14 @@
 
                 <!-- right_content start -->
                 <div class="col-lg-10">
+                    <ol class="breadcrumb">
+                        当前位置：
+                        <li><a href="/"> 首页 </a></li>
+                        <if condition="($parentMod neq null)">
+                            <li><a href="/home/list?id={$parentMod[id]}"> {$parentMod[modulename]}</a></li>
+                        </if>
+                        <li class="active"> {$thisMod[modulename]} </li>
+                    </ol>
                     <div class="panel panel-primary">
                         <div class="panel-heading"> {$thisMod[modulename]} </div>
                         <div class="panel-body">
@@ -27,8 +42,7 @@
                                             <if condition="($article[addtime] gt strtotime('yesterday'))">
                                             <span class="set-new"></span>
                                             </if>
-                                            <!-- todo isstickies how to set? -->
-                                            <if condition="($article[isstickies] eq 0)">
+                                            <if condition="($article[isstickies] lt 10)">
                                             <span class="set-ding"></span>
                                             </if>
                                         </a>
@@ -36,6 +50,9 @@
                                     </li>
                                 </foreach>
                             </ul>
+                            <if condition="($modArticles eq null)">
+                            <center><h2>暂时没有信息!</h2></center>
+                            </if>
                         </div>
                     </div>
 

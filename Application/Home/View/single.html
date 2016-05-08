@@ -6,47 +6,67 @@
             <div class="row">
                 <div class="col-lg-2 subpage">
                     <ul class="list-group">
-                    <foreach name="results" item="result" key="$key">
-                        <li class="list-group-item">
-                            <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
+
+                        <li class="list-group-item active">
+                            <a href="/home/list?id={$parentMod[id]}">
+                                {$parentMod[modulename]}
+                            </a>
                         </li>
-                    </foreach>
+                        <foreach name="results" item="result" key="$key">
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon glyphicon-record" aria-hidden="true"></span>
+                                <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
+                            </li>
+                        </foreach>
                     </ul>
                 </div>
                 <div class="col-lg-10">
+                    <ol class="breadcrumb">
+                        当前位置：
+                        <li><a href="/"> 首页 </a></li>
+                        <if condition="($parentMod neq null)">
+                        <li><a href="/home/list?id={$parentMod[id]}"> {$parentMod[modulename]}</a></li>
+                        </if>
+                        <li class="active"> {$thisMod[modulename]} </li>
+                    </ol>
                     <div class="panel panel-primary">
                         <div class="panel-heading"> {$thisMod[modulename]} </div>
                         <div class="panel-body">
+                        <if condition="($modArticle neq null)">
                             <div class="page-header">
                                 <h1>{$modArticle[title]}<br>
-                                    <small>来源: {$modArticle[department]}&nbsp;&nbsp;时间: {:date('Y-m-d H:i:s',$modArticle[addtime])}&nbsp;浏览次数: {$modArticle[hit]+1}&nbsp;
-                                        字体:
-					       		<span class="set-font-size">[
-					       	  	<a class="big-font">大</a>
-					       	  	<a class="mid-font">中</a>
-					       	  	<a class="small-font">小</a>
-					       			]
-					       	  </span>
-                                </small></h1>
                             </div>
-                            <div class="hr"><span class="col-lg-9"></span></div>
+                            <div class="hr"><span class="col-lg-12"></span></div>
+                            <div class="col-lg-12">
+						       <span class="sub-info">来源: {$modArticle[department]}&nbsp;&nbsp;&nbsp;时间: {:date('Y-m-d H:i:s',$modArticle[addtime])}&nbsp;&nbsp;&nbsp;浏览次数: {$modArticle[hit]+1}&nbsp;&nbsp;&nbsp;字体:
+						       		<span class="set-font-size">【
+							       	  	<a href="#!" class="big-font">大</a>
+							       	  	<a href="#!" class="mid-font">中</a>
+							       	  	<a href="#!" class="small-font">小</a>
+							       		】
+						       	  </span>
+						       </span>
+                            </div>
                             <article class="col-lg-12">
                                 {$modArticle[content]}
                             </article>
                             <nav>
                                 <ul class="pager">
                                     <if condition="($pre neq null)">
-                                    <li class="previous"><a href="/home/show?id={$pre[id]}"><span aria-hidden="true">&larr;</span>上一篇：{$pre[title]}</a></li>
+                                        <li class="previous"><a href="/home/show?id={$pre[id]}"><span aria-hidden="true">&larr;</span>上一篇：{$pre[title]}</a></li>
                                         <else/>
-                                    <li class="previous"><a>没有上一篇!</a></li>
+                                        <li class="previous"><a>没有上一篇!</a></li>
                                     </if>
                                     <if condition="($next neq null)">
-                                    <li class="next"><a href="/home/show?id={$next[id]}">{$next[title]}：下一篇<span aria-hidden="true">&rarr;</span></a></li>
+                                        <li class="next"><a href="/home/show?id={$next[id]}">{$next[title]}：下一篇<span aria-hidden="true">&rarr;</span></a></li>
                                         <else/>
-                                    <li class="previous"><a>没有下一篇!</a></li>
+                                        <li class="previous"><a>没有下一篇!</a></li>
                                     </if>
                                 </ul>
                             </nav>
+                            <else/>
+                            <center><h2>暂时没有信息!</h2></center>
+                        </if>
                         </div>
                     </div>
                 </div>

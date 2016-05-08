@@ -129,7 +129,7 @@ a:link,a:visited{text-decoration:none}
     margin: 2px 10px;
     padding: 3px 10px;
     text-decoration: none;
-    width: 285px;
+    width: 360px;
     height: 27px;
     white-space: nowrap;
     overflow: hidden;
@@ -140,7 +140,7 @@ a:link,a:visited{text-decoration:none}
 	border-left: 6px solid #90000a;
 }
 .section4{
-	padding-top: 40px;
+	padding-top: 20px;
 	padding-bottom: 40px;
 }
 .section4 .breadcrumb a{
@@ -334,17 +334,14 @@ address,.copyright,.copyright a{
 .set-ding{
 	background: url(../imgs/ding.gif) center no-repeat;
 }
-.page-header small{
-	font-size: 18px;
+.page-header h1{
+	text-align: center;
 }
-.page-header small a{
-	color: #777;
-	cursor: pointer;
-}
+
 article{
 	font-size: 20px;
 	text-align: justify;
-	line-height: 150%;
+	line-height: 170%;
 	padding: 20px 0;
 }
 article img{
@@ -365,12 +362,21 @@ article img{
 	background-color: #ddd;
 }
 .subpage ul li.list-group-item{
-	border-top: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
+	border-top: 1px solid #90000a;
+	border-bottom: 1px solid #90000a;
 	text-align: center;
+	padding: 15px 9px;
+	background-color: #fff;
+	font-size: 18px;
 }
 .subpage ul li.list-group-item:first-child{
 	border-top: none;
+	border-radius: 0;
+	font-weight: bold;
+}
+.subpage ul li.list-group-item:last-child{
+	border-bottom: none;
+	border-radius: 0;
 }
 .subpage ul li.list-group-item a{
 	color: #90000a;
@@ -378,6 +384,13 @@ article img{
 .subpage ul li.list-group-item a:hover{
 	color: #90000a;
 	text-decoration: underline;
+}
+
+.subpage ul li.list-group-item.active,
+.subpage ul li.list-group-item.active a,
+.subpage ul li.list-group-item.active a span{
+	color: #fff;
+	background-color: #90000a;
 }
 .panel-primary{
 	border-color: #90000a;
@@ -406,7 +419,24 @@ img.teacher-object{
 }
 .page-header{
 	border: none;
+	margin: 10px 0 20px;
 }
-.big-font{ font-size: 20px !important;}
-.mid-font{ font-size: 16px !important;}
-.small-font{ font-size: 14px !important;}
+.big-font{
+	font-size: 20px !important;
+}
+.mid-font{
+	font-size: 16px !important;
+}
+.small-font{
+	font-size: 14px !important;
+}
+.sub-info{
+	font-size: 18px;
+	color: #818181;
+	text-align: center;
+	display: block;
+	margin-top: 10px;
+}
+.sub-info a{
+	color: #818181;
+}

@@ -36,9 +36,11 @@ class showController extends BaseController
             $Art->where("id = $id")->setInc('hit');
 
             $thisMod = $Mod->find($modArticle['moduleid']);
+            $fid = $thisMod['fid'] == 0? $thisMod['id'] : $thisMod['fid'];
+            $parentMod = $Mod->find($fid);
             if($thisMod != null) {
                 try {
-                    $results = $Mod->where("fid = $thisMod[fid] and m_display = 0")->order("listnum desc")->getField("id, id, modulename");
+                    $results = $Mod->where("fid = $thisMod[fid] and fid != 0 and m_display = 0")->order("listnum desc")->getField("id, id, modulename");
                 } catch (\Exception $e) {
                     $this->hrefBack($e->getMessage());
                 }
@@ -51,7 +53,7 @@ class showController extends BaseController
                 ->order("id desc")->limit(1)->getField('id, id, title');
             $pre = reset($pre);
             $next = reset($next);
-            $this->assign(compact(['modArticle', 'pre', 'next', 'results', 'thisMod']));
+            $this->assign(compact(['modArticle', 'pre', 'next', 'results', 'thisMod', 'parentMod']));
             $this->display('/single');
         }
     }
