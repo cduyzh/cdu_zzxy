@@ -15,9 +15,10 @@
                     <foreach name="articles[0]" item="article">
                         <div class="slide">
                             <div class="slide-left">
-                                <a href="/home/show?id={$article[id]}" title="{$article[title]}" ><img src="{$article[url]}" alt="{$article[title]}" width="" height=""></a>
+                                <a href="/home/show?id={$article[id]}" title="{$article[title]}">
+                                    <img src="{$article[url]}" alt="{$article[title]}">
+                                </a>
                             </div>
-                            <!--public/imgs/slide.jpg-->
                             <div class="slide-right">
                                 <div class="hotinfo-tit">
                                     <nobr> {$article[title]} </nobr>
@@ -27,7 +28,7 @@
                                 </div>
                                 <div class="hotinfo-item clearfix">
                                     <div class="hotinfo-link">
-                                        <a class="button small">阅读详情</a>
+                                        <a href="/home/show?id={$article[id]}" class="button small">阅读详情</a>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@
                         <ul>
                             <foreach name="articles[1]" item="article">
                                 <li>
-                                    <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                    <a href="/home/show?id={$article[id]}">{$article[title]}</a>
                                     <span class="pull-right"> {:date($article[$siteIndex[1]], $article[addtime])} </span>
                                 </li>
                             </foreach>
@@ -65,7 +66,7 @@
                         <ul>
                         <foreach name="articles[2]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
                                 <span class="pull-right"> {:date($siteIndex[2], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -79,7 +80,7 @@
                         <ul>
                         <foreach name="articles[3]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
                                 <span class="pull-right"> {:date($siteIndex[3], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -93,7 +94,7 @@
                         <ul>
                         <foreach name="articles[4]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
                                 <span class="pull-right"> {:date($siteIndex[4], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -107,7 +108,7 @@
                         <ul>
                         <foreach name="articles[5]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
                                 <span class="pull-right"> {:date($siteIndex[5], $article[addtime])} </span>
                             </li>
                         </foreach>
@@ -121,7 +122,7 @@
                         <ul>
                         <foreach name="articles[6]" item="article">
                             <li>
-                                <a href="/home/show?id={$article[id]}" target="_blank">{$article[title]}</a>
+                                <a href="/home/show?id={$article[id]}">{$article[title]}</a>
                                 <span class="pull-right"> {:date($siteIndex[6], $article[addtime])} </span>
                             </li>
                         </foreach>

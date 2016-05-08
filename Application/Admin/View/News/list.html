@@ -53,10 +53,10 @@
                             <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" width="15%">点击次数
                             </th>
 
-                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" width="15%">排序
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" width="5%">排序
                             </th>
 
-                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" width="305">操作
+                            <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" width="40%">操作
                             </th>
                         </tr>
 
@@ -80,10 +80,17 @@
                                 <td class="center">{$article[listnum]}</td>
 
                                 <td>
+                                    <if condition="($pageName neq '轮播新闻列表')">
                                     <a href="/admin/news/edit?id={$article[id]}" class="btn blue">编辑</a>
                                     <a href="/admin/news/top?id={$article[id]}" class="btn green">置顶</a>
                                     <a href="/admin/news/down?id={$article[id]}" class="btn yellow">取消置顶</a>
                                     <a href="javascript:void(0);" onclick="del_new({$article[id]}, '{$article[title]}', this)" class="btn red">删除</a>
+                                    </if>
+                                    <if condition="($article[slider] eq 1)">
+                                    <a href="javascript:void(0);" onclick="slider({$article[id]}, 'remove', this)" class="btn red">下架轮播</a>
+                                        <else/>
+                                    <a href="javascript:void(0);" onclick="slider({$article[id]}, 'put', this)" class="btn green">上架轮播</a>
+                                    </if>
                                 </td>
 
                             </tr>
@@ -91,13 +98,13 @@
                         </tbody>
 
                     </table>
-
+                    <if condition="($pageName neq '轮播新闻列表')">
                     <div class="form-actions">
 
                         <a href="/admin/news/edit?mid={$thisModule[id]}" class="btn green pull-right">添加信息</a>
 
                     </div>
-
+                    </if>
                 </div>
 
             </div>
@@ -126,6 +133,28 @@
                     }
                 }, "json")
             }
+        }
+
+        function slider(id ,type, obj) {
+            $.get('/admin/news/'+type,
+                    {id:id},
+            function (data) {
+                if(data.status == 1000) {
+                    alert(data.data);
+                    $(obj).attr('onclick', 'slider('+ id + ', \'remove\', this)');
+                    $(obj).removeClass('green').addClass('red').html('下架轮播');
+                } else if(data.status == 10000) {
+                    alert(data.data);
+                    if('{$pageName}' == '轮播新闻列表') {
+                        $(obj).parents('tr').remove();
+                        return true;
+                    }
+                    $(obj).attr('onclick', 'slider('+ id + ', \'put\', this)');
+                    $(obj).removeClass('red').addClass('green').html('上架轮播');
+                } else {
+                    alert(data.data);
+                }
+            }, "json")
         }
     </script>
 </block>

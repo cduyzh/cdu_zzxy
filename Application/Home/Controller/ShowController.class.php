@@ -33,6 +33,8 @@ class showController extends BaseController
                 $this->hrefBack('没有查找到数据!请刷新重试!');
             }
 
+            $Art->where("id = $id")->setInc('hit');
+
             $thisMod = $Mod->find($modArticle['moduleid']);
             if($thisMod != null) {
                 try {
@@ -47,10 +49,6 @@ class showController extends BaseController
                 ->order("id desc")->limit(1)->getField('id, id, title');
             $next = $Art->where("(moduleid = $modArticle[moduleid]) and (id < $modArticle[id]) and (listnum > 0)")
                 ->order("id desc")->limit(1)->getField('id, id, title');
-//            dump($pre);
-//            dump($modArticle);
-//            dump($next);
-//            dump($results);
             $pre = reset($pre);
             $next = reset($next);
             $this->assign(compact(['modArticle', 'pre', 'next', 'results', 'thisMod']));

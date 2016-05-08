@@ -12,7 +12,10 @@ class IndexController extends BaseController {
             $siteIndex[$i] = explode(',', $siteIndex[$i]['value'])[3];
         }
 
-//        dump($articles[6]);
+        if (!is_dir($articles[0][0]['url'])) {
+            $articles[0][0]['url'] = '/Public/imgs/slide.jpg';
+        }
+
         $this->assign(compact(['articles', 'siteIndex']));
         return $this->display('/index');
     }
@@ -42,7 +45,7 @@ class IndexController extends BaseController {
             $sql = "select `id`,`title`,`isbold`,`content`, `isstickies` from `hj_sitearticle` where `moduleid` in (
                 		select id from `hj_sitemodule` where id = 23 or fid = 23
                     ) AND `content` LIKE '%<img%' or `content` LIKE '%<IMG%'
-                    order by addtime desc limit 20";
+                    order by addtime desc limit 8";
 //            todo 演示示例,真实代码在下边注释中
 //            $sql = "select `id`,`title`,`isbold`,`content`, `isstickies` from `hj_sitearticle` where `moduleid` in (
 //                		select id from `hj_sitemodule` where id = 23 or fid = 23
@@ -52,7 +55,7 @@ class IndexController extends BaseController {
 
             foreach ($results as $key=>$item) {
                 preg_match_all('/<img[^>]+src=[\'"]([^\'"]+)[\'"]|<IMG[^>]+src=[\'"]([^\'"]+)[\'"]/', $item['content'], $url);
-                $results[$key]['url'] = $url[1][0];
+                $results[$key]['url'] = $url[1][0] == "" ? $url[2][0] : $url[1][0];
                 $results[$key]['content'] = strip_tags($item['content']);
             }
             return $results;

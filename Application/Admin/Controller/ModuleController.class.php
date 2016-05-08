@@ -129,7 +129,7 @@ class ModuleController extends SuperController
             $e->getMessage();
             exit(-1);
         }
-//        $message = "<script>alert('模块已修改!');location.href(".$_SERVER['HTTP_REFERER'].");</script>";
+//        $message = "<script charset='utf-8'>alert('模块已修改!');location.href(".$_SERVER['HTTP_REFERER'].");</script>";
 //        exit($message);
         $this->success('已修改模块!', '/admin/module');
     }

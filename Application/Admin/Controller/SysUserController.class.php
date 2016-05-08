@@ -68,7 +68,7 @@ class SysuserController extends SuperController
 //            todo 需要更多的人员
             $input['department'] = I('department');
             $flag = $User->where("id = $input[id]")->data($input)->save();
-            if($flag != false) $this->success('修改成功!', '/admin/sysuser/modify?id='.$input['id']);
+            if($flag !== false) $this->success('修改成功!', '/admin/sysuser/modify?id='.$input['id']);
             else $this->error("修改失败!");
         } else{  // get info
             $url = 'modify';

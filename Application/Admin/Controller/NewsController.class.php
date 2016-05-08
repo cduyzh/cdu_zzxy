@@ -28,7 +28,7 @@ class NewsController extends SuperController
             $thisModule = M('sitemodule')->find($id);
             $articles = M('sitearticle')->where("moduleid = $id")
                 ->order('isstickies asc, addtime desc, listnum desc')
-                ->getField('id,title,addtime,hit,listnum,isstickies');
+                ->getField('id,title,addtime,hit,listnum,isstickies,slider');
             $this->assign(compact(['pageName', 'articles', 'thisModule']));
             $this->display('list');
         } else {
@@ -140,13 +140,16 @@ class NewsController extends SuperController
      */
     public function isAllow($string = null)
     {
-        try {
-            $module = M('sitemodule')->find($string);
-            $mid = $module['fid'] = 0 ? $string : $module['fid'];
-        } catch (Exception $e) {
-            return false;
+        if(is_numeric($string)) {
+            try {
+                $module = M('sitemodule')->find($string);
+                $mid = $module['fid'] = 0 ? $string : $module['fid'];
+            } catch (Exception $e) {
+                return false;
+            }
+            return parent::isAllow($mid);
         }
-        return parent::isAllow($mid);
+        return parent::isAllow($string);
     }
 
     /**
@@ -170,6 +173,9 @@ class NewsController extends SuperController
         }
     }
 
+    /**
+     * 取消置顶
+     */
     public function down() {
         $Art = M('sitearticle');
         $id = I('id');
@@ -188,6 +194,69 @@ class NewsController extends SuperController
         }
     }
 
+    /**
+     * select slider articles
+     */
+    public function slider() {
+//        todo 权限不对!
+        if(!$this->isAllow('slider')) {
+            $this->hrefBack("没有轮播新闻操作权限!");
+        }
+        $pageName = '轮播新闻列表';
+
+        $articles = M('sitearticle')->where("slider = 1")
+            ->order('addtime desc, listnum desc')->select();
+        $this->assign(compact(['pageName', 'articles']));
+        $this->display('list');
+    }
+
+    /**
+     * put article to slider news
+     */
+    public function put() {
+        $id = I('id');
+        $Art = M('sitearticle');
+        if ($Art->find($id) == null) {
+            $json['status'] = 1001;
+            $json['data'] = '没有该新闻!';
+            echo json_encode($json);
+            exit(-1);
+        }
+        if(!$this->isAllow('slider')) {
+            $json['status'] = 1002;
+            $json['data'] = '没有轮播新闻操作权限!';
+            echo json_encode($json);
+            exit(-1);
+        }
+        $Art->where("id = $id")->setField('slider', 1);
+        $json['status'] = 1000;
+        $json['data'] = '新闻已放置轮播!';
+        echo json_encode($json);
+    }
+
+    /**
+     * remove article from slider news
+     */
+    public function remove() {
+        $id = I('id');
+        $Art = M('sitearticle');
+        if ($Art->find($id) == null) {
+            $json['status'] = 1001;
+            $json['data'] = '没有该新闻!';
+            echo json_encode($json);
+            exit(-1);
+        }
+        if(!$this->isAllow('slider')) {
+            $json['status'] = 1002;
+            $json['data'] = '没有轮播新闻操作权限!';
+            echo json_encode($json);
+            exit(-1);
+        }
+        $Art->where("id = $id")->setField('slider', 0);
+        $json['status'] = 10000;
+        $json['data'] = '新闻已取消轮播放置!';
+        echo json_encode($json);
+    }
 
     /**
      * @param $content
@@ -214,7 +283,7 @@ class NewsController extends SuperController
                 if (!preg_match("/$file/", $content)) {  //不存在的图片才会删除
                     unlink($_SERVER['DOCUMENT_ROOT'] . $fileBase . $file);
                 }
-            }
+            } 
         }
 
         $content = html_entity_decode($content, ENT_QUOTES, 'UTF-8');  //转以后 content

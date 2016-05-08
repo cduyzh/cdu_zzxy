@@ -277,7 +277,16 @@
                                 <div class="row-fluid">
 
                                     <div class="span3">
+
+                                        <label class="checkbox line">
+
+                                            <input type="checkbox" value="slider"
+                                            <if condition="(preg_match('/slider/', $auth))"> checked="" </if>
+                                            name="module-setting[]"> 首页轮播新闻
+
+                                        </label>
                                     <foreach name="mainmodule" item="module" key="key">
+
                                             <label class="checkbox line">
 
                                                 <input type="checkbox" value="m{$module[id]}m"
@@ -285,7 +294,7 @@
                                                        name="module-setting[]"> {$module[modulename]}
 
                                             </label>
-                                        <if condition="(($key + 1) % 3) eq 0">
+                                        <if condition="(($key + 2) % 3) eq 0">
                                         </div>
 
                                         <div class="span3">

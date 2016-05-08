@@ -103,12 +103,14 @@ class SuperController extends Controller
             $sitemodules[$key]['cmodule'] = $Mod->where("fid = $module[id]" . $where)
                 ->getField('id, fid, moduletype, modulename, listnum');
         }
+        
+//        dump($actions);
 //        exit();
         $this->assign(compact(['sitemodules', 'sysAuth', 'siteSet', 'actions']));
     }
 
     public function hrefBack($message = '请重新试试!') {
-        $script = "<script>window.history.back();alert('$message');</script>";
+        $script = "<script charset='utf-8'>window.history.back();alert('$message');</script>";
         exit($script);
     }
 
@@ -117,8 +119,8 @@ class SuperController extends Controller
      * @return bool
      */
     public function isAllow($string = null) {
-        $user = M('systemuser')->find($_SESSION['user']['id'])['actions'];
-        if ($user['userlevel'] < 2) return true;
+        $user = M('systemuser')->find($_SESSION['user']['id']);
+        if ($user['userlevel'] == 0) return true;
         if ($string == null) return false;
         if (is_numeric($string)) $string = 'm'.$string.'m';
         return preg_match("/$string/", $user['actions']);

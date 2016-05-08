@@ -49,6 +49,7 @@ class ListController extends BaseController
         $this->assign(compact(['thisMod', 'results', 'modArticles', 'page', 'pageNum']));
 
         switch ($thisMod['moduletype']) {
+            case "DownLoad":
             case "News":
                 $this->display('/second');
                 break;
@@ -69,9 +70,6 @@ class ListController extends BaseController
                     $this->assign(compact(['modArticle']));
                     $this->display('/single');
                 }
-                break;
-            case "DownLoad":
-                echo 'download';
                 break;
             case "Sub":
                 $this->hrefBack("系统错误!刷新重试!");

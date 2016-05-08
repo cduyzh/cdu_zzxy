@@ -215,6 +215,12 @@
 
                 <ul class="sub-menu">
 
+                    <li>
+                    <if condition="((preg_match('/slider/', implode(',', $actions))) or ($Think.session.user.userlevel lt 2))">
+                        <a href="/admin/news/slider"> 首页轮播新闻 </a>
+                    </if>
+                    </li>
+
                     <volist name="sitemodules" id="module">
                         <li>
                             <if condition="($module[moduletype] neq 'Sub')">
@@ -403,7 +409,7 @@
 
 <script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/select2.min.js"></script>
 
-<script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/jquery.dataTables.js"></script>
+<script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript" src="{$Think.const.ADMIN_JS_PATH}/DT_bootstrap.js"></script>
 

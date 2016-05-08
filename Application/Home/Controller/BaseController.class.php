@@ -32,7 +32,7 @@ class BaseController extends Controller
     }
 
     public function hrefBack($message = '请重新试试!') {
-        $script = "<script>window.history.back();alert('$message');</script>";
+        $script = "<script charset='utf-8'>window.history.back();alert('$message');</script>";
         exit($script);
     }
 }
