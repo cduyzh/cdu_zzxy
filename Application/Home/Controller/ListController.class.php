@@ -32,7 +32,7 @@ class ListController extends BaseController
 
             $modArticles = $Art->where("moduleid = $thisMod[id]")
                 ->order("addtime desc, listnum desc")->limit(15)->page($page)
-                ->getField('id, id, title, isstickies, isbold, moduleid, addtime');
+                ->getField('id, id, title, isstickies, isbold, moduleid, addtime, sortcontent');
 
 
         } elseif ($thisMod['fid'] > 0) {    //子模块
@@ -41,7 +41,7 @@ class ListController extends BaseController
 
             $modArticles = $Art->where("moduleid = $thisMod[id]")
                 ->order("addtime desc, listnum desc")->limit(15)->page($page)
-                ->getField('id, id, title, isstickies, isbold, moduleid, addtime');
+                ->getField('id, id, title, isstickies, isbold, moduleid, addtime, sortcontent');
 
         }else { //错误数据
 
@@ -66,6 +66,22 @@ class ListController extends BaseController
         switch ($thisMod['moduletype']) {
             case "DownLoad":
             case "News":
+                if ($thisMod['moption'] == 'Both') {
+
+                    $teachers = $Art->where("moduleid = $thisMod[id]")
+                        ->order("addtime desc, listnum desc")->limit(15)->page($page)
+                        ->select();
+
+                    foreach ($teachers as $key=>$item) {
+                        preg_match_all('/<img[^>]+src=[\'"]([^\'"]+)[\'"]|<IMG[^>]+src=[\'"]([^\'"]+)[\'"]/', $item['content'], $url);
+                        $teachers[$key]['url'] = $url[1][0] == "" ? $url[2][0] : $url[1][0];
+                        $teachers[$key]['content'] = strip_tags($item['content']);
+                    }
+
+//                    return dump($teachers);
+                    $this->assign(compact('teachers'));
+                    return $this->display('/teachers');
+                }
                 $this->display('/second');
                 break;
             case "Simple":

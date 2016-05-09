@@ -1,0 +1,94 @@
+<extend name="Base/base"/>
+<block name="body">
+    <section class="section4">
+        <div class="container">
+            <div class="row">
+                <!-- 二级页面的左边导航栏 -->
+                <div class="col-lg-2 subpage">
+                    <ul class="list-group">
+
+                        <li class="list-group-item active">
+                            <a href="/home/list?id={$parentMod[id]}">
+                                {$parentMod[modulename]}
+                            </a>
+                        </li>
+                        <foreach name="results" item="result" key="$key">
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon glyphicon-record" aria-hidden="true"></span>
+                                <a href="/home/list?id={$result[id]}"> {$result[modulename]} </a>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+
+                <div class="col-lg-10">
+                    <ol class="breadcrumb">
+                        当前位置：
+                        <li><a href="/"> 首页 </a></li>
+                        <if condition="($parentMod neq null)">
+                            <li><a href="/home/list?id={$parentMod[id]}"> {$parentMod[modulename]}</a></li>
+                        </if>
+                        <li class="active"> {$thisMod[modulename]} </li>
+                    </ol>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"> {$thisMod[modulename]} </div>
+                        <div class="panel-body">
+                            <if condition="($teachers eq null)">
+                                <center><h2>暂时没有信息!</h2></center>
+                            </if>
+                            <foreach name="teachers" item="teacher">
+                                <div class="col-lg-6">
+
+                                    <div class="teacher">
+                                        <div class="teacher-left col-lg-5">
+                                            <a href="/home/show?id={$teacher[id]}">
+                                                <img class="teacher-object" src="{$teacher[url]}" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="teacher-body">
+                                            <h4 class="teacher-heading"> {$teacher[title]}</h4>
+                                            <!--<p>教师简介：最好别超过50字最好别超过50字最好别超过50字最好别超过50字最好别超过50字最好别超过50字</p>-->
+                                            <p>教师简介：{$teacher[sortcontent]}</p>
+                                            <a href="/home/show?id={$teacher[id]}" class="btn btn-default">教师详情</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </foreach>
+                        </div>
+                    </div>
+
+                    <!-- 二级页面分页 -->
+                    <if condition="($pageNum gt 1)">
+                        <nav>
+                            <ul class="pagination">
+                                <li>
+                                    <a href="/home/list?id={$thisMod[id]}&page=0" aria-label="top">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <?php
+                                $start = ($page - 2) < 0 ? 0 : ($page - 2);
+                                $end = ($page + 2) > ($pageNum -1) ? ($pageNum -1) : ($page + 2);
+
+                                for($i = $start; $i <= $end; ++$i) {
+                                if($i == $page) {
+                                ?>
+                                <li class="active"><a href="/home/list?id=<?php echo ($thisMod[id]); ?>&page=<?php echo ($i); ?>">{$i+1}</a></li>
+                                <?php } else {?>
+                                <li><a href="/home/list?id=<?php echo ($thisMod[id]); ?>&page=<?php echo ($i); ?>"><?php echo ($i+1); ?></a></li>
+                                <?php }
+                            }?>
+                                <li>
+                                    <a href="/home/list?id={$thisMod[id]}&page={$pageNum-1}" aria-label="bottom">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </if>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
