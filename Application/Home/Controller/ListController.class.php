@@ -20,13 +20,22 @@ class ListController extends BaseController
         $Mod = M('sitemodule');
         $Art = M('sitearticle');
         $thisMod = $Mod->find($id);
-//        获取 page 总页数
-        $pageNum = ceil($Art->where("moduleid = $thisMod[id]")->count()/15);
+
+//        get page total number
+        try {
+            $pageNum = ceil($Art->where("moduleid = $thisMod[id]")->count()/15);
+        } catch (\Exception $e) {
+            $this->hrefBack('数据错误!请刷新重试!');
+        }
+
         if ($page >= $pageNum) $page = $page % $pageNum;  //  防止页数超出
 
-        if($thisMod['fid'] == 0) {  //分类模块
-
-            $_flag = $Mod->where("fid = $thisMod[id]")->order('listnum desc')->limit(1)->select()[0];
+        if($thisMod['fid'] == 0) {  // parent module
+            try {
+                $_flag = $Mod->where("fid = $thisMod[id]")->order('listnum desc')->limit(1)->select()[0];
+            } catch (\Exception $e) {
+                $this->hrefBack('数据错误!请刷新重试!');
+            }
 
             $thisMod = $_flag == null? $thisMod: $_flag;
 
@@ -35,21 +44,21 @@ class ListController extends BaseController
                 ->getField('id, id, title, isstickies, isbold, moduleid, addtime, sortcontent');
 
 
-        } elseif ($thisMod['fid'] > 0) {    //子模块
+        } elseif ($thisMod['fid'] > 0) {    //child module
 
-            $id = $thisMod['fid'];  // 此时用于在下边方便取出 results
+            $id = $thisMod['fid'];  // Convenient for get "results"
 
             $modArticles = $Art->where("moduleid = $thisMod[id]")
                 ->order("addtime desc, listnum desc")->limit(15)->page($page)
                 ->getField('id, id, title, isstickies, isbold, moduleid, addtime, sortcontent');
 
-        }else { //错误数据
+        }else { //error data
 
             $this->hrefBack('没有找到该模块内容!');
 
         }
 
-//            取左边的二级分类
+//            get left children module types
         try {
             $results = $Mod->where("fid = $id and m_display = 0")
                 ->order("listnum desc")->getField("id, id, modulename");
@@ -60,13 +69,13 @@ class ListController extends BaseController
         $fid = $thisMod['fid'] == 0? $thisMod['id'] : $thisMod['fid'];
         $parentMod = $Mod->find($fid);
 
-//        传递模板
+//        sent to template
         $this->assign(compact(['thisMod', 'results', 'modArticles', 'page', 'pageNum', 'parentMod']));
 
         switch ($thisMod['moduletype']) {
             case "DownLoad":
             case "News":
-                if ($thisMod['moption'] == 'Both') {
+                if ($thisMod['moption'] == 'Both') {    // both with image and text
 
                     $teachers = $Art->where("moduleid = $thisMod[id]")
                         ->order("addtime desc, listnum desc")->limit(15)->page($page)
@@ -78,9 +87,9 @@ class ListController extends BaseController
                         $teachers[$key]['content'] = strip_tags($item['content']);
                     }
 
-//                    return dump($teachers);
                     $this->assign(compact('teachers'));
-                    return $this->display('/teachers');
+                    $this->display('/teachers');
+                    exit(0);
                 }
                 $this->display('/second');
                 break;

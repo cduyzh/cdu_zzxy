@@ -51,7 +51,7 @@ class SuperController extends Controller
         ],
         'sitebook' => [
             'name'=>'网站留言管理',
-            'url' =>'/admin/database/run',
+            'url' =>'javascript:alert(\'没有留言管理模块!\');',
         ],
         'friendlink' => [
             'name'=>'网站友情链接管理',

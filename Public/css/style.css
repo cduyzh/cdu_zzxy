@@ -405,6 +405,12 @@ article img{
 	box-shadow: 5px 5px 5px #888888 ;
 	height: 130px;
 	border-radius: 5px;
+	margin-bottom: 30px;
+}
+.teacher p{
+	width: 240px;
+	height: 72px;
+	overflow: hidden;
 }
 .teacher .teacher-left{
 	float: left;

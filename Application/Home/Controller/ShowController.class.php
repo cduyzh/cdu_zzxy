@@ -47,9 +47,11 @@ class showController extends BaseController
             } else {
                 $this->hrefBack('没有找到该模块内容!');
             }
-            $pre = $Art->where("(moduleid = $modArticle[moduleid]) and (id > $modArticle[id]) and (listnum > 0)")
+
+
+            $pre = $Art->where("(moduleid = $modArticle[moduleid]) and (id > $modArticle[id])")
                 ->order("id desc")->limit(1)->getField('id, id, title');
-            $next = $Art->where("(moduleid = $modArticle[moduleid]) and (id < $modArticle[id]) and (listnum > 0)")
+            $next = $Art->where("(moduleid = $modArticle[moduleid]) and (id < $modArticle[id])")
                 ->order("id desc")->limit(1)->getField('id, id, title');
             $pre = reset($pre);
             $next = reset($next);
